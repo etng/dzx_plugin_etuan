@@ -1,0 +1,91 @@
+<!--{block return}-->
+<style type="text/css">
+.spmf2{width: 500px;}
+
+
+	.sadd{width:375px;}
+
+	.sadd dl dd{width:300px;}
+	.tuan_upload {width: 150px;overflow: hidden;border-bottom: 1px dashed #CCC;padding-bottom: 5px;margin-bottom: 5px;float: left;}
+	.tuan_upload .tuan_btn {float: left;width: 55px;}
+	.tuan_upload .tuan_view {float: left;overflow: hidden;}
+	.spimg {max-width:80px;max-height:50px;_width:expression(this.width > 80 && this.width>=this.height ? 80:true);_height:expression(this.height > 50 && this.width<=this.height ? 50:true);}
+	.spimg_del {display: block;width: 50px;margin-top: 7px;text-align: center;text-decoration: underline;}
+	.spimg_del:hover {text-decoration: none;}
+</style>
+<div class="exfm cl">
+	<div class="sinf sppoll z">
+		<dl>
+			<dt><span class="rq">*</span>{lang etuan:tuan_duration}:</dt>
+			<dd>
+				<div class="spmf mbm">
+					<em>
+					<input type="text" name="start_time" id="start_time" class="px" onClick="showcalendar(event, this, true)" value="$tuan[start_time]"/>
+					<label for="starttime">{lang etuan:tuan_start_time}</label>
+					</em>
+					<em>
+					<input type="text" name="stop_time" id="stop_time" class="px" onClick="showcalendar(event, this, true)" value="$tuan[stop_time]"/>
+					<label for="overtime">{lang etuan:tuan_stop_time}</label>
+					</em>
+				</div>
+			</dd>
+			<dt>
+				<label for="intro">{lang etuan:tuan_intro}:</label>
+			</dt>
+			<dd>
+				<textarea name="intro" id="intro" rows="2" cols="2" class="pt" style="width:95%; height:51px;">$tuan[intro]</textarea>
+			</dd>
+
+			<dt>
+				<label for="intro">{lang etuan:tuan_ship_fee}:</label>
+			</dt>
+			<dd>
+				<div class="spmf mbm">
+						<em>
+						<input type="checkbox" name="ship_only_pick" id="ship_only_pick" class="px" value="1" onClick="$('ship_fee_deliver').disabled = this.checked;" />
+						<label for="ship_only_pick">{lang etuan:tuan_ship_only_pick}</label>
+						</em>
+						<br />
+				</div>
+				<div class="spmf mbm">
+					<em>
+					<input type="text" name="ship_fee_pick" id="ship_fee_pick" class="px" value="$tuan[ship_fee_pick]" />
+					<label for="ship_fee_pick">{lang etuan:tuan_ship_fee_pick}</label>
+					</em>
+					<em>
+					<input type="text" name="ship_fee_deliver" id="ship_fee_deliver" class="px" value="$tuan[ship_fee_deliver]" />
+					<label for="ship_fee_deliver">{lang etuan:tuan_ship_fee_deliver}</label>
+					</em>
+				</div>
+			</dd>
+		</dl>
+	</div>
+	<div class="sadd z">
+		<dl>
+			<dt>{lang etuan:tuan_products}:</dt>
+			<dd>
+			<!--{loop $my_products $k $product}-->
+				<div class="spmf2 mbm">
+					{$product[name]}
+					<em>
+						<input type="checkbox" name="tuan_product_enable[{$product[id]}]" id="tuan_product_enable_{$product[id]}" class="px" value="1" onClick="$('product_unit_price_{$product[id]}').disabled = $('product_user_limit_{$product[id]}').disabled = $('product_total_limit_{$product[id]}').disabled = !this.checked;" />
+						<label for="tuan_product_enable_{$product[id]}">{lang etuan:tuan_product_enable}</label>
+						</em>
+					<em>
+					<input type="text" name="product_unit_price[{$product[id]}]" id="product_unit_price_{$product[id]}" class="px" value="$product[price]" />
+					<label for="product_unit_price_{$product[id]}">{lang etuan:tuan_product_unit_price}</label>
+					</em>
+					<em>
+					<input type="text" name="product_user_limit[{$product[id]}]" id="product_user_limit_{$product[id]}" class="px" value="0" />
+					<label for="product_user_limit_{$product[id]}">{lang etuan:tuan_product_user_limit}</label>
+					</em>
+					<em>
+					<input type="text" name="product_total_limit[{$product[id]}]" id="product_total_limit_{$product[id]}" class="px" value="0" />
+					<label for="product_total_limit_{$product[id]}">{lang etuan:tuan_product_total_limit}</label>
+					</em>
+				</div><!--{/loop}-->
+			</dd>
+		</dl>
+	</div>
+</div>
+<!--{/block}-->

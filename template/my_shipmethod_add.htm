@@ -1,0 +1,102 @@
+<!--{template common/header}-->
+<!--{if empty($_G['gp_infloat'])}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my">{lang etuan:my_shipmethod}</a>
+	</div>
+</div>
+<div id="ct" class="wp cl">
+<!--{/if}-->
+<h3 class="flb">
+	<!--{if $op=='add'}-->
+	<em>{lang etuan:my_add_shipmethod}</em>
+	<!--{elseif $op=='edit'}-->
+	<em>{lang etuan:my_edit_shipmethod}</em>
+	<!--{/if}-->
+	<!--{if !empty($_G['gp_infloat'])}-->
+		<span>
+			<a href="javascript:;" class="flbc" onclick="hideWindow('add_shipmethod')" title="{lang close}">{lang close}</a>
+		</span>
+	<!--{/if}-->
+</h3>
+<!--{if $op=='add'}-->
+	<form method="post" name="shipmethod_form" id="shipmethod_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=shipmethod&op=add" onsubmit="return add_validate();">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<!--{elseif $op=='edit'}-->
+	<form method="post" name="shipmethod_form" id="shipmethod_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=shipmethod&op=edit" onsubmit="return add_validate();">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="shipmethodid" value="{$shipmethodid}" />
+<!--{/if}-->
+
+<div class="c" style="width: 450px;">
+	<table width="100%" class="actl">
+		<tr>
+			<td width="25%" height="10"></td>
+			<td></td>
+		</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_shipmethod_is_enabled}: <span class="rq">*</span></td>
+<td><input name="is_enabled" id="is_enabled" type="text" class="px" size="20" value="{$row['is_enabled']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_shipmethod_name}: <span class="rq">*</span></td>
+<td><input name="name" id="name" type="text" class="px" size="20" value="{$row['name']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_shipmethod_first_unit}: <span class="rq">*</span></td>
+<td><input name="first_unit" id="first_unit" type="text" class="px" size="20" value="{$row['first_unit']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_shipmethod_first_price}: <span class="rq">*</span></td>
+<td><input name="first_price" id="first_price" type="text" class="px" size="20" value="{$row['first_price']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_shipmethod_continue_unit}: <span class="rq">*</span></td>
+<td><input name="continue_unit" id="continue_unit" type="text" class="px" size="20" value="{$row['continue_unit']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_shipmethod_continue_price}: <span class="rq">*</span></td>
+<td><input name="continue_price" id="continue_price" type="text" class="px" size="20" value="{$row['continue_price']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_shipmethod_intro}: <span class="rq">*</span></td>
+<td><input name="intro" id="intro" type="text" class="px" size="20" value="{$row['intro']}" /></td>
+</tr>
+	</table>
+</div>
+<div class="o pns"><button type="submit" id="addsubmit" class="pn pnc" value="true" name="addsubmit"><span>{lang submit}</span></button></div>
+</form>
+
+<script type="text/javascript">
+var pleaseselect = '{lang etuan:pleaseselect}';
+function add_validate(){
+
+	if($('is_enabled').value==''){
+		showDialog('{lang etuan:my_shipmethod_is_enabled_error}', 'alert', '', function () { $('is_enabled').focus();});
+		return false;
+	}
+		if($('name').value==''){
+		showDialog('{lang etuan:my_shipmethod_name_error}', 'alert', '', function () { $('name').focus();});
+		return false;
+	}
+		if($('first_unit').value==''){
+		showDialog('{lang etuan:my_shipmethod_first_unit_error}', 'alert', '', function () { $('first_unit').focus();});
+		return false;
+	}
+		if($('first_price').value==''){
+		showDialog('{lang etuan:my_shipmethod_first_price_error}', 'alert', '', function () { $('first_price').focus();});
+		return false;
+	}
+		if($('continue_unit').value==''){
+		showDialog('{lang etuan:my_shipmethod_continue_unit_error}', 'alert', '', function () { $('continue_unit').focus();});
+		return false;
+	}
+		if($('continue_price').value==''){
+		showDialog('{lang etuan:my_shipmethod_continue_price_error}', 'alert', '', function () { $('continue_price').focus();});
+		return false;
+	}
+		if($('intro').value==''){
+		showDialog('{lang etuan:my_shipmethod_intro_error}', 'alert', '', function () { $('intro').focus();});
+		return false;
+	}
+}
+</script>
+<!--{if empty($_G['gp_infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

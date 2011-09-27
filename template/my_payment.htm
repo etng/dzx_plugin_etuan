@@ -1,0 +1,82 @@
+<!--{template common/header}-->
+<style type="text/css">
+.tl{padding-top: 10px;}
+.tl table {width:100%;table-layout:fixed;border-collapse:separate;}
+.tl th,.tl td {padding:12px 0;border-bottom:1px dashed #E5E5E5;}
+.tl tr.a th,.tl tr.a td {background-color: #F7F7F7;	}
+.tl .th {background:#F2F2F2;}
+.tl .th th,.tl .th td{border:none;padding: 8px 0px;}
+.tl .th th,.tl th{padding-left: 10px;}
+.tl td{text-align: center;}
+.actl{table-layout:fixed;margin:10px 0;border-top:3px solid #CDCDCD;}
+</style>
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my&app=payment">{lang etuan:my_payment}</a>
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="{STATICURL}image/feed/article.gif" class="vm" /> {lang etuan:my_payment}</h1>
+
+			<ul class="tb cl">
+				<li class="a"><a href="plugin.php?id=etuan:my&app=payment">{lang all}</a></li>
+				<li class="o"><a href="javascript:void(0);" onclick="showWindow('add_payment', 'plugin.php?id=etuan:my&app=payment&op=add', 'get', 0)">{lang etuan:my_add_payment}</a></li>
+			</ul>
+
+
+			<div class="tl">
+					<table cellspacing="0" cellpadding="0">
+						<tr class="th">
+							<td>{lang etuan:my_payment_alipay_partener_id}</td>
+							<!-- <td>{lang etuan:my_payment_alipay_key}</td> -->
+							<td>{lang etuan:my_payment_alipay_account}</td>
+							<td>{lang etuan:my_payment_alipay_api_type}</td>
+							<td>{lang etuan:my_payment_tenpay_account}</td>
+							<!-- <td>{lang etuan:my_payment_tenpay_key}</td> -->
+							<td>{lang etuan:my_operation}</td>
+						</tr>
+
+					<!--{if $list}-->
+						<!--{eval $i=0;}-->
+						<!--{loop $list $value}-->
+						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_payment_{$value['id']}">
+							<td>$value['alipay_partener_id']</td>
+							<!-- <td>$value['alipay_key']</td> -->
+							<td>$value['alipay_account']</td>
+							<td>$value['alipay_api_type']</td>
+							<td>$value['tenpay_account']</td>
+							<!-- <td>$value['tenpay_key']</td> -->
+							<td><a href="javascript:void(0);" onclick="showWindow('add_payment', 'plugin.php?id=etuan:my&app=payment&op=edit&paymentid={$value[id]}', 'get', 0)" class="xi2">{lang edit}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="delete_payment({$value[id]});" class="xi2">{lang delete}</a></td>
+
+						</tr>
+						<!--{eval $i++;}-->
+						<!--{/loop}-->
+					<!--{else}-->
+						<tr>
+							<td colspan="6"><p class="emp">{lang etuan:my_empty_payment}</p></td>
+						</tr>
+					<!--{/if}-->
+					</table>
+			</div>
+
+		</div>
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<script type="text/javascript">
+function delete_payment(id){
+	var x = new Ajax('HTML');
+	x.get('plugin.php?id=etuan:my&app=payment&op=delete&paymentid='+id, function(s, x) {
+		$('_payment_' + id).style.display = 'none';
+	});
+}
+</script>
+<!--{template common/footer}-->

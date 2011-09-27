@@ -1,0 +1,172 @@
+<!--{template common/header}-->
+<!--{if empty($_G['gp_infloat'])}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my">{lang etuan:my_supplier}</a>
+	</div>
+</div>
+<div id="ct" class="wp cl">
+<!--{/if}-->
+<h3 class="flb">
+	<!--{if $op=='add'}-->
+	<em>{lang etuan:my_add_supplier}</em>
+	<!--{elseif $op=='edit'}-->
+	<em>{lang etuan:my_edit_supplier}</em>
+	<!--{/if}-->
+	<!--{if !empty($_G['gp_infloat'])}-->
+		<span>
+			<a href="javascript:;" class="flbc" onclick="hideWindow('add_supplier')" title="{lang close}">{lang close}</a>
+		</span>
+	<!--{/if}-->
+</h3>
+<!--{if $op=='add'}-->
+	<form method="post" name="supplier_form" id="supplier_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=supplier&op=add" onsubmit="return add_validate();">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<!--{elseif $op=='edit'}-->
+	<form method="post" name="supplier_form" id="supplier_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=supplier&op=edit" onsubmit="return add_validate();">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="supplierid" value="{$supplierid}" />
+<!--{/if}-->
+
+<div class="c" style="width: 450px;">
+	<table width="100%" class="actl">
+		<tr>
+			<td width="25%" height="10"></td>
+			<td></td>
+		</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_name}: <span class="rq">*</span></td>
+<td><input name="name" id="name" type="text" class="px" size="20" value="{$row['name']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_phone}: <span class="rq">*</span></td>
+<td><input name="phone" id="phone" type="text" class="px" size="20" value="{$row['phone']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_address}: <span class="rq">*</span></td>
+<td><input name="address" id="address" type="text" class="px" size="20" value="{$row['address']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_logo}: <span class="rq">*</span></td>
+<td><input name="logo" id="logo" type="text" class="px" size="20" value="{$row['logo']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_contact_name}: <span class="rq">*</span></td>
+<td><input name="contact_name" id="contact_name" type="text" class="px" size="20" value="{$row['contact_name']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_contact_gender}: <span class="rq">*</span></td>
+<td><input name="contact_gender" id="contact_gender" type="text" class="px" size="20" value="{$row['contact_gender']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_contact_phone}: <span class="rq">*</span></td>
+<td><input name="contact_phone" id="contact_phone" type="text" class="px" size="20" value="{$row['contact_phone']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_contact_qq}: <span class="rq">*</span></td>
+<td><input name="contact_qq" id="contact_qq" type="text" class="px" size="20" value="{$row['contact_qq']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_cate}: <span class="rq">*</span></td>
+<td><input name="cate" id="cate" type="text" class="px" size="20" value="{$row['cate']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_website}: <span class="rq">*</span></td>
+<td><input name="website" id="website" type="text" class="px" size="20" value="{$row['website']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_tax_license}: <span class="rq">*</span></td>
+<td><input name="tax_license" id="tax_license" type="text" class="px" size="20" value="{$row['tax_license']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_speed_rating}: <span class="rq">*</span></td>
+<td><input name="speed_rating" id="speed_rating" type="text" class="px" size="20" value="{$row['speed_rating']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_quality_rating}: <span class="rq">*</span></td>
+<td><input name="quality_rating" id="quality_rating" type="text" class="px" size="20" value="{$row['quality_rating']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_service_rating}: <span class="rq">*</span></td>
+<td><input name="service_rating" id="service_rating" type="text" class="px" size="20" value="{$row['service_rating']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_supplier_memo}: <span class="rq">*</span></td>
+<td><input name="memo" id="memo" type="text" class="px" size="20" value="{$row['memo']}" /></td>
+</tr>
+
+	</table>
+</div>
+<div class="o pns"><button type="submit" id="addsubmit" class="pn pnc" value="true" name="addsubmit"><span>{lang submit}</span></button></div>
+</form>
+
+<script type="text/javascript">
+var pleaseselect = '{lang etuan:pleaseselect}';
+function add_validate(){
+	if($('name_val').value==''){
+		showDialog('{lang etuan:my_supplier_name_error}', 'alert', '', function () { $('name').focus();});
+		return false;
+	}
+	if($('phone_val').value==''){
+		showDialog('{lang etuan:my_supplier_phone_error}', 'alert', '', function () { $('phone').focus();});
+		return false;
+	}
+	if($('address_val').value==''){
+		showDialog('{lang etuan:my_supplier_address_error}', 'alert', '', function () { $('address').focus();});
+		return false;
+	}
+	if($('logo_val').value==''){
+		showDialog('{lang etuan:my_supplier_logo_error}', 'alert', '', function () { $('logo').focus();});
+		return false;
+	}
+	if($('contact_name_val').value==''){
+		showDialog('{lang etuan:my_supplier_contact_name_error}', 'alert', '', function () { $('contact_name').focus();});
+		return false;
+	}
+	if($('contact_gender_val').value==''){
+		showDialog('{lang etuan:my_supplier_contact_gender_error}', 'alert', '', function () { $('contact_gender').focus();});
+		return false;
+	}
+	if($('contact_phone_val').value==''){
+		showDialog('{lang etuan:my_supplier_contact_phone_error}', 'alert', '', function () { $('contact_phone').focus();});
+		return false;
+	}
+	if($('contact_qq_val').value==''){
+		showDialog('{lang etuan:my_supplier_contact_qq_error}', 'alert', '', function () { $('contact_qq').focus();});
+		return false;
+	}
+	if($('cate_val').value==''){
+		showDialog('{lang etuan:my_supplier_cate_error}', 'alert', '', function () { $('cate').focus();});
+		return false;
+	}
+	if($('website_val').value==''){
+		showDialog('{lang etuan:my_supplier_website_error}', 'alert', '', function () { $('website').focus();});
+		return false;
+	}
+	if($('tax_license_val').value==''){
+		showDialog('{lang etuan:my_supplier_tax_license_error}', 'alert', '', function () { $('tax_license').focus();});
+		return false;
+	}
+	if($('speed_rating_val').value==''){
+		showDialog('{lang etuan:my_supplier_speed_rating_error}', 'alert', '', function () { $('speed_rating').focus();});
+		return false;
+	}
+	if($('quality_rating_val').value==''){
+		showDialog('{lang etuan:my_supplier_quality_rating_error}', 'alert', '', function () { $('quality_rating').focus();});
+		return false;
+	}
+	if($('service_rating_val').value==''){
+		showDialog('{lang etuan:my_supplier_service_rating_error}', 'alert', '', function () { $('service_rating').focus();});
+		return false;
+	}
+	if($('memo_val').value==''){
+		showDialog('{lang etuan:my_supplier_memo_error}', 'alert', '', function () { $('memo').focus();});
+		return false;
+	}
+}
+</script>
+<!--{if empty($_G['gp_infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

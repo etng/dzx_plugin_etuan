@@ -1,0 +1,90 @@
+<!--{template common/header}-->
+<style type="text/css">
+.tl{padding-top: 10px;}
+.tl table {width:100%;table-layout:fixed;border-collapse:separate;}
+.tl th,.tl td {padding:12px 0;border-bottom:1px dashed #E5E5E5;}
+.tl tr.a th,.tl tr.a td {background-color: #F7F7F7;	}
+.tl .th {background:#F2F2F2;}
+.tl .th th,.tl .th td{border:none;padding: 8px 0px;}
+.tl .th th,.tl th{padding-left: 10px;}
+.tl td{text-align: center;}
+.actl{table-layout:fixed;margin:10px 0;border-top:3px solid #CDCDCD;}
+</style>
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my&app=product">{lang etuan:my_product}</a>
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="{STATICURL}image/feed/article.gif" class="vm" /> {lang etuan:my_product}</h1>
+
+			<ul class="tb cl">
+				<li class="a"><a href="plugin.php?id=etuan:my&app=product">{lang all}</a></li>
+				<li class="o"><a href="javascript:void(0);" onclick="showWindow('add_product', 'plugin.php?id=etuan:my&app=product&op=add', 'get', 0)">{lang etuan:my_add_product}</a></li>
+			</ul>
+
+
+			<div class="tl">
+					<table cellspacing="0" cellpadding="0">
+						<tr class="th">
+							<td>{lang etuan:my_product_supplier}</td>
+							<td>{lang etuan:my_product_name}</td>
+							<td>{lang etuan:my_product_market_price}</td>
+							<td>{lang etuan:my_product_supply_price}</td>
+							<td>{lang etuan:my_product_price}</td>
+							<td>{lang etuan:my_product_spec}</td>
+							<td>{lang etuan:my_product_unit_name}</td>
+							<td>{lang etuan:my_product_photo}</td>
+							<td>{lang etuan:my_product_description}</td>
+							<td>{lang etuan:my_product_credit_limit}</td>
+							<td>{lang etuan:my_operation}</td>
+						</tr>
+
+					<!--{if $list}-->
+						<!--{eval $i=0;}-->
+						<!--{loop $list $value}-->
+						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_product_{$value['id']}">
+							<td>$value['supplier_id']</td>
+							<td>$value['name']</td>
+							<td>$value['market_price']</td>
+							<td>$value['supply_price']</td>
+							<td>$value['price']</td>
+							<td>$value['spec']</td>
+							<td>$value['unit_name']</td>
+							<td>$value['photo']</td>
+							<td>$value['description']</td>
+							<td>$value['credit_limit']</td>
+							<td><a href="javascript:void(0);" onclick="showWindow('add_product', 'plugin.php?id=etuan:my&app=product&op=edit&productid={$value[id]}', 'get', 0)" class="xi2">{lang edit}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="delete_product({$value[id]});" class="xi2">{lang delete}</a></td>
+
+						</tr>
+						<!--{eval $i++;}-->
+						<!--{/loop}-->
+					<!--{else}-->
+						<tr>
+							<td colspan="6"><p class="emp">{lang etuan:my_empty_product}</p></td>
+						</tr>
+					<!--{/if}-->
+					</table>
+			</div>
+
+		</div>
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<script type="text/javascript">
+function delete_product(id){
+	var x = new Ajax('HTML');
+	x.get('plugin.php?id=etuan:my&app=product&op=delete&productid='+id, function(s, x) {
+		$('_product_' + id).style.display = 'none';
+	});
+}
+</script>
+<!--{template common/footer}-->

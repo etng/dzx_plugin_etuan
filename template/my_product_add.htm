@@ -1,0 +1,133 @@
+<!--{template common/header}-->
+<!--{if empty($_G['gp_infloat'])}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my">{lang etuan:my_product}</a>
+	</div>
+</div>
+<div id="ct" class="wp cl">
+<!--{/if}-->
+<h3 class="flb">
+	<!--{if $op=='add'}-->
+	<em>{lang etuan:my_add_product}</em>
+	<!--{elseif $op=='edit'}-->
+	<em>{lang etuan:my_edit_product}</em>
+	<!--{/if}-->
+	<!--{if !empty($_G['gp_infloat'])}-->
+		<span>
+			<a href="javascript:;" class="flbc" onclick="hideWindow('add_product')" title="{lang close}">{lang close}</a>
+		</span>
+	<!--{/if}-->
+</h3>
+<!--{if $op=='add'}-->
+	<form method="post" name="product_form" id="product_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=product&op=add" onsubmit="return add_validate();">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<!--{elseif $op=='edit'}-->
+	<form method="post" name="product_form" id="product_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=product&op=edit" onsubmit="return add_validate();">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="productid" value="{$productid}" />
+<!--{/if}-->
+
+<div class="c" style="width: 450px;">
+	<table width="100%" class="actl">
+		<tr>
+			<td width="25%" height="10"></td>
+			<td></td>
+		</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_supplier}: <span class="rq">*</span></td>
+<td><input name="supplier_id" id="supplier_id" type="text" class="px" size="20" value="{$row['supplier_id']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_name}: <span class="rq">*</span></td>
+<td><input name="name" id="name" type="text" class="px" size="20" value="{$row['name']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_market_price}: <span class="rq">*</span></td>
+<td><input name="market_price" id="market_price" type="text" class="px" size="20" value="{$row['market_price']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_supply_price}: <span class="rq">*</span></td>
+<td><input name="supply_price" id="supply_price" type="text" class="px" size="20" value="{$row['supply_price']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_price}: <span class="rq">*</span></td>
+<td><input name="price" id="price" type="text" class="px" size="20" value="{$row['price']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_spec}: <span class="rq">*</span></td>
+<td><input name="spec" id="spec" type="text" class="px" size="20" value="{$row['spec']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_unit_name}: <span class="rq">*</span></td>
+<td><input name="unit_name" id="unit_name" type="text" class="px" size="20" value="{$row['unit_name']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_photo}: <span class="rq">*</span></td>
+<td><input name="photo" id="photo" type="text" class="px" size="20" value="{$row['photo']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_description}: <span class="rq">*</span></td>
+<td><input name="description" id="description" type="text" class="px" size="20" value="{$row['description']}" /></td>
+</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_product_credit_limit}: <span class="rq">*</span></td>
+<td><input name="credit_limit" id="credit_limit" type="text" class="px" size="20" value="{$row['credit_limit']}" /></td>
+</tr>
+
+
+	</table>
+</div>
+<div class="o pns"><button type="submit" id="addsubmit" class="pn pnc" value="true" name="addsubmit"><span>{lang submit}</span></button></div>
+</form>
+
+<script type="text/javascript">
+var pleaseselect = '{lang etuan:pleaseselect}';
+function add_validate(){
+	if($('supplier_id_val').value==''){
+		showDialog('{lang etuan:my_product_supplier_id_error}', 'alert', '', function () { $('supplier_id').focus();});
+		return false;
+	}
+	if($('name_val').value==''){
+		showDialog('{lang etuan:my_product_name_error}', 'alert', '', function () { $('name').focus();});
+		return false;
+	}
+	if($('market_price_val').value==''){
+		showDialog('{lang etuan:my_product_market_price_error}', 'alert', '', function () { $('market_price').focus();});
+		return false;
+	}
+	if($('supply_price_val').value==''){
+		showDialog('{lang etuan:my_product_supply_price_error}', 'alert', '', function () { $('supply_price').focus();});
+		return false;
+	}
+	if($('price_val').value==''){
+		showDialog('{lang etuan:my_product_price_error}', 'alert', '', function () { $('price').focus();});
+		return false;
+	}
+	if($('spec_val').value==''){
+		showDialog('{lang etuan:my_product_spec_error}', 'alert', '', function () { $('spec').focus();});
+		return false;
+	}
+	if($('unit_name_val').value==''){
+		showDialog('{lang etuan:my_product_unit_name_error}', 'alert', '', function () { $('unit_name').focus();});
+		return false;
+	}
+	if($('photo_val').value==''){
+		showDialog('{lang etuan:my_product_photo_error}', 'alert', '', function () { $('photo').focus();});
+		return false;
+	}
+	if($('description_val').value==''){
+		showDialog('{lang etuan:my_product_description_error}', 'alert', '', function () { $('description').focus();});
+		return false;
+	}
+	if($('credit_limit_val').value==''){
+		showDialog('{lang etuan:my_product_credit_limit_error}', 'alert', '', function () { $('credit_limit').focus();});
+		return false;
+	}
+}
+</script>
+<!--{if empty($_G['gp_infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

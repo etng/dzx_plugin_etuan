@@ -1,0 +1,88 @@
+<!--{template common/header}-->
+<style type="text/css">
+.tl{padding-top: 10px;}
+.tl table {width:100%;table-layout:fixed;border-collapse:separate;}
+.tl th,.tl td {padding:12px 0;border-bottom:1px dashed #E5E5E5;}
+.tl tr.a th,.tl tr.a td {background-color: #F7F7F7;	}
+.tl .th {background:#F2F2F2;}
+.tl .th th,.tl .th td{border:none;padding: 8px 0px;}
+.tl .th th,.tl th{padding-left: 10px;}
+.tl td{text-align: center;}
+.actl{table-layout:fixed;margin:10px 0;border-top:3px solid #CDCDCD;}
+</style>
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my&app=order">{lang etuan:my_order}</a>
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="{STATICURL}image/feed/article.gif" class="vm" /> {lang etuan:my_order}</h1>
+
+			<ul class="tb cl">
+				<li class="a"><a href="plugin.php?id=etuan:my&app=order">{lang all}</a></li>
+			</ul>
+
+
+			<div class="tl">
+					<table cellspacing="0" cellpadding="0">
+						<tr class="th">
+							<td>{lang etuan:my_order_tuan}</td>
+							<td>{lang etuan:my_order_bought_at}</td>
+							<td>{lang etuan:my_order_payment}</td>
+							<td>{lang etuan:my_order_address}</td>
+							<td>{lang etuan:my_order_paid_at}</td>
+							<td>{lang etuan:my_order_paid_amount}</td>
+							<td>{lang etuan:my_order_shipmethod}</td>
+							<td>{lang etuan:my_order_shipped_at}</td>
+							<td>{lang etuan:my_order_received_at}</td>
+							<td>{lang etuan:my_order_product_fee}</td>
+							<td>{lang etuan:my_order_ship_fee}</td>
+							<td>{lang etuan:my_order_credit_used}</td>
+							<td>{lang etuan:my_order_actual_fee}</td>
+							<td>{lang etuan:my_operation}</td>
+						</tr>
+
+					<!--{if $list}-->
+						<!--{eval $i=0;}-->
+						<!--{loop $list $value}-->
+						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_order_{$value['id']}">
+							<td>$value['tuan_id']</td>
+							<td>$value['buyer_id']</td>
+							<td>$value['bought_at']</td>
+							<td>$value['payment_id']</td>
+							<td>$value['address_id']</td>
+							<td>$value['paid_at']</td>
+							<td>$value['paid_amount']</td>
+							<td>$value['shipmethod_id']</td>
+							<td>$value['shipped_at']</td>
+							<td>$value['received_at']</td>
+							<td>$value['product_fee']</td>
+							<td>$value['ship_fee']</td>
+							<td>$value['credit_used']</td>
+							<td>$value['actual_fee']</td>
+							<td><a href="javascript:void(0);" onclick="showWindow('add_order', 'plugin.php?id=etuan:my&app=order&op=edit&orderid={$value[id]}', 'get', 0)" class="xi2">{lang edit}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="delete_order({$value[id]});" class="xi2">{lang delete}</a></td>
+
+						</tr>
+						<!--{eval $i++;}-->
+						<!--{/loop}-->
+					<!--{else}-->
+						<tr>
+							<td colspan="6"><p class="emp">{lang etuan:my_empty_order}</p></td>
+						</tr>
+					<!--{/if}-->
+					</table>
+			</div>
+
+		</div>
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<!--{template common/footer}-->

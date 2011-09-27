@@ -1,0 +1,82 @@
+<!--{template common/header}-->
+<style type="text/css">
+.tl{padding-top: 10px;}
+.tl table {width:100%;table-layout:fixed;border-collapse:separate;}
+.tl th,.tl td {padding:12px 0;border-bottom:1px dashed #E5E5E5;}
+.tl tr.a th,.tl tr.a td {background-color: #F7F7F7;	}
+.tl .th {background:#F2F2F2;}
+.tl .th th,.tl .th td{border:none;padding: 8px 0px;}
+.tl .th th,.tl th{padding-left: 10px;}
+.tl td{text-align: center;}
+.actl{table-layout:fixed;margin:10px 0;border-top:3px solid #CDCDCD;}
+</style>
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em> <a href="plugin.php?id=etuan:my&app=address">{lang etuan:my_address}</a>
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="{STATICURL}image/feed/article.gif" class="vm" /> {lang etuan:my_address}</h1>
+
+			<ul class="tb cl">
+				<li class="a"><a href="plugin.php?id=etuan:my&app=address">{lang all}</a></li>
+				<li class="o"><a href="javascript:void(0);" onclick="showWindow('add_address', 'plugin.php?id=etuan:my&app=address&op=add', 'get', 0)">{lang etuan:my_add_address}</a></li>
+			</ul>
+
+
+			<div class="tl">
+					<table cellspacing="0" cellpadding="0">
+						<tr class="th">
+							<td>{lang etuan:my_address_name}</td>
+							<td>{lang etuan:my_address_area}</td>
+							<td>{lang etuan:my_address_street}</td>
+							<td>{lang etuan:my_address_zip}</td>
+							<td>{lang etuan:my_address_phone}</td>
+							<td>{lang etuan:my_address_email}</td>
+							<td>{lang etuan:my_operation}</td>
+						</tr>
+
+					<!--{if $list}-->
+						<!--{eval $i=0;}-->
+						<!--{loop $list $value}-->
+						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_address_{$value[id]}">
+							<td>$value[name]</td>
+							<td>$value[province] $value[city] $value[town]</td>
+							<td>$value[address]</td>
+							<td>$value[zip]</td>
+							<td>$value[phone]</td>
+							<td>$value[email]</td>
+							<td><a href="javascript:void(0);" onclick="showWindow('add_address', 'plugin.php?id=etuan:my&app=address&op=edit&addressid={$value[id]}', 'get', 0)" class="xi2">{lang edit}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="delete_address({$value[id]});" class="xi2">{lang delete}</a></td>
+
+						</tr>
+						<!--{eval $i++;}-->
+						<!--{/loop}-->
+					<!--{else}-->
+						<tr>
+							<td colspan="6"><p class="emp">{lang etuan:my_empty_address}</p></td>
+						</tr>
+					<!--{/if}-->
+					</table>
+			</div>
+
+		</div>
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<script type="text/javascript">
+function delete_address(id){
+	var x = new Ajax('HTML');
+	x.get('plugin.php?id=etuan:my&app=address&op=delete&addressid='+id, function(s, x) {
+		$('_address_' + id).style.display = 'none';
+	});
+}
+</script>
+<!--{template common/footer}-->

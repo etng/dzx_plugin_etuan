@@ -1,0 +1,90 @@
+<!--{template common/header}-->
+<!--{if empty($_G['gp_infloat'])}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my">{lang etuan:my_payment}</a>
+	</div>
+</div>
+<div id="ct" class="wp cl">
+<!--{/if}-->
+<h3 class="flb">
+	<!--{if $op=='add'}-->
+	<em>{lang etuan:my_add_payment}</em>
+	<!--{elseif $op=='edit'}-->
+	<em>{lang etuan:my_edit_payment}</em>
+	<!--{/if}-->
+	<!--{if !empty($_G['gp_infloat'])}-->
+		<span>
+			<a href="javascript:;" class="flbc" onclick="hideWindow('add_payment')" title="{lang close}">{lang close}</a>
+		</span>
+	<!--{/if}-->
+</h3>
+<!--{if $op=='add'}-->
+	<form method="post" name="payment_form" id="payment_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=payment&op=add" onsubmit="return add_validate();">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<!--{elseif $op=='edit'}-->
+	<form method="post" name="payment_form" id="payment_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=payment&op=edit" onsubmit="return add_validate();">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="paymentid" value="{$paymentid}" />
+<!--{/if}-->
+
+<div class="c" style="width: 450px;">
+	<table width="100%" class="actl">
+		<tr>
+			<td width="25%" height="10"></td>
+			<td></td>
+		</tr>
+<tr>
+<td height="35" align="right">{lang etuan:my_payment_alipay_partener_id}: <span class="rq">*</span></td>
+<td><input name="alipay_partener_id" id="alipay_partener_id" type="text" class="px" size="20" value="{$row['alipay_partener_id']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_payment_alipay_key}: <span class="rq">*</span></td>
+<td><input name="alipay_key" id="alipay_key" type="text" class="px" size="20" value="{$row['alipay_key']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_payment_alipay_account}: <span class="rq">*</span></td>
+<td><input name="alipay_account" id="alipay_account" type="text" class="px" size="20" value="{$row['alipay_account']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_payment_alipay_api_type}: <span class="rq">*</span></td>
+<td><input name="alipay_api_type" id="alipay_api_type" type="text" class="px" size="20" value="{$row['alipay_api_type']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_payment_tenpay_account}: <span class="rq">*</span></td>
+<td><input name="tenpay_account" id="tenpay_account" type="text" class="px" size="20" value="{$row['tenpay_account']}" /></td>
+</tr><tr>
+<td height="35" align="right">{lang etuan:my_payment_tenpay_key}: <span class="rq">*</span></td>
+<td><input name="tenpay_key" id="tenpay_key" type="text" class="px" size="20" value="{$row['tenpay_key']}" /></td>
+</tr>
+	</table>
+</div>
+<div class="o pns"><button type="submit" id="addsubmit" class="pn pnc" value="true" name="addsubmit"><span>{lang submit}</span></button></div>
+</form>
+
+<script type="text/javascript">
+var pleaseselect = '{lang etuan:pleaseselect}';
+function add_validate(){
+
+	if($('alipay_partener_id_val').value==''){
+		showDialog('{lang etuan:my_payment_alipay_partener_id_error}', 'alert', '', function () { $('alipay_partener_id').focus();});
+		return false;
+	}	if($('alipay_key_val').value==''){
+		showDialog('{lang etuan:my_payment_alipay_key_error}', 'alert', '', function () { $('alipay_key').focus();});
+		return false;
+	}	if($('alipay_account_val').value==''){
+		showDialog('{lang etuan:my_payment_alipay_account_error}', 'alert', '', function () { $('alipay_account').focus();});
+		return false;
+	}	if($('alipay_api_type_val').value==''){
+		showDialog('{lang etuan:my_payment_alipay_api_type_error}', 'alert', '', function () { $('alipay_api_type').focus();});
+		return false;
+	}	if($('tenpay_account_val').value==''){
+		showDialog('{lang etuan:my_payment_tenpay_account_error}', 'alert', '', function () { $('tenpay_account').focus();});
+		return false;
+	}	if($('tenpay_key_val').value==''){
+		showDialog('{lang etuan:my_payment_tenpay_key_error}', 'alert', '', function () { $('tenpay_key').focus();});
+		return false;
+	}
+}
+</script>
+<!--{if empty($_G['gp_infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

@@ -1,0 +1,17 @@
+<div class="tbn">
+	<h2 class="mt bbda">{lang etuan:my_nav_buyer}</h2>
+	<ul>
+		<li $opactives[order]><a href="plugin.php?id=etuan:my&app=order">{lang etuan:my_order}</a></li>
+		<li $opactives[address]><a href="plugin.php?id=etuan:my&app=address">{lang etuan:my_address}</a></li>
+	</ul>
+	<!--{if true or $is_store}-->
+	<h2 class="mt bbda">{lang etuan:my_nav_seller}</h2>
+	<ul>
+		<li $opactives[tuan]><a href="plugin.php?id=etuan:my&app=tuan">{lang etuan:my_tuan}</a></li>
+		<li $opactives[supplier]><a href="plugin.php?id=etuan:my&app=supplier">{lang etuan:my_supplier}</a></li>
+		<li $opactives[product]><a href="plugin.php?id=etuan:my&app=product">{lang etuan:my_product}</a></li>
+		<li $opactives[shipmethod]><a href="plugin.php?id=etuan:my&app=shipmethod">{lang etuan:my_shipmethod}</a></li>
+		<li $opactives[payment]><a href="plugin.php?id=etuan:my&app=payment">{lang etuan:my_payment}</a></li>
+	</ul>
+	<!--{/if}-->
+</div>

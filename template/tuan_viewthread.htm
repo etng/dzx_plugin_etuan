@@ -1,0 +1,14 @@
+<!--{block return}-->
+<h3>{lang etuan:tuan_thread_view_products}</h3>
+<a href="">{lang etuan:tuan_thread_expand_all_products}</a>
+<a href="">{lang etuan:tuan_thread_collapse_all_products}</a>
+<!--{loop $products $k $product}-->
+<div>
+	<h4>{$product[name]}({$product[price]})</h4>
+	<a href="">{lang etuan:tuan_thread_expand_product}</a>
+<a href="">{lang etuan:tuan_thread_collapse_product}</a>
+	<div>{$product[description]}</div>
+	<div>{lang etuan:tuan_thread_product_buy}<input type="text" id="buy_quantity_{$product[id]}" class="px" value="1" /><a href="#" onclick="this.href=('plugin.php?id=etuan:cart&op=add&tuan_id={$tuan['id']}&product_id={$product[id]}&quantity='+$('buy_quantity_{$product[id]}').value);">{lang etuan:add_to_cart}</a></div>
+</div>
+<!--{/loop}-->
+<!--{/block}-->

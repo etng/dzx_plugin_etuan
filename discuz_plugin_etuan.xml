@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X2]]></item>
+	<item id="Time"><![CDATA[2011-09-19 07:42]]></item>
+	<item id="From"><![CDATA[Discuz! Board (http://bbs.myxiaoqu.dev/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[易团]]></item>
+			<item id="identifier"><![CDATA[etuan]]></item>
+			<item id="description"><![CDATA[加入团购商家组的用户可以管理自己的供应商、商品，设置配送方式、收费方式并发布团购，拥有齐全的报表，方便的发货管理和营销管理。]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[etuan/]]></item>
+			<item id="copyright"><![CDATA[http://www.zetng.com]]></item>
+			<item id="version"><![CDATA[0.1]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[etuan]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[cart]]></item>
+					<item id="menu"><![CDATA[购物车]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[1]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[我的购物车]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X2]]></item>
+		<item id="var">
+			<item id="0">
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="title"><![CDATA[商家用户组]]></item>
+				<item id="description"><![CDATA[该用户组的用户为团购商户]]></item>
+				<item id="variable"><![CDATA[seller_gid]]></item>
+				<item id="type"><![CDATA[groups]]></item>
+				<item id="extra"><![CDATA[]]></item>
+				<item id="__value">
+					<item id="0"><![CDATA[14]]></item>
+				</item>
+			</item>
+			<item id="1">
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="title"><![CDATA[购买成功自动回帖]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[auto_reply_on_bought]]></item>
+				<item id="type"><![CDATA[radio]]></item>
+				<item id="value"><![CDATA[0]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="2">
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="title"><![CDATA[自动回帖内容]]></item>
+				<item id="description"><![CDATA[支持UBB。可以使用如下变量:
+{dateline} : 购买成功时间
+{username} : 购买者用户名]]></item>
+				<item id="variable"><![CDATA[auto_reply_template]]></item>
+				<item id="type"><![CDATA[textarea]]></item>
+				<item id="value"><![CDATA[[b]该用户于{dateline}  购买成功本单！——本帖由系统自动发送。[/b]]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="3">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[调试模式]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[debug]]></item>
+				<item id="type"><![CDATA[radio]]></item>
+				<item id="value"><![CDATA[1]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="4">
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="title"><![CDATA[可用积分类型]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[credit_type]]></item>
+				<item id="type"><![CDATA[extcredit]]></item>
+				<item id="value"><![CDATA[2]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="5">
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="title"><![CDATA[现金/积分比率]]></item>
+				<item id="description"><![CDATA[设置现金与站内支付积分间的比率，例如设置为 10，则 10个支付积分等于1 元人民币]]></item>
+				<item id="variable"><![CDATA[credit_ratio]]></item>
+				<item id="type"><![CDATA[number]]></item>
+				<item id="value"><![CDATA[2]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="6">
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="title"><![CDATA[启用积分支付]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[credit_enabled]]></item>
+				<item id="type"><![CDATA[radio]]></item>
+				<item id="value"><![CDATA[1]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+		</item>
+		<item id="language">
+			<item id="scriptlang">
+				<item id="placeholder"><![CDATA[占位符]]></item>
+				<item id="admin_help_check"><![CDATA[程序版本检测]]></item>
+				<item id="admin_help_check_desc"><![CDATA[<li>系统当前版本：<b><font color=green>{version}</font></b></li><li>官方最新版本：<span id="etuan_version"></span></li><li>是否需要更新：<span id="etuan_upgrade"></span></li>]]></item>
+				<item id="admin_help_faq"><![CDATA[插件帮助]]></item>
+				<item id="admin_help_faq_desc"><![CDATA[<li>官方论坛：<a href="http://www.zetng.com" target="_blank">折腾网</a></li>]]></item>
+				<item id="payment_add_success"><![CDATA[支付方式添加成功]]></item>
+				<item id="payment_edit_success"><![CDATA[支付方式修改成功]]></item>
+				<item id="shipmethod_add_success"><![CDATA[发货方式添加成功]]></item>
+				<item id="shipmethod_edit_success"><![CDATA[发货方式修改成功]]></item>
+				<item id="supplier_add_success"><![CDATA[供应商添加成功]]></item>
+				<item id="supplier_edit_success"><![CDATA[供应商修改成功]]></item>
+				<item id="product_add_success"><![CDATA[商品添加成功]]></item>
+				<item id="product_edit_success"><![CDATA[商品修改成功]]></item>
+			</item>
+			<item id="templatelang">
+				<item id="my_operation"><![CDATA[操作]]></item>
+				<item id="pleaseselect"><![CDATA[请选择...]]></item>
+				<item id="my_nav_buyer"><![CDATA[我是买家]]></item>
+				<item id="my_nav_seller"><![CDATA[我是卖家]]></item>
+				<item id="other_product_in_this_tuan"><![CDATA[本团的其他商品]]></item>
+				<item id="other_product_in_tuan"><![CDATA[正在团购的其他商品]]></item>
+				<item id="my_cart"><![CDATA[我的购物车]]></item>
+				<item id="cart_checkout"><![CDATA[去购物车并结算]]></item>
+				<item id="cart_product"><![CDATA[商品]]></item>
+				<item id="cart_quantity"><![CDATA[数量]]></item>
+				<item id="cart_unit_price"><![CDATA[单价]]></item>
+				<item id="cart_price"><![CDATA[价格]]></item>
+				<item id="cart_clear"><![CDATA[清空购物车]]></item>
+				<item id="cart_is_empty"><![CDATA[购物车为空]]></item>
+				<item id="submit_order"><![CDATA[提交订单]]></item>
+				<item id="cancel_order"><![CDATA[取消订单]]></item>
+				<item id="etuan_used_credit"><![CDATA[团购使用积分抵用]]></item>
+				<item id="seller_notify_tuan_bought"><![CDATA[您的团购{tuan_name}有人下单购买{product_name} * {product_quantity}，请<a href="plugin.php?id=etuan:my&app=order&orderid={orderid}">查看订单</a>了解详情。]]></item>
+				<item id="my_address"><![CDATA[我的配送地址]]></item>
+				<item id="my_add_address"><![CDATA[添加配送地址]]></item>
+				<item id="my_edit_address"><![CDATA[修改配送地址]]></item>
+				<item id="my_empty_address"><![CDATA[没有配置配送地址]]></item>
+				<item id="my_address_name"><![CDATA[名称]]></item>
+				<item id="my_address_province"><![CDATA[省]]></item>
+				<item id="my_address_city"><![CDATA[市]]></item>
+				<item id="my_address_town"><![CDATA[区]]></item>
+				<item id="my_address_area"><![CDATA[地区]]></item>
+				<item id="my_address_address"><![CDATA[地址]]></item>
+				<item id="my_address_street"><![CDATA[街道]]></item>
+				<item id="my_address_zip"><![CDATA[邮编]]></item>
+				<item id="my_address_phone"><![CDATA[电话]]></item>
+				<item id="my_address_email"><![CDATA[Email]]></item>
+				<item id="my_order"><![CDATA[我的订单]]></item>
+				<item id="my_add_order"><![CDATA[添加订单]]></item>
+				<item id="my_edit_order"><![CDATA[修改订单]]></item>
+				<item id="my_empty_order"><![CDATA[没有配置订单]]></item>
+				<item id="my_order_tuan"><![CDATA[团购]]></item>
+				<item id="my_order_bought_at"><![CDATA[购买时间]]></item>
+				<item id="my_order_shipmethod"><![CDATA[配送方式]]></item>
+				<item id="my_order_address"><![CDATA[送货地址]]></item>
+				<item id="my_order_payment"><![CDATA[支付方式]]></item>
+				<item id="my_order_paid_at"><![CDATA[支付时间]]></item>
+				<item id="my_order_paid_amount"><![CDATA[支付金额]]></item>
+				<item id="my_order_shipped_at"><![CDATA[配送时间]]></item>
+				<item id="my_order_received_at"><![CDATA[收货时间]]></item>
+				<item id="my_order_product_fee"><![CDATA[产品价格]]></item>
+				<item id="my_order_ship_fee"><![CDATA[运费]]></item>
+				<item id="my_order_credit_used"><![CDATA[使用积分]]></item>
+				<item id="my_order_actual_fee"><![CDATA[应收款]]></item>
+				<item id="my_order_memo"><![CDATA[备注]]></item>
+				<item id="my_shipmethod"><![CDATA[我的发货方式]]></item>
+				<item id="my_add_shipmethod"><![CDATA[添加发货方式]]></item>
+				<item id="my_edit_shipmethod"><![CDATA[修改发货方式]]></item>
+				<item id="my_empty_shipmethod"><![CDATA[没有配置发货方式]]></item>
+				<item id="my_shipmethod_is_enabled"><![CDATA[已启用]]></item>
+				<item id="my_shipmethod_name"><![CDATA[名称]]></item>
+				<item id="my_shipmethod_first_unit"><![CDATA[起步单位]]></item>
+				<item id="my_shipmethod_first_price"><![CDATA[起步价格]]></item>
+				<item id="my_shipmethod_continue_unit"><![CDATA[新增单位]]></item>
+				<item id="my_shipmethod_continue_price"><![CDATA[新增价格]]></item>
+				<item id="my_shipmethod_intro"><![CDATA[备注]]></item>
+				<item id="my_payment"><![CDATA[我的支付方式]]></item>
+				<item id="my_add_payment"><![CDATA[添加支付方式]]></item>
+				<item id="my_edit_payment"><![CDATA[修改支付方式]]></item>
+				<item id="my_empty_payment"><![CDATA[没有配置支付方式]]></item>
+				<item id="my_payment_alipay_partener_id"><![CDATA[支付宝商户ID号]]></item>
+				<item id="my_payment_alipay_key"><![CDATA[支付宝交易密钥]]></item>
+				<item id="my_payment_alipay_account"><![CDATA[支付宝帐号]]></item>
+				<item id="my_payment_alipay_api_type"><![CDATA[支付宝接口类型]]></item>
+				<item id="my_payment_tenpay_account"><![CDATA[财付通商户ID号]]></item>
+				<item id="my_payment_tenpay_key"><![CDATA[财付通交易密钥]]></item>
+				<item id="my_supplier"><![CDATA[我的供应商]]></item>
+				<item id="my_add_supplier"><![CDATA[添加供应商]]></item>
+				<item id="my_edit_supplier"><![CDATA[修改供应商]]></item>
+				<item id="my_empty_supplier"><![CDATA[找不到供应商]]></item>
+				<item id="my_supplier_name"><![CDATA[名称]]></item>
+				<item id="my_supplier_phone"><![CDATA[电话]]></item>
+				<item id="my_supplier_address"><![CDATA[地址]]></item>
+				<item id="my_supplier_logo"><![CDATA[Logo]]></item>
+				<item id="my_supplier_contact_name"><![CDATA[姓名]]></item>
+				<item id="my_supplier_contact_gender"><![CDATA[性别]]></item>
+				<item id="my_supplier_contact_phone"><![CDATA[电话]]></item>
+				<item id="my_supplier_contact_qq"><![CDATA[QQ]]></item>
+				<item id="my_supplier_cate"><![CDATA[分类]]></item>
+				<item id="my_supplier_website"><![CDATA[网站]]></item>
+				<item id="my_supplier_tax_license"><![CDATA[税务登记号]]></item>
+				<item id="my_supplier_speed_rating"><![CDATA[发货速度]]></item>
+				<item id="my_supplier_quality_rating"><![CDATA[商品质量]]></item>
+				<item id="my_supplier_service_rating"><![CDATA[服务态度]]></item>
+				<item id="my_supplier_memo"><![CDATA[备注]]></item>
+				<item id="my_product"><![CDATA[我的商品]]></item>
+				<item id="my_add_product"><![CDATA[添加商品]]></item>
+				<item id="my_edit_product"><![CDATA[修改商品]]></item>
+				<item id="my_empty_product"><![CDATA[找不到商品]]></item>
+				<item id="my_product_name"><![CDATA[名称]]></item>
+				<item id="my_product_supplier"><![CDATA[供应商]]></item>
+				<item id="my_product_market_price"><![CDATA[市场价]]></item>
+				<item id="my_product_supply_price"><![CDATA[供应价]]></item>
+				<item id="my_product_price"><![CDATA[卖价]]></item>
+				<item id="my_product_spec"><![CDATA[规格]]></item>
+				<item id="my_product_unit_name"><![CDATA[单价]]></item>
+				<item id="my_product_photo"><![CDATA[照片]]></item>
+				<item id="my_product_description"><![CDATA[描述]]></item>
+				<item id="my_product_credit_limit"><![CDATA[可用金豆数]]></item>
+				<item id="my_tuan"><![CDATA[我的团购]]></item>
+				<item id="my_empty_tuan"><![CDATA[你还没有发布过团购]]></item>
+			</item>
+			<item id="installlang">
+				<item id="placeholder"><![CDATA[占位符]]></item>
+			</item>
+		</item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+		<item id="upgradefile"><![CDATA[upgrade.php]]></item>
+	</item>
+</root>
