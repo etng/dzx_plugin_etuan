@@ -50,21 +50,26 @@
 							<td>{lang etuan:cart_price}</td>
 							<td class="num">{lang etuan:my_operation}</td>
 						</tr>
-					<!--{if $cart_items}-->
-						<!--{loop $cart_items $cart_item}-->
-						<tr>
-							<td class="icn"><a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank"> <img src="static/image/common/folder_new.gif" /> </a></td>
-							<th> <a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank">$thread[subject]</a> </th>
-							<td>{$cart_item['quantity']}</td>
-							<td class="num">{$cart_item['unit_price']}</td>
-							<td class="by">{$cart_item['price']}</td>
-							<td class="num"><a href="plugin.php?id=etuan:cart&op=delete&tuan_id={$cart_item[tuan_id]}&product_id={$cart_item[product_id]}" class="xi2">{lang etuan:cart_remove_product}</a></td>
+					<!--{if $cart_items_group_by_tuan}-->
+						<tr class="th">
+							<td colspan="5">{$tuan_cart_items[tuan][name]}</td>
 						</tr>
-						<!--{/loop}-->
-					<!--{else}-->
-						<tr>
-							<td colspan="5"><p class="emp">{lang etuan:cart_is_empty}</p></td>
-						</tr>
+						<!--{if $tuan_cart_items[items]}-->
+							<!--{loop $tuan_cart_items[items] $cart_item}-->
+							<tr>
+								<td class="icn"><a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank"> <img src="static/image/common/folder_new.gif" /> </a></td>
+								<th> <a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank">$thread[subject]</a> </th>
+								<td>{$cart_item['quantity']}</td>
+								<td class="num">{$cart_item['unit_price']}</td>
+								<td class="by">{$cart_item['price']}</td>
+								<td class="num"><a href="plugin.php?id=etuan:cart&op=delete&tuan_id={$cart_item[tuan_id]}&product_id={$cart_item[product_id]}" class="xi2">{lang etuan:cart_remove_product}</a></td>
+							</tr>
+							<!--{/loop}-->
+						<!--{else}-->
+							<tr>
+								<td colspan="5"><p class="emp">{lang etuan:cart_is_empty}</p></td>
+							</tr>
+						<!--{/if}-->
 					<!--{/if}-->
 					</table>
 				</form>

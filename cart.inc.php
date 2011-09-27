@@ -44,16 +44,22 @@ switch($op){
         }
         break;
     case 'checkout'://填写结账单即选择送货地址、支付方式、发货方式及积分抵扣等
+        $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan();
         include template('etuan:cart_checkout');
         break;
     case 'submit'://生成订单
-        $sn = $ecart->submit($_G['uid'], $_G['gp_credit_used'], $_G['gp_shipmethod_id'], $_G['gp_payment_id'], $_G['gp_address_id'], $_G['gp_memo']);
-
-        showmessage('etuan:order_create_success', "plugin.php?id=etuan:my&app=order&sn={$sn}", array(), array('showdialog' => 1, 'closetime' => true));
+        $sn = $ecart->submit($_G['tuan_id'], $_G['uid'], $_G['gp_credit_used'], $_G['gp_shipmethod_id'], $_G['gp_payment_id'], $_G['gp_address_id'], $_G['gp_memo']);
+        if(!$ecart->isEmpty())
+        {
+            showmessage('etuan:order_create_success_continue', "plugin.php?id=etuan:cart&op=checkout", array(), array('showdialog' => 1, 'closetime' => true));
+        }else
+        {
+            showmessage('etuan:order_create_success', "plugin.php?id=etuan:my&app=order&sn={$sn}", array(), array('showdialog' => 1, 'closetime' => true));
+        }
         break;
     case 'list':
     default:
-        $cart_items = $ecart->getItems();
+        $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan();
         include template('etuan:cart_view');
   break;
 }
