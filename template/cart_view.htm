@@ -51,6 +51,7 @@
 							<td class="num">{lang etuan:my_operation}</td>
 						</tr>
 					<!--{if $cart_items_group_by_tuan}-->
+					<!--{loop $cart_items_group_by_tuan $tuan_cart_items}-->
 						<tr class="th">
 							<td colspan="5">{$tuan_cart_items[tuan][name]}</td>
 						</tr>
@@ -70,6 +71,7 @@
 								<td colspan="5"><p class="emp">{lang etuan:cart_is_empty}</p></td>
 							</tr>
 						<!--{/if}-->
+						<!--{/loop}-->
 					<!--{/if}-->
 					</table>
 				</form>

@@ -2,7 +2,7 @@
 <root>
 	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
 	<item id="Version"><![CDATA[X2]]></item>
-	<item id="Time"><![CDATA[2011-09-19 07:42]]></item>
+	<item id="Time"><![CDATA[2011-09-28 08:12]]></item>
 	<item id="From"><![CDATA[Discuz! Board (http://bbs.myxiaoqu.dev/)]]></item>
 	<item id="Data">
 		<item id="plugin">
@@ -17,10 +17,10 @@
 			<item id="version"><![CDATA[0.1]]></item>
 			<item id="__modules">
 				<item id="0">
-					<item id="name"><![CDATA[etuan]]></item>
+					<item id="name"><![CDATA[etuan_thread]]></item>
 					<item id="menu"><![CDATA[]]></item>
 					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[11]]></item>
+					<item id="type"><![CDATA[12]]></item>
 					<item id="adminid"><![CDATA[0]]></item>
 					<item id="displayorder"><![CDATA[0]]></item>
 					<item id="navtitle"><![CDATA[]]></item>
@@ -36,6 +36,18 @@
 					<item id="adminid"><![CDATA[0]]></item>
 					<item id="displayorder"><![CDATA[0]]></item>
 					<item id="navtitle"><![CDATA[我的购物车]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="2">
+					<item id="name"><![CDATA[etuan]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
 					<item id="navicon"><![CDATA[]]></item>
 					<item id="navsubname"><![CDATA[]]></item>
 					<item id="navsuburl"><![CDATA[]]></item>
@@ -114,6 +126,8 @@
 		</item>
 		<item id="language">
 			<item id="scriptlang">
+				<item id="thread_name"><![CDATA[团购主题]]></item>
+				<item id="thread_buttontext"><![CDATA[发起团购]]></item>
 				<item id="placeholder"><![CDATA[占位符]]></item>
 				<item id="admin_help_check"><![CDATA[程序版本检测]]></item>
 				<item id="admin_help_check_desc"><![CDATA[<li>系统当前版本：<b><font color=green>{version}</font></b></li><li>官方最新版本：<span id="etuan_version"></span></li><li>是否需要更新：<span id="etuan_upgrade"></span></li>]]></item>
@@ -127,12 +141,38 @@
 				<item id="supplier_edit_success"><![CDATA[供应商修改成功]]></item>
 				<item id="product_add_success"><![CDATA[商品添加成功]]></item>
 				<item id="product_edit_success"><![CDATA[商品修改成功]]></item>
+				<item id="cart_add_success"><![CDATA[成功添加到购物车]]></item>
+				<item id="cart_edit_success"><![CDATA[成功更新购物车]]></item>
+				<item id="cart_delete_success"><![CDATA[成功从购物车删除]]></item>
+				<item id="cart_clear_success"><![CDATA[购物车清空成功]]></item>
+				<item id="order_create_success"><![CDATA[订单已创建]]></item>
+				<item id="tuan_delete_success"><![CDATA[团购删除成功]]></item>
 			</item>
 			<item id="templatelang">
 				<item id="my_operation"><![CDATA[操作]]></item>
 				<item id="pleaseselect"><![CDATA[请选择...]]></item>
 				<item id="my_nav_buyer"><![CDATA[我是买家]]></item>
 				<item id="my_nav_seller"><![CDATA[我是卖家]]></item>
+				<item id="tuan_intro"><![CDATA[团购介绍]]></item>
+				<item id="tuan_duration"><![CDATA[团购时间]]></item>
+				<item id="tuan_start_time"><![CDATA[开始时间]]></item>
+				<item id="tuan_stop_time"><![CDATA[结束时间]]></item>
+				<item id="tuan_ship_fee"><![CDATA[配送费用]]></item>
+				<item id="tuan_ship_only_pick"><![CDATA[只能自提]]></item>
+				<item id="tuan_ship_fee_pick"><![CDATA[自提配送费]]></item>
+				<item id="tuan_ship_fee_deliver"><![CDATA[送货上门配送费]]></item>
+				<item id="tuan_products"><![CDATA[商品]]></item>
+				<item id="tuan_product_enable"><![CDATA[启用]]></item>
+				<item id="tuan_product_unit_price"><![CDATA[单价]]></item>
+				<item id="tuan_product_user_limit"><![CDATA[每个用户限购数]]></item>
+				<item id="tuan_product_total_limit"><![CDATA[总共限购数]]></item>
+				<item id="tuan_thread_view_products"><![CDATA[本团商品]]></item>
+				<item id="tuan_thread_expand_all_products"><![CDATA[展开所有商品]]></item>
+				<item id="tuan_thread_collapse_all_products"><![CDATA[关闭所有商品]]></item>
+				<item id="tuan_thread_expand_product"><![CDATA[展开]]></item>
+				<item id="tuan_thread_collapse_product"><![CDATA[关闭]]></item>
+				<item id="tuan_thread_product_buy"><![CDATA[我要买]]></item>
+				<item id="add_to_cart"><![CDATA[加入购物车]]></item>
 				<item id="other_product_in_this_tuan"><![CDATA[本团的其他商品]]></item>
 				<item id="other_product_in_tuan"><![CDATA[正在团购的其他商品]]></item>
 				<item id="my_cart"><![CDATA[我的购物车]]></item>
@@ -141,6 +181,7 @@
 				<item id="cart_quantity"><![CDATA[数量]]></item>
 				<item id="cart_unit_price"><![CDATA[单价]]></item>
 				<item id="cart_price"><![CDATA[价格]]></item>
+				<item id="cart_remove_product"><![CDATA[删除]]></item>
 				<item id="cart_clear"><![CDATA[清空购物车]]></item>
 				<item id="cart_is_empty"><![CDATA[购物车为空]]></item>
 				<item id="submit_order"><![CDATA[提交订单]]></item>
@@ -179,6 +220,7 @@
 				<item id="my_order_credit_used"><![CDATA[使用积分]]></item>
 				<item id="my_order_actual_fee"><![CDATA[应收款]]></item>
 				<item id="my_order_memo"><![CDATA[备注]]></item>
+				<item id="confirm_order_received"><![CDATA[确认收货]]></item>
 				<item id="my_shipmethod"><![CDATA[我的发货方式]]></item>
 				<item id="my_add_shipmethod"><![CDATA[添加发货方式]]></item>
 				<item id="my_edit_shipmethod"><![CDATA[修改发货方式]]></item>
@@ -233,8 +275,33 @@
 				<item id="my_product_photo"><![CDATA[照片]]></item>
 				<item id="my_product_description"><![CDATA[描述]]></item>
 				<item id="my_product_credit_limit"><![CDATA[可用金豆数]]></item>
+				<item id="view"><![CDATA[查看]]></item>
+				<item id="delete"><![CDATA[删除]]></item>
+				<item id="my_tuan_name"><![CDATA[名称]]></item>
+				<item id="my_tuan_duration"><![CDATA[起止时间]]></item>
+				<item id="my_tuan_status"><![CDATA[状态]]></item>
 				<item id="my_tuan"><![CDATA[我的团购]]></item>
 				<item id="my_empty_tuan"><![CDATA[你还没有发布过团购]]></item>
+				<item id="order_id"><![CDATA[订单号]]></item>
+				<item id="order_status"><![CDATA[状态]]></item>
+				<item id="order_buyer"><![CDATA[买家]]></item>
+				<item id="order_area"><![CDATA[所在小区]]></item>
+				<item id="order_contact_name"><![CDATA[联系人]]></item>
+				<item id="order_contact_phone"><![CDATA[联系电话]]></item>
+				<item id="order_contact_address"><![CDATA[联系地址]]></item>
+				<item id="order_payment"><![CDATA[支付方式]]></item>
+				<item id="order_payment_status"><![CDATA[支付状态]]></item>
+				<item id="order_shipmethod"><![CDATA[送货方式]]></item>
+				<item id="order_shiptime"><![CDATA[送货时间]]></item>
+				<item id="order_total_fee"><![CDATA[总金额]]></item>
+				<item id="order_item_id"><![CDATA[商品编号]]></item>
+				<item id="order_item_name"><![CDATA[商品名称]]></item>
+				<item id="order_item_spec"><![CDATA[商品规格]]></item>
+				<item id="order_item_unit_price"><![CDATA[单价]]></item>
+				<item id="order_item_quantity"><![CDATA[数量]]></item>
+				<item id="order_item_price"><![CDATA[小计]]></item>
+				<item id="order_item_used_credits"><![CDATA[使用金豆]]></item>
+				<item id="order_item_memo"><![CDATA[备注]]></item>
 			</item>
 			<item id="installlang">
 				<item id="placeholder"><![CDATA[占位符]]></item>

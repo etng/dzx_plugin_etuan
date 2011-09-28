@@ -50,6 +50,24 @@ class etuan
         }
         return $cache[$tuan_id];
     }
+    function fetchPayment($payment_id, $reload=false)
+    {
+        static $cache=array();
+        if($reload || !isset($cache[$payment_id]))
+        {
+            $cache[$payment_id] = DB::fetch_first("SELECT * FROM ".DB::table('etuan_payment')." where id={$payment_id}");
+        }
+        return $cache[$payment_id];
+    }
+    function fetchShipMethod($shipmethod_id, $reload=false)
+    {
+        static $cache=array();
+        if($reload || !isset($cache[$shipmethod_id]))
+        {
+            $cache[$shipmethod_id] = DB::fetch_first("SELECT * FROM ".DB::table('etuan_shipmethod')." where id={$shipmethod_id}");
+        }
+        return $cache[$shipmethod_id];
+    }
     function fetchProduct($product_id, $reload=false)
     {
         static $cache=array();

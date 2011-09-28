@@ -52,22 +52,24 @@
 						<!--{eval $i=0;}-->
 						<!--{loop $list $value}-->
 						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_order_{$value['id']}">
-							<td>$value['tuan_id']</td>
-							<td>$value['buyer_id']</td>
+							<td>$value['tuan']['name']</td>
 							<td>$value['bought_at']</td>
-							<td>$value['payment_id']</td>
-							<td>$value['address_id']</td>
+							<td>$value['payment']['alipay_account']</td>
+							<td>$value['address']</td>
 							<td>$value['paid_at']</td>
 							<td>$value['paid_amount']</td>
-							<td>$value['shipmethod_id']</td>
+							<td>$value['shipmethod']['name']</td>
 							<td>$value['shipped_at']</td>
 							<td>$value['received_at']</td>
 							<td>$value['product_fee']</td>
 							<td>$value['ship_fee']</td>
 							<td>$value['credit_used']</td>
 							<td>$value['actual_fee']</td>
-							<td><a href="javascript:void(0);" onclick="showWindow('add_order', 'plugin.php?id=etuan:my&app=order&op=edit&orderid={$value[id]}', 'get', 0)" class="xi2">{lang edit}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="delete_order({$value[id]});" class="xi2">{lang delete}</a></td>
+							<td>
+							<a href="">{lang etuan:confirm_order_received}</a>
+							<a href="">{lang etuan:cancel_order}</a>
 
+							</td>
 						</tr>
 						<!--{eval $i++;}-->
 						<!--{/loop}-->

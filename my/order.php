@@ -42,6 +42,9 @@ if(empty($_G['gp_closeorder']) && empty($_G['gp_receorder'])) {
 	$query = DB::query("SELECT * FROM ".DB::table('etuan_order')." where buyer_id='$_G[uid]' $extra_sql ORDER BY bought_at DESC LIMIT $offset,$limit");
 
 	while($row = DB::fetch($query)){
+        $row['tuan'] = $etuan->fetchTuan($row['tuan_id']);
+        $row['payment'] = $etuan->fetchPayment($row['payment_id']);
+        $row['shipmethod'] = $etuan->fetchShipMethod($row['shipmethod_id']);
 		$list[] = $row;
 	}
 	$multi = multi($total, $limit, $page, "plugin.php?id=etuan:my&filter={$filter}");
