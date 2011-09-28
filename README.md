@@ -10,3 +10,8 @@ Installation
 Just like a common discuzx plugin
 
 
+Modify
+-------
+add the following code to /dzx2/config/config_global.php
+...$_config['plugindeveloper'] = 1;
+

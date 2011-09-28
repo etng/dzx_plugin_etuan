@@ -49,6 +49,7 @@ class threadplugin_etuan  extends etuan
             'begin_date' => $_G['gp_start_time'],
             'end_date' => $_G['gp_stop_time'],
             'intro' => $_G['gp_intro'],
+			'name' => $_G['gp_name'],
         ), true);
         foreach($_G['gp_tuan_product_enable'] as $product_id=>$dummy)
         {

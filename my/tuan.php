@@ -36,8 +36,6 @@ switch($op){
         break;
     case 'list':
     default:
-
-
         $extra_sql = array("tuan.seller_id = '$_G[uid]'");
         $extra_sql = implode(' and ', $extra_sql);
 

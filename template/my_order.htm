@@ -23,9 +23,12 @@
 	<div class="mn">
 		<div class="bm bw0">
 			<h1 class="mt"><img alt="thread" src="{STATICURL}image/feed/article.gif" class="vm" /> {lang etuan:my_order}</h1>
-
 			<ul class="tb cl">
-				<li class="a"><a href="plugin.php?id=etuan:my&app=order">{lang all}</a></li>
+				<li<!--{if $filter=="all"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=all">{lang all_order}</a></li>
+				<li<!--{if $filter=="finished"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=finished">{lang finished_order}</a></li>
+				<li<!--{if $filter=="pending"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=pending">{lang pending_order}</a></li>
+				<li<!--{if $filter=="paid"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=paid">{lang paid_order}</a></li>
+				<li<!--{if $filter=="shipped"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=shipped">{lang shipped_order}</a></li>
 			</ul>
 
 
@@ -66,9 +69,8 @@
 							<td>$value['credit_used']</td>
 							<td>$value['actual_fee']</td>
 							<td>
-							<a href="">{lang etuan:confirm_order_received}</a>
-							<a href="">{lang etuan:cancel_order}</a>
-
+							<a href="plugin.php?id=etuan:my&app=order&confirm_received=1&orderid={$value['id']}">{lang etuan:confirm_order_received}</a>
+							<a href="plugin.php?id=etuan:my&app=order&cancel=1&orderid={$value['id']}">{lang etuan:cancel_order}</a>
 							</td>
 						</tr>
 						<!--{eval $i++;}-->
