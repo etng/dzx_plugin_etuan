@@ -48,8 +48,11 @@ class threadplugin_etuan  extends etuan
             'seller_id' => $_G['uid'],
             'begin_date' => $_G['gp_start_time'],
             'end_date' => $_G['gp_stop_time'],
+            'name' => $_G['gp_subject'],
+            'ship_fee_deliver' =>$_G['gp_ship_fee_deliver'],
+            'ship_fee_pick' =>$_G['gp_ship_fee_pick'],
+            'ship_only_pick' =>$_G['gp_ship_only_pick'],
             'intro' => $_G['gp_intro'],
-			'name' => $_G['gp_name'],
         ), true);
         foreach($_G['gp_tuan_product_enable'] as $product_id=>$dummy)
         {

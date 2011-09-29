@@ -160,6 +160,11 @@ class etuan_cart
             $cart_items_by_tuan[$tuan_id] = array(
                 'tuan'=>$this->tuan->fetchTuan($tuan_id),
                 'items'  => $this->getItems($tuan_id, $get_detail),
+                'sub_total'  => $sub_total = $this->getProductFee($tuan_id),
+                'ship_fee'  => $ship_fee=0,
+                'credit_discount'  => $credit_discount=0,
+                'usable_credit'  => $this->getCreditLimit($tuan_id),
+                'total'  => $sub_total+$ship_fee-$credit_discount,
                 );
         }
         return $cart_items_by_tuan;
@@ -190,7 +195,7 @@ class etuan_cart
     function getProductFee($only_tuan_id=0)
     {
         $product_fee = 0;
-        foreach($this->products() as $tuan_product_id=>$quantity)
+        foreach($this->products as $tuan_product_id=>$quantity)
         {
             list($tuan_id, $product_id) = explode('_', $tuan_product_id);
             if(!$only_tuan_id || ($only_tuan_id==$tuan_id))
@@ -208,7 +213,7 @@ class etuan_cart
     function getCreditLimit($only_tuan_id=0)
     {
         $credit_limit = 0;
-        foreach($this->products() as $tuan_product_id=>$quantity)
+        foreach($this->products as $tuan_product_id=>$quantity)
         {
             list($tuan_id, $product_id) = explode('_', $tuan_product_id);
             if(!$only_tuan_id || ($only_tuan_id==$tuan_id))
@@ -247,8 +252,10 @@ class etuan_cart
             $notify_var = array_merge($order_item, compact('tuan_name', 'product_name', 'order_id'));
             notification_add($tuan['seller_id'], 'etuan', 'etuan:seller_notify_tuan_bought', $notify_var, 1);
         }
+        $order = $etuan->fetchRow('etuan_order', $order_id);
+        $order['tuan'] = $etuan->fetchRow('etuan_tuan', $order['tuan_id']);
         $this->clear($tuan_id);
-        return $sn;
+        return $order;
     }
 
     function addItem($tuan_id, $product_id, $quantity=1)

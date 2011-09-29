@@ -44,10 +44,8 @@ if($op == 'add') {
 	}
 
 }else if($op == 'delete') {
-
 	DB::delete('etuan_address', "buyer_id=$_G[uid] and id = $id");
-	echo 'true';
-
+	$etuan->ajaxOrMsg('etuan:address_delete_success', "plugin.php?id=etuan:my&app=address");
 }else{
 
 	$page = max(1, intval($_G['page']));

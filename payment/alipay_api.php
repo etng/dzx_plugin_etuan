@@ -7,52 +7,55 @@ class AlipayService {
 
 	var $parameter;
 	var $alipay_gateway;
+    var $api_type=1;
+    var $partner='';
+    var $account='';
+    var $key='';
 
-	function AlipayService() {
+	function AlipayService($config) {
+        global $_G;
+        foreach($config as $k=>$v)
+        {
+            if(strpos($k, 'alipay_')===0)
+            {
+                $k = substr($k, strlen('alipay_'));
+            }
+            $this->$k = $v;
+        }
 		$this->alipay_gateway = 'https://mapi.alipay.com/gateway.do?';
-		$this->loadParameter();
-    }
-
-	function loadParameter(){
-		global $_G;
-		global $orderid, $tid, $subject, $totalmoney;
 		$this->parameter = array();
 
-		if(ALIPAY_APITYPE == 1){
+		if($this->api_type == 1){
 			$this->parameter['service'] = "create_direct_pay_by_user";
-			$this->parameter['total_fee'] = $totalmoney;
 			$this->parameter['paymethod'] = "directPay";
-		}else if(ALIPAY_APITYPE == 2){
+		}else if($this->api_type == 2){
 			$this->parameter['service'] = "create_partner_trade_by_buyer";
 			$this->parameter['quantity'] = 1;
-			$this->parameter['price'] = $totalmoney;
 			$this->parameter['logistics_fee'] = '0.00';
 			$this->parameter['logistics_type'] = 'EXPRESS';
 			$this->parameter['logistics_payment'] = 'SELLER_PAY';
-		}else if(ALIPAY_APITYPE == 3){
+		}else if($this->api_type == 3){
 			$this->parameter['service'] = "trade_create_by_buyer";
 			$this->parameter['quantity'] = 1;
-			$this->parameter['price'] = $totalmoney;
+
 			$this->parameter['logistics_fee'] = '0.00';
 			$this->parameter['logistics_type'] = 'EXPRESS';
 			$this->parameter['logistics_payment'] = 'SELLER_PAY';
 		}
 
-		$this->parameter['_input_charset'] = CHARSET;
+		$this->parameter['_input_charset'] = 'UTF8';
 		$this->parameter['payment_type'] = "1";
-		$this->parameter['partner'] = ALIPAY_PID;
-		$this->parameter['seller_email'] = ALIPAY_ACCOUNT;
+		$this->parameter['partner'] = $this->partner;
+		$this->parameter['seller_email'] = $this->account;
 		$this->parameter['return_url'] = $_G['siteurl']."source/plugin/etuan/payment/alipay_return.php";
 		$this->parameter['notify_url'] = $_G['siteurl']."source/plugin/etuan/payment/alipay_notify.php";
-		$this->parameter['show_url'] = $_G['siteurl'].'forum.php?mod=viewthread&tid='.$tid;
+    }
+	function createPayURL($orderid, $subject, $totalmoney, $show_url){
 		$this->parameter['out_trade_no'] = $orderid;
 		$this->parameter['subject'] = $subject;
 		$this->parameter['body'] = $subject;
-	}
-
-
-	function createPayURL(){
-
+        $this->parameter['price'] = $totalmoney;
+        $this->parameter['show_url'] = $show_url;
 		$payurl = $sign = '';
 		$args = $this->parameter;
 		ksort($args);
@@ -61,15 +64,15 @@ class AlipayService {
 			$payurl.= $key.'='.rawurlencode($val).'&';
         }
 		$sign = substr($sign, 1);
-		$sign = md5($sign.ALIPAY_KEY);
+		$sign = md5($sign.$this->key);
 
 		$payurl = $this->alipay_gateway.$payurl.'sign='.$sign.'&sign_type=MD5';
 
 		return $payurl;
 	}
 
-	function doSend() {
-		header("Location:" . $this->createPayURL());
+	function doSend($orderid, $subject, $totalmoney, $show_url) {
+		header("Location:" . $this->createPayURL($orderid, $subject, $totalmoney, $show_url));
 		exit;
 	}
 

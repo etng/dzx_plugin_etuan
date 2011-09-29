@@ -25,17 +25,28 @@ switch($op){
         $etuan->ajaxOrMsg('etuan:cart_clear_success', $cart_url);
         break;
     case 'checkout'://填写结账单即选择送货地址、支付方式、发货方式及积分抵扣等
-        $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan();
+        $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan($get_detail=true);
+        $addresses = $etuan->fetchAll('etuan_address', array("buyer_id={$_G['uid']}"));
         include template('etuan:cart_checkout');
         break;
     case 'submit'://生成订单
-        $sn = $ecart->submit($_G['tuan_id'], $_G['uid'], $_G['gp_credit_used'], $_G['gp_shipmethod_id'], $_G['gp_payment_id'], $_G['gp_address_id'], $_G['gp_memo']);
-        if(!$ecart->isEmpty())
+        $order = $ecart->submit($_G['gp_tuan_id'], $_G['uid'], $_G['gp_credit_used'], $_G['gp_shipmethod_id'], $_G['gp_payment_id'], $_G['gp_address_id'], $_G['gp_memo']);
+        $order_view_url = "plugin.php?id=etuan:my&app=order&op=view&orderid={$order['id']}";
+        if($_G['gp_payment_id']!='cod')
         {
-            $etuan->ajaxOrMsg('etuan:order_create_success_continue', "plugin.php?id=etuan:cart&op=checkout");
+            require_once(DISCUZ_ROOT.'./source/plugin/etuan/payment/'.$_G['gp_payment_id'].'_api.php');
+            $cls = ucfirst($_G['gp_payment_id']) . 'Service';
+            $gateway = new $cls($config);
+            $gateway->doSend($order['id'], $order['tuan']['name'], $order['total'], $_G['siteurl'].$order_view_url);
         }else
         {
-            $etuan->ajaxOrMsg('etuan:order_create_success', "plugin.php?id=etuan:my&app=order");
+            if(!$ecart->isEmpty())
+            {
+                $etuan->ajaxOrMsg('etuan:order_create_success_continue', "plugin.php?id=etuan:cart&op=checkout");
+            }else
+            {
+                $etuan->ajaxOrMsg('etuan:order_create_success', $order_view_url);
+            }
         }
         break;
     case 'list':

@@ -1,5 +1,3 @@
-结算
-收货人信息
 <!--{template common/header}-->
 <style type="text/css">
 .tl{padding-top: 10px;}
@@ -34,7 +32,7 @@
 	<div class="z">
 		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
 		<a href="plugin.php?id=etuan:cart">{lang etuan:my_cart}</a>
-		<a href="plugin.php?id=etuan:cart&op=checkout">{lang etuan:my_cart}</a>
+		 <em>&rsaquo;</em><a href="plugin.php?id=etuan:cart&op=checkout">{lang etuan:cart_checkouting}</a>
 	</div>
 </div>
 
@@ -42,45 +40,93 @@
 <div id="ct" class="ct2_a wp cl">
 	<div class="mn">
 		<div class="bm bw0">
-			<!--{if $cart_items_group_by_tuan}-->
-			<!--{loop $cart_items_group_by_tuan $tuan_cart_items}-->
-			<h1 class="mt"><img alt="thread" src="static/image/feed/thread.gif" class="vm" /> >{$tuan_cart_items[tuan][name]}</h1>
+		<!--{if $cart_items_group_by_tuan}-->
+		<!--{loop $cart_items_group_by_tuan $tuan_cart_items}-->
+			<form method="post" action="plugin.php?id=etuan:cart&op=submit&tuan_id={$tuan_cart_items[tuan][id]}">
+			<h1>{$tuan_cart_items[tuan][name]}</h1>
 			<div class="tl">
+				<h3>{lang etuan:cart_choose_address}</h3>
+				<div>
+				<ul>
+				<!--{if $addresses}-->
+				<!--{loop $addresses $address}-->
+					<li><input type="radio" id="address_id_{$address[id]}" name="address_id" value="{$address[id]}" />
+					{$address[name]}</li>
+				<!--{/loop}-->
+				<!--{/if}-->
+				</ul>
+				<a href="javascript:void(0);" onclick="showWindow('add_address', 'plugin.php?id=etuan:my&app=address&op=add', 'get', 0)">{lang etuan:my_add_address}</a>
+				</div>
+				<h3>{lang etuan:cart_choose_shipmethod}</h3>
+				<div><ul>
+					<!--{if $tuan_cart_items[tuan][ship_only_pick]}-->
+					<li><strong>{lang etuan:tuan_ship_only_pick}</strong><label><input type="radio" id="shipmethod_pick" name="shipmethod" value="shipmethod_pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
+					<!--{else}-->
+					<li><label><input type="radio" id="shipmethod_pick" name="shipmethod" value="shipmethod_pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
+					<li><label><input type="radio" id="shipmethod_deliver" name="shipmethod" value="shipmethod_deliver" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_deliver]}" />{lang etuan:tuan_ship_fee_deliver} {$tuan_cart_items[tuan][ship_fee_deliver]}</label>	</li>
+					<!--{/if}-->
+					</ul>
+				</div>
+				<h3>{lang etuan:cart_choose_payment_method}</h3>
+				<ul>
+					<li><label><input type="radio" id="payment_cod" name="payment_id" value="cod" />{lang etuan:payment_method_cod}</label></li>
+					<li><label><input type="radio" id="payment_alipay" name="payment_id" value="alipay" />{lang etuan:payment_method_alipay}</label></li>
+					<li><label><input type="radio" id="payment_tenpay" name="payment_id" value="tenpay" />
+					{lang etuan:payment_method_tenpay}</label></li>
+				</ul>
+				<h3>{lang etuan:cart_choose_credit}</h3>
+				<div>
+					{lang etuan:checkout_use_credit_tips}
+					<input type="text" id="credit_used" name="credit_used" value="0" data-usable="{}" />
+				</div>
+				<h3>{lang etuan:cart_choose_memo}</h3>
+				<div><textarea name="memo" id="memo" rows="2" cols="2" class="pt" style="width:95%; height:51px;"></textarea></div>
+				<h3>{lang etuan:cart_items}</h3>
 					<table cellspacing="0" cellpadding="0">
 						<tr class="th">
-							<td class="icn">&nbsp;</td>
 							<th>{lang etuan:cart_product}</th>
 							<td>{lang etuan:cart_quantity}</td>
 							<td>{lang etuan:cart_unit_price}</td>
 							<td>{lang etuan:cart_price}</td>
-							<td class="num">{lang etuan:my_operation}</td>
 						</tr>
-						<!--{if $tuan_cart_items[items]}-->
 							<!--{loop $tuan_cart_items[items] $cart_item}-->
 							<tr>
-								<td class="icn"><a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank"> <img src="static/image/common/folder_new.gif" /> </a></td>
-								<th> <a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank">$thread[subject]</a> </th>
+								<th> <a href="forum.php?mod=viewthread&tid=$cart_item[tuan][tid]" target="_blank">$cart_item[product][name]</a> </th>
 								<td>{$cart_item['quantity']}</td>
 								<td class="num">{$cart_item['unit_price']}</td>
 								<td class="by">{$cart_item['price']}</td>
-								<td class="num"><a href="plugin.php?id=etuan:cart&op=delete&tuan_id={$cart_item[tuan_id]}&product_id={$cart_item[product_id]}" class="xi2">{lang etuan:cart_remove_product}</a></td>
 							</tr>
 							<!--{/loop}-->
-						<!--{else}-->
 							<tr>
-								<td colspan="5"><p class="emp">{lang etuan:cart_is_empty}</p></td>
+								<td colspan="2">&nbsp;</td>
+								<td class="num">{lang etuan:sub_total}</td>
+								<td class="by">{$tuan_cart_items[sub_total]}</td>
 							</tr>
-						<!--{/if}-->
+							<tr>
+								<td colspan="2">&nbsp;</td>
+								<td class="num">{lang etuan:ship_fee}</td>
+								<td class="by"><span id="ship_fee">{$tuan_cart_items[ship_fee]}</span></td>
+							</tr>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+								<td class="num">{lang etuan:credit_discount}</td>
+								<td class="by"><span id="credit_discount">{$tuan_cart_items[credit_discount]}</span></td>
+							</tr>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+								<td class="num">{lang etuan:total}</td>
+								<td class="by"><span id="total">{$tuan_cart_items[total]}</span></td>
+							</tr>
 					</table>
-				</div>
-
 			</div>
-			<!--{/loop}-->
-			<!--{else}-->
+			<div style="text-align:right"><input type="submit" value="{lang etuan:submit_my_order}" /></div>
+			</form>
+
+		<!--{/loop}-->
+		<!--{else}-->
 			<p>{lang etuan:cart_is_empty}</p>
-<!--{/if}-->
-</div>
-	</div>
+		<!--{/if}-->
+	</div></div>
 	<div class="appl">
 		<div class="tbn">
 			<h2 class="mt bbda">{lang etuan:other_product_in_this_tuan}</h2>
