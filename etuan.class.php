@@ -19,6 +19,16 @@ class etuan
     {
         return lang('plugin/etuan', $text);
     }
+    function ajaxOrMsg($msg, $url)
+    {
+        global $_G;
+        if($_G['inajax']) {
+            echo 'true';
+        }else
+        {
+            showmessage($msg, $url, array(), array('showdialog' => 1, 'closetime' => true));
+        }
+    }
 
     function readConf($var, $default=null)
     {
@@ -77,6 +87,31 @@ class etuan
         }
         return $cache[$product_id];
     }
+    function fetchAll($table, $where=array(), $limit=0, $offset=0)
+    {
+        $list = array();
+        $where = $where?' where ' .implode(' and ', $where):'';
+        $limit = $limit?" limit {$offset},{$limit}":'';
+         $query = DB::query("SELECT * FROM ".DB::table($table)." {$where}{$limit}");
+         while($row = DB::fetch($query)){
+            $list[] = $row;
+        }
+        return $list;
+    }
+    function fetchRow($table, $pk_value, $reload=false)
+    {
+        static $cache=array();
+        if($reload || !isset($cache[$table][$pk_value]))
+        {
+            $cache[$table][$pk_value] = DB::fetch_first($sql="SELECT * FROM ".DB::table($table)." where id={$pk_value}");
+        }
+        return $cache[$table][$pk_value];
+    }
+    function fetchSupplier($id, $reload=false)
+    {
+        return $this->fetchRow('etuan_supplier', $id, $reload);
+    }
+
 }
 class plugin_etuan extends etuan
  {
@@ -117,24 +152,23 @@ class etuan_cart
     {
         dsetcookie('etuan_cart', serialize($this->products), 86400);
     }
-    function getItemsGroupByTuan()
+    function getItemsGroupByTuan($get_detail=false)
     {
         $cart_items_by_tuan = array();
         foreach($this->getTuans() as $tuan_id=>$product_ids)
         {
             $cart_items_by_tuan[$tuan_id] = array(
                 'tuan'=>$this->tuan->fetchTuan($tuan_id),
-                'items'  => $this->getItems(),
+                'items'  => $this->getItems($tuan_id, $get_detail),
                 );
         }
         return $cart_items_by_tuan;
     }
-    function getItems($only_tuan_id=0)
+    function getItems($only_tuan_id=0, $get_detail=false)
     {
         $order_items = array();
         foreach($this->products as $tuan_product_id=>$quantity)
         {
-
             list($tuan_id, $product_id) = explode('_', $tuan_product_id);
             if(!$only_tuan_id || ($only_tuan_id==$tuan_id))
             {
@@ -142,7 +176,13 @@ class etuan_cart
                 $product = $this->tuan->fetchProduct($product_id);
                 $unit_price = $product['price'];
                 $price = $unit_price * $quantity;
-                $order_items[] = compact('tuan_id', 'product_id', 'unit_price', 'quantity', 'price');
+                $order_item = compact('tuan_id', 'product_id', 'unit_price', 'quantity', 'price');
+                if($get_detail)
+                {
+                    $order_item['product'] = $product;
+                    $order_item['tuan'] = $tuan;
+                }
+                $order_items[] =  $order_item;
             }
         }
         return $order_items;

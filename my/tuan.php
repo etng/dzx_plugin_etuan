@@ -37,6 +37,14 @@ switch($op){
     case 'list':
     default:
         $extra_sql = array("tuan.seller_id = '$_G[uid]'");
+
+        $filter = trim($_G['gp_filter']);
+        $filter = in_array($filter, array('all', 'ing', 'over')) ? $filter : 'all';
+        if($filter!=='all')
+        {
+            $extra_sql []= "tuan.status ='{$filter}'";
+        }
+
         $extra_sql = implode(' and ', $extra_sql);
 
         $page = max(1, intval($_G['page']));

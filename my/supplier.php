@@ -8,7 +8,7 @@ $supplierid = intval(@$_G['gp_supplierid']);
 switch($op){
     case 'delete':
         DB::delete('etuan_supplier', "seller_id={$_G['uid']} and id={$supplierid}");
-        echo 'true';
+        $etuan->ajaxOrMsg('etuan:supplier_add_success', "plugin.php?id=etuan:my&app=supplier");
         break;
 
     case 'add':
@@ -31,8 +31,7 @@ switch($op){
                                 'service_rating' => $_G['gp_service_rating'],
                                 'memo' => $_G['gp_memo'],
                         ), true);
-
-            showmessage('etuan:supplier_add_success', "plugin.php?id=etuan:my&app=supplier", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:supplier_add_success', "plugin.php?id=etuan:my&app=supplier");
         }else{
             include template('etuan:my_supplier_add');
         }
@@ -58,13 +57,16 @@ switch($op){
                                     'memo' => $_G['gp_memo'],
                                     ),
                                     "seller_id={$_G['uid']} and id={$supplierid}");
-            showmessage('etuan:supplier_edit_success', "plugin.php?id=etuan:my&app=supplier", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:supplier_edit_success', "plugin.php?id=etuan:my&app=supplier");
         }else{
             $row = DB::fetch_first("SELECT * FROM ".DB::table('etuan_supplier')." where seller_id={$_G['uid']} and id={$supplierid}");
             include template('etuan:my_supplier_add');
         }
         break;
-
+    case 'view':
+        $supplier = DB::fetch_first("SELECT * FROM ".DB::table('etuan_supplier')." where seller_id={$_G['uid']} and id={$supplierid}");
+        include template('etuan:my_supplier_view');
+     break;
     case 'list':
     default:
         $extra_sql  ='';

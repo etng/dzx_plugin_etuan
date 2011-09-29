@@ -24,11 +24,11 @@
 		<div class="bm bw0">
 			<h1 class="mt"><img alt="thread" src="{STATICURL}image/feed/article.gif" class="vm" /> {lang etuan:my_order}</h1>
 			<ul class="tb cl">
-				<li<!--{if $filter=="all"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=all">{lang all_order}</a></li>
-				<li<!--{if $filter=="finished"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=finished">{lang finished_order}</a></li>
-				<li<!--{if $filter=="pending"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=pending">{lang pending_order}</a></li>
-				<li<!--{if $filter=="paid"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=paid">{lang paid_order}</a></li>
-				<li<!--{if $filter=="shipped"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=shipped">{lang shipped_order}</a></li>
+				<li<!--{if $filter=="all"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=all">{lang etuan:all_order}</a></li>
+				<li<!--{if $filter=="finished"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=finished">{lang etuan:finished_order}</a></li>
+				<li<!--{if $filter=="pending"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=pending">{lang etuan:pending_order}</a></li>
+				<li<!--{if $filter=="paid"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=paid">{lang etuan:paid_order}</a></li>
+				<li<!--{if $filter=="shipped"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=order&filter=shipped">{lang etuan:shipped_order}</a></li>
 			</ul>
 
 
@@ -48,6 +48,7 @@
 							<td>{lang etuan:my_order_ship_fee}</td>
 							<td>{lang etuan:my_order_credit_used}</td>
 							<td>{lang etuan:my_order_actual_fee}</td>
+							<td>{lang etuan:status}</td>
 							<td>{lang etuan:my_operation}</td>
 						</tr>
 
@@ -68,9 +69,11 @@
 							<td>$value['ship_fee']</td>
 							<td>$value['credit_used']</td>
 							<td>$value['actual_fee']</td>
+							<td>$value['status']</td>
 							<td>
-							<a href="plugin.php?id=etuan:my&app=order&confirm_received=1&orderid={$value['id']}">{lang etuan:confirm_order_received}</a>
-							<a href="plugin.php?id=etuan:my&app=order&cancel=1&orderid={$value['id']}">{lang etuan:cancel_order}</a>
+							<a href="plugin.php?id=etuan:my&app=order&op=view&orderid={$value['id']}">{lang etuan:view}</a>
+							<a href="plugin.php?id=etuan:my&app=order&op=confirm_received&orderid={$value['id']}">{lang etuan:confirm_order_received}</a>
+							<a href="plugin.php?id=etuan:my&app=order&op=cancel&orderid={$value['id']}">{lang etuan:cancel_order}</a>
 							</td>
 						</tr>
 						<!--{eval $i++;}-->

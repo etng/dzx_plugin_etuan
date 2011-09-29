@@ -2,7 +2,7 @@
 <root>
 	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
 	<item id="Version"><![CDATA[X2]]></item>
-	<item id="Time"><![CDATA[2011-09-28 08:12]]></item>
+	<item id="Time"><![CDATA[2011-09-29 08:06]]></item>
 	<item id="From"><![CDATA[Discuz! Board (http://bbs.myxiaoqu.dev/)]]></item>
 	<item id="Data">
 		<item id="plugin">
@@ -147,12 +147,16 @@
 				<item id="cart_clear_success"><![CDATA[购物车清空成功]]></item>
 				<item id="order_create_success"><![CDATA[订单已创建]]></item>
 				<item id="tuan_delete_success"><![CDATA[团购删除成功]]></item>
+				<item id="order_confirm_received"><![CDATA[成功确认订单已收到]]></item>
+				<item id="order_canceled"><![CDATA[成功取消订单]]></item>
 			</item>
 			<item id="templatelang">
 				<item id="my_operation"><![CDATA[操作]]></item>
 				<item id="pleaseselect"><![CDATA[请选择...]]></item>
 				<item id="my_nav_buyer"><![CDATA[我是买家]]></item>
 				<item id="my_nav_seller"><![CDATA[我是卖家]]></item>
+				<item id="edit"><![CDATA[查看]]></item>
+				<item id="status"><![CDATA[状态]]></item>
 				<item id="tuan_intro"><![CDATA[团购介绍]]></item>
 				<item id="tuan_duration"><![CDATA[团购时间]]></item>
 				<item id="tuan_start_time"><![CDATA[开始时间]]></item>
@@ -271,13 +275,15 @@
 				<item id="my_product_supply_price"><![CDATA[供应价]]></item>
 				<item id="my_product_price"><![CDATA[卖价]]></item>
 				<item id="my_product_spec"><![CDATA[规格]]></item>
-				<item id="my_product_unit_name"><![CDATA[单价]]></item>
+				<item id="my_product_unit_name"><![CDATA[单位]]></item>
 				<item id="my_product_photo"><![CDATA[照片]]></item>
 				<item id="my_product_description"><![CDATA[描述]]></item>
 				<item id="my_product_credit_limit"><![CDATA[可用金豆数]]></item>
 				<item id="view"><![CDATA[查看]]></item>
 				<item id="delete"><![CDATA[删除]]></item>
 				<item id="my_tuan_name"><![CDATA[名称]]></item>
+				<item id="my_tuan_ing"><![CDATA[进行中]]></item>
+				<item id="my_tuan_over"><![CDATA[已结束]]></item>
 				<item id="my_tuan_duration"><![CDATA[起止时间]]></item>
 				<item id="my_tuan_status"><![CDATA[状态]]></item>
 				<item id="my_tuan"><![CDATA[我的团购]]></item>
@@ -302,6 +308,11 @@
 				<item id="order_item_price"><![CDATA[小计]]></item>
 				<item id="order_item_used_credits"><![CDATA[使用金豆]]></item>
 				<item id="order_item_memo"><![CDATA[备注]]></item>
+				<item id="finished_order"><![CDATA[已完成]]></item>
+				<item id="pending_order"><![CDATA[待处理]]></item>
+				<item id="paid_order"><![CDATA[已付款]]></item>
+				<item id="shipped_order"><![CDATA[已发货]]></item>
+				<item id="all_order"><![CDATA[所有]]></item>
 			</item>
 			<item id="installlang">
 				<item id="placeholder"><![CDATA[占位符]]></item>

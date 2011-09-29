@@ -41,9 +41,9 @@
 		<div class="bm bw0">
 			<h1 class="mt"><img alt="thread" src="static/image/feed/thread.gif" class="vm" /> {lang etuan:my_tuan}</h1>
 			<ul class="tb cl">
-				<li $orderactives[all]><a href="plugin.php?id=etuan:my&app=tuan">{lang all}</a></li>
-				<li $orderactives[ing]><a href="plugin.php?id=etuan:my&app=tuan&filter=ing">{lang etuan:my_tuan_ing}</a></li>
-				<li $orderactives[over]><a href="plugin.php?id=etuan:my&app=tuan&filter=over">{lang etuan:my_tuan_over}</a></li>
+				<li<!--{if $filter=="all"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=tuan">{lang all}</a></li>
+				<li<!--{if $filter=="ing"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=tuan&filter=ing">{lang etuan:my_tuan_ing}</a></li>
+				<li<!--{if $filter=="over"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=tuan&filter=over">{lang etuan:my_tuan_over}</a></li>
 			</ul>
 			<div class="tl">
 					<table cellspacing="0" cellpadding="0">

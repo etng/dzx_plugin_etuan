@@ -50,7 +50,7 @@
 						<!--{eval $i=0;}-->
 						<!--{loop $list $value}-->
 						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_product_{$value['id']}">
-							<td>$value['supplier_id']</td>
+							<td>$value['supplier']['name']</td>
 							<td>$value['name']</td>
 							<td>$value['market_price']</td>
 							<td>$value['supply_price']</td>

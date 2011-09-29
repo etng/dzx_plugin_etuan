@@ -35,19 +35,14 @@
 						<tr class="th">
 							<td>{lang etuan:my_supplier_name}</td>
 							<td>{lang etuan:my_supplier_phone}</td>
-							<td>{lang etuan:my_supplier_address}</td>
-							<td>{lang etuan:my_supplier_logo}</td>
 							<td>{lang etuan:my_supplier_contact_name}</td>
 							<td>{lang etuan:my_supplier_contact_gender}</td>
 							<td>{lang etuan:my_supplier_contact_phone}</td>
 							<td>{lang etuan:my_supplier_contact_qq}</td>
 							<td>{lang etuan:my_supplier_cate}</td>
-							<td>{lang etuan:my_supplier_website}</td>
-							<td>{lang etuan:my_supplier_tax_license}</td>
 							<td>{lang etuan:my_supplier_speed_rating}</td>
 							<td>{lang etuan:my_supplier_quality_rating}</td>
 							<td>{lang etuan:my_supplier_service_rating}</td>
-							<td>{lang etuan:my_supplier_memo}</td>
 							<td>{lang etuan:my_operation}</td>
 						</tr>
 
@@ -55,22 +50,17 @@
 						<!--{eval $i=0;}-->
 						<!--{loop $list $value}-->
 						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_supplier_{$value['id']}">
-						<td>$value['name']</td>
+						<td>{$value['logo']}{$value['name']}</td>
 						<td>$value['phone']</td>
-						<td>$value['address']</td>
-						<td>$value['logo']</td>
 						<td>$value['contact_name']</td>
 						<td>$value['contact_gender']</td>
 						<td>$value['contact_phone']</td>
 						<td>$value['contact_qq']</td>
 						<td>$value['cate']</td>
-						<td>$value['website']</td>
-						<td>$value['tax_license']</td>
 						<td>$value['speed_rating']</td>
 						<td>$value['quality_rating']</td>
 						<td>$value['service_rating']</td>
-						<td>$value['memo']</td>
-							<td><a href="javascript:void(0);" onclick="showWindow('add_supplier', 'plugin.php?id=etuan:my&app=supplier&op=edit&supplierid={$value[id]}', 'get', 0)" class="xi2">{lang edit}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="delete_supplier({$value[id]});" class="xi2">{lang delete}</a></td>
+							<td><a href="plugin.php?id=etuan:my&app=supplier&op=view&supplierid={$value[id]}" class="xi2">{lang etuan:view}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="showWindow('add_supplier', 'plugin.php?id=etuan:my&app=supplier&op=edit&supplierid={$value[id]}', 'get', 0)" class="xi2">{lang edit}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="delete_supplier({$value[id]});" class="xi2">{lang delete}</a></td>
 
 						</tr>
 						<!--{eval $i++;}-->

@@ -9,39 +9,20 @@ $cart_url = 'plugin.php?id=etuan:cart&op=list';
 switch($op){
     case 'add': //加入购物车
         $ecart->addItem($_G['gp_tuan_id'], $_G['gp_product_id'], empty($_G['gp_quantity'])?1:$_G['gp_quantity']);
-        if($_G['inajax']) {
-            echo 'true';
-        }else
-        {
-            showmessage('etuan:cart_add_success', $cart_url, array(), array('showdialog' => 1, 'closetime' => true));
-        }
+        $etuan->ajaxOrMsg('etuan:cart_add_success', $cart_url);
         break;
     case 'edit'://更新商品
         $ecart->updateItem($_G['gp_tuan_id'], $_G['gp_product_id'], $_G['gp_quantity'] );
-        if($_G['inajax']) {
-            echo 'true';
-        }else
-        {
-            showmessage('etuan:cart_edit_success', $cart_url, array(), array('showdialog' => 1, 'closetime' => true));
-        }        break;
+        $etuan->ajaxOrMsg('etuan:cart_edit_success', $cart_url);
+        break;
     case 'remove'://删除商品
     case 'delete'://删除商品
         $ecart->removeItem($_G['gp_tuan_id'], $_G['gp_product_id']);
-        if($_G['inajax']) {
-            echo 'true';
-        }else
-        {
-            showmessage('etuan:cart_delete_success', $cart_url, array(), array('showdialog' => 1, 'closetime' => true));
-        }
+        $etuan->ajaxOrMsg('etuan:cart_delete_success', $cart_url);
         break;
      case 'clear'://清空购物车
         $ecart->clear();
-        if($_G['inajax']) {
-            echo 'true';
-        }else
-        {
-            showmessage('etuan:cart_clear_success', $cart_url, array(), array('showdialog' => 1, 'closetime' => true));
-        }
+        $etuan->ajaxOrMsg('etuan:cart_clear_success', $cart_url);
         break;
     case 'checkout'://填写结账单即选择送货地址、支付方式、发货方式及积分抵扣等
         $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan();
@@ -59,7 +40,7 @@ switch($op){
         break;
     case 'list':
     default:
-        $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan();
+        $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan($get_detail=true);
         include template('etuan:cart_view');
   break;
 }
