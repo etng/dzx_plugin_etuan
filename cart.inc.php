@@ -32,10 +32,10 @@ switch($op){
         $sn = $ecart->submit($_G['tuan_id'], $_G['uid'], $_G['gp_credit_used'], $_G['gp_shipmethod_id'], $_G['gp_payment_id'], $_G['gp_address_id'], $_G['gp_memo']);
         if(!$ecart->isEmpty())
         {
-            showmessage('etuan:order_create_success_continue', "plugin.php?id=etuan:cart&op=checkout", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:order_create_success_continue', "plugin.php?id=etuan:cart&op=checkout");
         }else
         {
-            showmessage('etuan:order_create_success', "plugin.php?id=etuan:my&app=order&sn={$sn}", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:order_create_success', "plugin.php?id=etuan:my&app=order");
         }
         break;
     case 'list':

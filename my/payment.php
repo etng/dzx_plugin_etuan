@@ -8,7 +8,7 @@ $paymentid = intval(@$_G['gp_paymentid']);
 switch($op){
     case 'delete':
         DB::delete('etuan_payment', "seller_id={$_G['uid']} and id={$paymentid}");
-        echo 'true';
+        $etuan->ajaxOrMsg('etuan:payment_delete_success', "plugin.php?id=etuan:my&app=payment");
         break;
 
     case 'add':
@@ -23,7 +23,7 @@ switch($op){
                                         'tenpay_key' => $_G['gp_tenpay_key'],
                         ), true);
 
-            showmessage('etuan:payment_add_success', "plugin.php?id=etuan:my&app=payment", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:payment_add_success', "plugin.php?id=etuan:my&app=payment");
         }else{
             include template('etuan:my_payment_add');
         }
@@ -40,7 +40,7 @@ switch($op){
                                     'tenpay_key' => $_G['gp_tenpay_key'],
                                     ),
                                     "seller_id={$_G['uid']} and id={$paymentid}");
-            showmessage('etuan:payment_edit_success', "plugin.php?id=etuan:my&app=payment", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:payment_edit_success', "plugin.php?id=etuan:my&app=payment");
         }else{
             $row = DB::fetch_first("SELECT * FROM ".DB::table('etuan_payment')." where seller_id={$_G['uid']} and id={$paymentid}");
             include template('etuan:my_payment_add');

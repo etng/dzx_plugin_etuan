@@ -8,7 +8,7 @@ $productid = intval(@$_G['gp_productid']);
 switch($op){
     case 'delete':
         DB::delete('etuan_product', "seller_id={$_G['uid']} and id={$productid}");
-        echo 'true';
+        $etuan->ajaxOrMsg('etuan:product_add_success', "plugin.php?id=etuan:my&app=product");
         break;
 
     case 'add':
@@ -27,7 +27,7 @@ switch($op){
                                         'credit_limit' => $_G['gp_credit_limit'],
                         ), true);
 
-            showmessage('etuan:product_add_success', "plugin.php?id=etuan:my&app=product", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:product_add_success', "plugin.php?id=etuan:my&app=product");
         }else{
             $suppliers = $etuan->fetchAll('etuan_supplier', array("seller_id={$_G['uid']}"));
             include template('etuan:my_product_add');
@@ -49,7 +49,7 @@ switch($op){
                                     'credit_limit' => $_G['gp_credit_limit'],
                                     ),
                                     "seller_id={$_G['uid']} and id={$productid}");
-            showmessage('etuan:product_edit_success', "plugin.php?id=etuan:my&app=product", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:product_edit_success', "plugin.php?id=etuan:my&app=product");
         }else{
             $row = DB::fetch_first("SELECT * FROM ".DB::table('etuan_product')." where seller_id={$_G['uid']} and id={$productid}");
             $suppliers = $etuan->fetchAll('etuan_supplier', array("seller_id={$_G['uid']}"));

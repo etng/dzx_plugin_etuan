@@ -21,7 +21,7 @@ if($op == 'add') {
                 'email' => $_G['gp_email'],
                 ), true);
 
-		showmessage('etuan:address_add_success', "plugin.php?id=etuan:my&app=address", array(), array('showdialog' => 1, 'closetime' => true));
+		$etuan->ajaxOrMsg('etuan:address_add_success', "plugin.php?id=etuan:my&app=address");
 	}else{
 		include template('etuan:my_address_add');
 	}
@@ -37,7 +37,7 @@ if($op == 'add') {
                 'phone' => $_G['gp_phone'],
                 'email' => $_G['gp_email'],
                 ), "buyer_id=$_G[uid] and id = $id");
-		showmessage('etuan:address_edit_success', "plugin.php?id=etuan:my&app=address", array(), array('showdialog' => 1, 'closetime' => true));
+		$etuan->ajaxOrMsg('etuan:address_edit_success', "plugin.php?id=etuan:my&app=address");
 	}else{
 		$row = DB::fetch_first("SELECT * FROM ".DB::table('etuan_address')." where buyer_id=$_G[uid] and id = '$id'");
 		include template('etuan:my_address_add');

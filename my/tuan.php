@@ -8,12 +8,7 @@ switch($op){
     case 'delete':
         $tid = intval($_G['gp_tid']);
         DB::delete('etuan_tuan', "seller_id={$_G['uid']} and tid={$tid}");
-        if($_G['inajax']) {
-            echo 'true';
-        }else
-        {
-            showmessage('etuan:tuan_delete_success', "plugin.php?id=etuan:my&app=tuan", array(), array('showdialog' => 1, 'closetime' => true));
-        }
+        $etuan->ajaxOrMsg('etuan:tuan_delete_success', "plugin.php?id=etuan:my&app=tuan");
         break;
     case 'view':
         $tid = intval($_G['gp_tid']);
@@ -25,8 +20,7 @@ switch($op){
         where tuan_id={$tuan_thread['tuan_id']}");
         while($row = DB::fetch($query)){
             $row['items'] = array();
-            $item_query = DB::query("SELECT * FROM ".DB::table('etuan_order_product')."
-        where order_id={$row['id']}");
+            $item_query = DB::query("SELECT * FROM ".DB::table('etuan_order_product')." where order_id={$row['id']}");
             while($item_row = DB::fetch($item_query)){
                 $row['items'][] = $item_row;
             }

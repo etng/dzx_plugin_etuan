@@ -8,7 +8,7 @@ $shipmethodid = intval(@$_G['gp_shipmethodid']);
 switch($op){
     case 'delete':
         DB::delete('etuan_shipmethod', "seller_id={$_G['uid']} and id={$shipmethodid}");
-        echo 'true';
+        $etuan->ajaxOrMsg('etuan:shipmethod_add_success', "plugin.php?id=etuan:my&app=shipmethod");
         break;
 
     case 'add':
@@ -24,7 +24,7 @@ switch($op){
                             'intro' => $_G['gp_intro'],
                         ), true);
 
-            showmessage('etuan:shipmethod_add_success', "plugin.php?id=etuan:my&app=shipmethod", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:shipmethod_add_success', "plugin.php?id=etuan:my&app=shipmethod");
         }else{
             include template('etuan:my_shipmethod_add');
         }
@@ -42,7 +42,7 @@ switch($op){
                                     'intro' => $_G['gp_intro'],
                                     ),
                                     "seller_id={$_G['uid']} and id={$shipmethodid}");
-            showmessage('etuan:shipmethod_edit_success', "plugin.php?id=etuan:my&app=shipmethod", array(), array('showdialog' => 1, 'closetime' => true));
+            $etuan->ajaxOrMsg('etuan:shipmethod_edit_success', "plugin.php?id=etuan:my&app=shipmethod");
         }else{
             $row = DB::fetch_first("SELECT * FROM ".DB::table('etuan_shipmethod')." where seller_id={$_G['uid']} and id={$shipmethodid}");
             include template('etuan:my_shipmethod_add');
