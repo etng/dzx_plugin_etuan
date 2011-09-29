@@ -1,0 +1,59 @@
+<!--{template common/header}-->
+<style type="text/css">
+.tl{padding-top: 10px;}
+.tl table {width:100%;table-layout:fixed;border-collapse:separate;}
+.tl th,.tl td {padding:12px 0;border-bottom:1px dashed #E5E5E5;}
+.tl tr.a th,.tl tr.a td {background-color: #F7F7F7;	}
+.tl .th {background:#F2F2F2;}
+.tl .th th,.tl .th td{border:none;padding: 8px 0px;}
+.tl .th th,.tl th{padding-left: 10px;}
+.tl td{text-align: center;}
+.actl{table-layout:fixed;margin:10px 0;border-top:3px solid #CDCDCD;}
+</style>
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my&app=supplier">{lang etuan:my_supplier}</a>
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="{STATICURL}image/feed/article.gif" class="vm" /> {lang etuan:my_supplier}</h1>
+
+			<div class="tl">
+				<table cellspacing="0" cellpadding="0">
+					<tr class="th">
+					<tr><td>{lang etuan:my_supplier_name}</td><td>$supplier['name']</td></tr>
+					<tr><td>{lang etuan:my_supplier_phone}</td><td>$supplier['phone']</td></tr>
+					<tr><td>{lang etuan:my_supplier_address}</td><td>$supplier['address']</td></tr>
+					<tr><td>{lang etuan:my_supplier_logo}</td><td>$supplier['logo']</td></tr>
+					<tr><td>{lang etuan:my_supplier_contact_name}</td><td>$supplier['contact_name']</td></tr>
+					<tr><td>{lang etuan:my_supplier_contact_gender}</td><td>$supplier['contact_gender']</td></tr>
+					<tr><td>{lang etuan:my_supplier_contact_phone}</td><td>$supplier['contact_phone']</td></tr>
+					<tr><td>{lang etuan:my_supplier_contact_qq}</td><td>$supplier['contact_qq']</td></tr>
+					<tr><td>{lang etuan:my_supplier_cate}</td><td>$supplier['cate']</td></tr>
+					<tr><td>{lang etuan:my_supplier_website}</td><td>$supplier['website']</td></tr>
+					<tr><td>{lang etuan:my_supplier_tax_license}</td><td>$supplier['tax_license']</td></tr>
+					<tr><td>{lang etuan:my_supplier_speed_rating}</td><td>$supplier['speed_rating']</td></tr>
+					<tr><td>{lang etuan:my_supplier_quality_rating}</td><td>$supplier['quality_rating']</td></tr>
+					<tr><td>{lang etuan:my_supplier_service_rating}</td><td>$supplier['service_rating']</td></tr>
+					<tr><td>{lang etuan:my_supplier_memo}</td><td>$supplier['memo']</td></tr>
+					<tr><td>{lang etuan:my_operation}</td><td>
+						<a href="plugin.php?id=etuan:my&app=supplier&op=edit&supplierid={$supplier[id]}" class="xi2">{lang edit}</a>
+						<span class="pipe">|</span>
+						<a href="plugin.php?id=etuan:my&app=supplier&op=delete&supplierid={$supplier[id]}" class="xi2">{lang delete}</a></td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<!--{template common/footer}-->
