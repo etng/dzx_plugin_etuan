@@ -81,8 +81,19 @@ class AlipayService {
 class AlipayNotify {
 
 	var $http_verify_url;
-
-    function AlipayNotify() {
+    var $api_type=1;
+    var $partner='';
+    var $account='';
+    var $key='';
+    function AlipayNotify($config) {
+        foreach($config as $k=>$v)
+        {
+            if(strpos($k, 'alipay_')===0)
+            {
+                $k = substr($k, strlen('alipay_'));
+            }
+            $this->$k = $v;
+        }		
 		$this->http_verify_url = 'http://notify.alipay.com/trade/notify_query.do?';
     }
 
@@ -136,12 +147,12 @@ class AlipayNotify {
 			$sign .= '&'.$key.'='.$val;
         }
 		$sign = substr($sign, 1);
-		$sign = md5($sign.ALIPAY_KEY);
+		$sign = md5($sign.$this->key);
 		return $sign;
 	}
 
 	function getResponse($notify_id) {
-		$veryfy_url = $this->http_verify_url."partner=" . ALIPAY_PID . "&notify_id=" . $notify_id;
+		$veryfy_url = $this->http_verify_url."partner=" . $this->partener . "&notify_id=" . $notify_id;
 		$responseTxt = $this->getHttpResponse($veryfy_url);
 
 		return $responseTxt;

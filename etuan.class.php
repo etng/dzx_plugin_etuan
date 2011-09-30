@@ -29,7 +29,46 @@ class etuan
             showmessage($msg, $url, array(), array('showdialog' => 1, 'closetime' => true));
         }
     }
-
+	function acceptPayment($order_id, $amount, $gateway='alipay')
+	{
+		$order = $this->fetchRow('etuan_order', $order_id);
+		$status = $order['status'];
+		$paid_at = dgmdate(time(), 'Y-m-d H:i:s');
+		if(($order['paid_amount']+$amount)>$order['total'])
+		{
+			$status = 'paid';
+		}
+		DB::query("UPDATE ".DB::table('etuan_order')." 
+		SET paid_amount=paid_amount+{$amount}
+		,payment_method='{$gateway}'
+		,paid_at='{$paid_at}' 
+		,status='{$status}' 
+		WHERE order_id={$order_id}");
+		//@todo insert payment log
+	}
+	function paymentConf($type='alipay')
+	{
+		if($type=='alipay')
+		{
+			return array(
+			'api_type' => $this->readConf('alipay_api_type'),
+			'partner' => $this->readConf('alipay_partner'),
+			'account' => $this->readConf('alipay_account'),
+			'key' => $this->readConf('alipay_key'),
+			);	
+		}
+		elseif($type=='tenpay')
+		{
+			return array(
+			'account' => $this->readConf('tenpay_account'),
+			'key' => $this->readConf('tenpay_key'),
+			);				
+		}	
+		else
+		{
+			return array();
+		}		
+	}
     function readConf($var, $default=null)
     {
         if(isset($this->config[$var]))
