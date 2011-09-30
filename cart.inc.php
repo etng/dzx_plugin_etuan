@@ -36,6 +36,9 @@ switch($op){
         {
             require_once(DISCUZ_ROOT.'./source/plugin/etuan/payment/'.$_G['gp_payment_id'].'_api.php');
             $cls = ucfirst($_G['gp_payment_id']) . 'Service';
+            /**
+              * @todo fill $config
+              */
             $gateway = new $cls($config);
             $gateway->doSend($order['id'], $order['tuan']['name'], $order['total'], $_G['siteurl'].$order_view_url);
         }else
