@@ -2,7 +2,7 @@
 <root>
 	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
 	<item id="Version"><![CDATA[X2]]></item>
-	<item id="Time"><![CDATA[2011-09-29 08:06]]></item>
+	<item id="Time"><![CDATA[2011-09-30 08:07]]></item>
 	<item id="From"><![CDATA[Discuz! Board (http://bbs.myxiaoqu.dev/)]]></item>
 	<item id="Data">
 		<item id="plugin">
@@ -157,6 +157,7 @@
 				<item id="my_nav_seller"><![CDATA[我是卖家]]></item>
 				<item id="edit"><![CDATA[查看]]></item>
 				<item id="status"><![CDATA[状态]]></item>
+				<item id="cart_checkouting"><![CDATA[结算中]]></item>
 				<item id="tuan_intro"><![CDATA[团购介绍]]></item>
 				<item id="tuan_duration"><![CDATA[团购时间]]></item>
 				<item id="tuan_start_time"><![CDATA[开始时间]]></item>
@@ -313,6 +314,22 @@
 				<item id="paid_order"><![CDATA[已付款]]></item>
 				<item id="shipped_order"><![CDATA[已发货]]></item>
 				<item id="all_order"><![CDATA[所有]]></item>
+				<item id="sub_total"><![CDATA[小计]]></item>
+				<item id="ship_fee"><![CDATA[运费]]></item>
+				<item id="credit_discount"><![CDATA[积分抵扣]]></item>
+				<item id="total"><![CDATA[合计]]></item>
+				<item id="cart_choose_address"><![CDATA[选择配送地址]]></item>
+				<item id="cart_choose_shipmethod"><![CDATA[选择配送方式]]></item>
+				<item id="cart_choose_payment"><![CDATA[选择支付方式]]></item>
+				<item id="cart_choose_credit"><![CDATA[使用优惠]]></item>
+				<item id="cart_choose_memo"><![CDATA[备注]]></item>
+				<item id="cart_items"><![CDATA[订单商品]]></item>
+				<item id="submit_my_order"><![CDATA[提交我的订单]]></item>
+				<item id="cart_choose_payment_method"><![CDATA[选择支付方式]]></item>
+				<item id="payment_method_tenpay"><![CDATA[财付通]]></item>
+				<item id="payment_method_alipay"><![CDATA[支付宝]]></item>
+				<item id="payment_method_cod"><![CDATA[货到付款]]></item>
+				<item id="checkout_use_credit_tips"><![CDATA[请选择要使用的积分数，目前你还有<span class="left_credit">0</span>积分,本单可用<span class="usable_credit">0</span>积分]]></item>
 			</item>
 			<item id="installlang">
 				<item id="placeholder"><![CDATA[占位符]]></item>
