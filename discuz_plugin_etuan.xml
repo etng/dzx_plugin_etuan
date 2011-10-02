@@ -2,7 +2,7 @@
 <root>
 	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
 	<item id="Version"><![CDATA[X2]]></item>
-	<item id="Time"><![CDATA[2011-09-30 08:07]]></item>
+	<item id="Time"><![CDATA[2011-10-02 15:02]]></item>
 	<item id="From"><![CDATA[Discuz! Board (http://bbs.myxiaoqu.dev/)]]></item>
 	<item id="Data">
 		<item id="plugin">
@@ -17,6 +17,18 @@
 			<item id="version"><![CDATA[0.1]]></item>
 			<item id="__modules">
 				<item id="0">
+					<item id="name"><![CDATA[etuan]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
 					<item id="name"><![CDATA[etuan_thread]]></item>
 					<item id="menu"><![CDATA[]]></item>
 					<item id="url"><![CDATA[]]></item>
@@ -28,7 +40,7 @@
 					<item id="navsubname"><![CDATA[]]></item>
 					<item id="navsuburl"><![CDATA[]]></item>
 				</item>
-				<item id="1">
+				<item id="2">
 					<item id="name"><![CDATA[cart]]></item>
 					<item id="menu"><![CDATA[购物车]]></item>
 					<item id="url"><![CDATA[]]></item>
@@ -40,13 +52,25 @@
 					<item id="navsubname"><![CDATA[]]></item>
 					<item id="navsuburl"><![CDATA[]]></item>
 				</item>
-				<item id="2">
-					<item id="name"><![CDATA[etuan]]></item>
-					<item id="menu"><![CDATA[]]></item>
+				<item id="3">
+					<item id="name"><![CDATA[admin_community]]></item>
+					<item id="menu"><![CDATA[小区管理]]></item>
 					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[11]]></item>
+					<item id="type"><![CDATA[3]]></item>
 					<item id="adminid"><![CDATA[0]]></item>
-					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[5]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="4">
+					<item id="name"><![CDATA[admin_help]]></item>
+					<item id="menu"><![CDATA[帮助]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[10]]></item>
 					<item id="navtitle"><![CDATA[]]></item>
 					<item id="navicon"><![CDATA[]]></item>
 					<item id="navsubname"><![CDATA[]]></item>
@@ -123,6 +147,44 @@
 				<item id="value"><![CDATA[1]]></item>
 				<item id="extra"><![CDATA[]]></item>
 			</item>
+			<item id="7">
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="title"><![CDATA[支付宝商户ID号]]></item>
+				<item id="description"><![CDATA[此处填写支付宝分配给你的合作者身份]]></item>
+				<item id="variable"><![CDATA[alipay_partener]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[208812345678]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="8">
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="title"><![CDATA[支付宝交易密钥]]></item>
+				<item id="description"><![CDATA[此处填写支付宝分配给你的交易安全校验码]]></item>
+				<item id="variable"><![CDATA[alipay_key]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[plese_give_me_the_real_key]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="9">
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="title"><![CDATA[支付宝账户]]></item>
+				<item id="description"><![CDATA[支付宝登录帐户名]]></item>
+				<item id="variable"><![CDATA[alipay_account]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[alipay@etuan.com]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="10">
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="title"><![CDATA[支付宝接口类型]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[alipay_api_type]]></item>
+				<item id="type"><![CDATA[select]]></item>
+				<item id="value"><![CDATA[1]]></item>
+				<item id="extra"><![CDATA[1=即时到账
+2=担保交易
+3=标准双接口]]></item>
+			</item>
 		</item>
 		<item id="language">
 			<item id="scriptlang">
@@ -133,6 +195,17 @@
 				<item id="admin_help_check_desc"><![CDATA[<li>系统当前版本：<b><font color=green>{version}</font></b></li><li>官方最新版本：<span id="etuan_version"></span></li><li>是否需要更新：<span id="etuan_upgrade"></span></li>]]></item>
 				<item id="admin_help_faq"><![CDATA[插件帮助]]></item>
 				<item id="admin_help_faq_desc"><![CDATA[<li>官方论坛：<a href="http://www.zetng.com" target="_blank">折腾网</a></li>]]></item>
+				<item id="admin_community_tips"><![CDATA[请在这里设置各个小区的地址和联系人信息]]></item>
+				<item id="admin_community"><![CDATA[小区管理]]></item>
+				<item id="admin_community_name"><![CDATA[名称]]></item>
+				<item id="admin_community_contact_name"><![CDATA[联系人]]></item>
+				<item id="admin_community_contact_phone"><![CDATA[联系电话]]></item>
+				<item id="admin_community_contact_address"><![CDATA[联系地址]]></item>
+				<item id="admin_community_memo"><![CDATA[备注]]></item>
+				<item id="admin_community_add"><![CDATA[添加小区]]></item>
+				<item id="admin_community_add_succeed"><![CDATA[添加小区成功]]></item>
+				<item id="admin_community_edit_succeed"><![CDATA[修改小区成功]]></item>
+				<item id="admin_community_update_succeed"><![CDATA[更新小区成功]]></item>
 				<item id="payment_add_success"><![CDATA[支付方式添加成功]]></item>
 				<item id="payment_edit_success"><![CDATA[支付方式修改成功]]></item>
 				<item id="shipmethod_add_success"><![CDATA[发货方式添加成功]]></item>
@@ -192,7 +265,7 @@
 				<item id="submit_order"><![CDATA[提交订单]]></item>
 				<item id="cancel_order"><![CDATA[取消订单]]></item>
 				<item id="etuan_used_credit"><![CDATA[团购使用积分抵用]]></item>
-				<item id="seller_notify_tuan_bought"><![CDATA[您的团购{tuan_name}有人下单购买{product_name} * {product_quantity}，请<a href="plugin.php?id=etuan:my&app=order&orderid={orderid}">查看订单</a>了解详情。]]></item>
+				<item id="seller_notify_tuan_bought"><![CDATA[您的团购{tuan_name}有人下单了，请<a href="plugin.php?id=etuan:my&app=order&orderid={order_id}">查看订单#{order_sn}</a>了解详情。]]></item>
 				<item id="my_address"><![CDATA[我的配送地址]]></item>
 				<item id="my_add_address"><![CDATA[添加配送地址]]></item>
 				<item id="my_edit_address"><![CDATA[修改配送地址]]></item>
@@ -256,8 +329,10 @@
 				<item id="my_supplier_address"><![CDATA[地址]]></item>
 				<item id="my_supplier_logo"><![CDATA[Logo]]></item>
 				<item id="my_supplier_contact_name"><![CDATA[姓名]]></item>
+				<item id="my_supplier_second_contact_name"><![CDATA[后备联系人姓名]]></item>
 				<item id="my_supplier_contact_gender"><![CDATA[性别]]></item>
 				<item id="my_supplier_contact_phone"><![CDATA[电话]]></item>
+				<item id="my_supplier_second_contact_phone"><![CDATA[后备联系电话]]></item>
 				<item id="my_supplier_contact_qq"><![CDATA[QQ]]></item>
 				<item id="my_supplier_cate"><![CDATA[分类]]></item>
 				<item id="my_supplier_website"><![CDATA[网站]]></item>
@@ -314,6 +389,7 @@
 				<item id="paid_order"><![CDATA[已付款]]></item>
 				<item id="shipped_order"><![CDATA[已发货]]></item>
 				<item id="all_order"><![CDATA[所有]]></item>
+				<item id="my_seller_settings"><![CDATA[商家设置]]></item>
 				<item id="sub_total"><![CDATA[小计]]></item>
 				<item id="ship_fee"><![CDATA[运费]]></item>
 				<item id="credit_discount"><![CDATA[积分抵扣]]></item>
@@ -330,6 +406,29 @@
 				<item id="payment_method_alipay"><![CDATA[支付宝]]></item>
 				<item id="payment_method_cod"><![CDATA[货到付款]]></item>
 				<item id="checkout_use_credit_tips"><![CDATA[请选择要使用的积分数，目前你还有<span class="left_credit">0</span>积分,本单可用<span class="usable_credit">0</span>积分]]></item>
+				<item id="my_order_items"><![CDATA[订单内容]]></item>
+				<item id="my_order_product"><![CDATA[商品]]></item>
+				<item id="my_order_product_spec"><![CDATA[规格]]></item>
+				<item id="my_order_quantity"><![CDATA[数量]]></item>
+				<item id="my_order_unit_price"><![CDATA[单价]]></item>
+				<item id="my_order_price"><![CDATA[价格]]></item>
+				<item id="my_order_payment_log"><![CDATA[支付记录]]></item>
+				<item id="payment_log_paid_at"><![CDATA[支付时间]]></item>
+				<item id="payment_log_gateway"><![CDATA[支付方式]]></item>
+				<item id="payment_log_amount"><![CDATA[金额]]></item>
+				<item id="my_order_credit_discount"><![CDATA[积分抵扣]]></item>
+				<item id="my_order_not_shipped_yet"><![CDATA[还没有发货]]></item>
+				<item id="my_order_not_received_yet"><![CDATA[还没有确认收货]]></item>
+				<item id="my_order_ship_address"><![CDATA[送货地址]]></item>
+				<item id="my_order_ship_community"><![CDATA[送货小区]]></item>
+				<item id="my_order_ship_name"><![CDATA[收货人]]></item>
+				<item id="my_order_ship_phone"><![CDATA[收货人电话]]></item>
+				<item id="order_memo"><![CDATA[订单备注]]></item>
+				<item id="address_add_success"><![CDATA[收货地址添加成功]]></item>
+				<item id="my_address_community"><![CDATA[小区]]></item>
+				<item id="my_address_contact_name"><![CDATA[联系人]]></item>
+				<item id="my_order_not_paid_yet"><![CDATA[还没有付款]]></item>
+				<item id="pay_order"><![CDATA[支付]]></item>
 			</item>
 			<item id="installlang">
 				<item id="placeholder"><![CDATA[占位符]]></item>

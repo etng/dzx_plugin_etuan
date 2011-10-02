@@ -12,22 +12,11 @@ if(0){
     }
     deletethread($tids, true, true);
 }
-$sql = <<<EOF
-
-DROP TABLE IF EXISTS `pre_etuan_address`;
-DROP TABLE IF EXISTS `pre_etuan_order`;
-DROP TABLE IF EXISTS `pre_etuan_order_product`;
-DROP TABLE IF EXISTS `pre_etuan_payment`;
-DROP TABLE IF EXISTS `pre_etuan_product`;
-DROP TABLE IF EXISTS `pre_etuan_shipmethod`;
-DROP TABLE IF EXISTS `pre_etuan_supplier`;
-DROP TABLE IF EXISTS `pre_etuan_tuan`;
-DROP TABLE IF EXISTS `pre_etuan_tuan_product`;
-
-EOF;
-
-runquery($sql);
-
+$tables = $etuan->fetchCol("show tables like '".DB::table('etuan_')."%'");
+foreach($tables as $table)
+{
+    runquery(sprintf('DROP TABLE IF EXISTS `%s`;', $table));
+}
 $finish = TRUE;
 
 ?>

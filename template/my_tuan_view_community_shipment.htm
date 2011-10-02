@@ -1,0 +1,103 @@
+<!--{template common/header}-->
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my&app=tuan">{lang etuan:my_tuan}</a>
+		<em>&rsaquo;</em>{lang etuan:view}
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="static/image/feed/thread.gif" class="vm" /> {$tuan_thread[subject]}{$tuan_thread[intro]}</h1>
+
+			<div class="tl">
+								<table cellspacing="0" cellpadding="0">
+						<tr class="th">
+							<td class="icn">&nbsp;</td>
+							<th>{lang etuan:my_tuan_name}</th>
+							<td>{lang etuan:my_tuan_duration}</td>
+							<td>{lang etuan:my_tuan_status}</td>
+						</tr>
+						<tr>
+							<td class="icn"><a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank"> <img src="source/plugin/etuan/static/icon_post.gif" /> </a></td>
+							<th> <a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank">$tuan_thread[subject]</a> </th>
+							<td>{$tuan_thread[begin_date]} - {$tuan_thread[end_date]}</td>
+							<td class="by">{$tuan_thread[status]}</td>
+						</tr>
+					</table>
+</div>
+
+			<div class="tl"><div>
+		<!--{template etuan:tuan_view_nav}-->
+	</div>
+					<h3>分小区发货表</h3>
+<!--{loop $community_shipments $community_shipment}-->
+<p>小区名: {$community_shipment[name]}</p>
+<table width="100%" border="0">
+  <tr>
+    <th rowspan="2" scope="col">用户名</th>
+    <th colspan="3" scope="col">团品</th>
+    <th rowspan="2" scope="col">团单价</th>
+    <th rowspan="2" scope="col">发放核对</th>
+    <th rowspan="2" scope="col">备注信息</th>
+    <th rowspan="2" scope="col">应收款</th>
+    <th rowspan="2" scope="col">收款状态</th>
+    <th rowspan="2" scope="col">核对手机号</th>
+    <th rowspan="2" scope="col">用户取货签字</th>
+  </tr>
+  <tr>
+    <th scope="col">团品名</th>
+    <th scope="col">规格</th>
+    <th scope="col">数量</th>
+  </tr>
+  <!--{loop $community_shipment[orders] $shipment_order}-->
+  <tr>
+    <td rowspan="{$shipment_order[items_count]}">{$shipment_order[buyer_name]}</td>
+    <td>{$shipment_order[first_item][product_name]}</td>
+    <td>{$shipment_order[first_item][product_spec]}</td>
+    <td>{$shipment_order[first_item][quantity]}</td>
+    <td>{$shipment_order[first_item][sub_total]}</td>
+    <td rowspan="{$shipment_order[items_count]}">&nbsp;</td>
+    <td rowspan="{$shipment_order[items_count]}">&nbsp;</td>
+    <td rowspan="{$shipment_order[items_count]}">{$shipment_order[total]}</td>
+    <td rowspan="{$shipment_order[items_count]}">{$shipment_order[payment][paid_amount]}({$shipment_order[payment][paid_at]})</td>
+    <td rowspan="{$shipment_order[items_count]}">{$shipment_order[buyer][phone]}</td>
+    <td rowspan="{$shipment_order[items_count]}">&nbsp;</td>
+  </tr>
+  <!--{loop $shipment_order[other_items] $other_item}-->
+  <tr>
+    <td>{$other_item[product_name]}</td>
+    <td>{$other_item[product_spec]}</td>
+    <td>{$other_item[quantity]}</td>
+    <td>{$other_item[sub_total]}</td>
+  </tr>
+  <!--{/loop}-->
+  <!--{/loop}-->
+  <tr>
+    <td>总计</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table><!--{/loop}-->
+			</div>
+			<!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
+		</div>
+
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<!--{template common/footer}-->

@@ -1,32 +1,4 @@
 <!--{template common/header}-->
-<style type="text/css">
-.tl{padding-top: 10px;}
-.tl .bm_c {padding-top:0;}
-.tl table {width:100%;table-layout:fixed;border-collapse:separate;}
-.tl th, .tl td {padding:5px 0;border-bottom:1px solid #C2D5E3;}
-.emptb th, .emptb td {padding:0;border-bottom:none;}
-.tl tr:hover th, .tl tr:hover td {background-color:#F2F2F2;}
-.tl th {padding-right:1.5em;zoom:1;}
-.tl th a:visited {color:#666;}
-.fromg {visibility:hidden;}
-.ie6 .fromg, tr:hover .fromg {visibility:visible;}
-.tl .icn {padding-left:5px;width:25px;text-align:left;}
-.tl .frm {width:150px;}
-.tl .o {width:20px;}
-.tl .num {width:60px;line-height:18px;}
-.tl .by {width:105px;line-height:18px;}
-.tl .by b{color:#06F;font-size: 16px;}
-.tl cite, .tl .num em {display:block;}
-.tl th em {margin-right:4px;zoom:1;}
-.tl th em, .tl th em a {color:#007CD5;}
-.tl td em {font-size:11px;font-family:Arial, PMingliu, sans-serif;-webkit-text-size-adjust:none;}
-.tl td em, .tl td em a {color:#999;}
-.tl .ts th, .tl .ts td {padding:3px 0;border-bottom-color:#CDCDCD;background:#F2F2F2;}
-.tl .th {margin-top:1px;padding:0 10px;border-bottom:1px solid #CDCDCD;background:#F2F2F2;}
-.tl .th table {border:none;}
-.tl .th td, .tl .th th {height:20px;border:none;vertical-align:baseline;}
-.tl .tf {padding:3px 0;}
-</style>
 <div id="pt" class="bm cl">
 	<!--{subtemplate common/simplesearchform}-->
 	<div class="z">
@@ -59,7 +31,9 @@
 					</table>
 </div>
 
-			<div class="tl">
+			<div class="tl"><div>
+		<!--{template etuan:tuan_view_nav}-->
+	</div>
 					<!--{if $tuan_orders}-->
 						<!--{loop $tuan_orders $tuan_order}-->
 							<table cellspacing="0" cellpadding="0">

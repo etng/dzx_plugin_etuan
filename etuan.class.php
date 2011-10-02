@@ -38,13 +38,19 @@ class etuan
 		{
 			$status = 'paid';
 		}
-		DB::query("UPDATE ".DB::table('etuan_order')." 
+		DB::query("UPDATE ".DB::table('etuan_order')."
 		SET paid_amount=paid_amount+{$amount}
 		,payment_method='{$gateway}'
-		,paid_at='{$paid_at}' 
-		,status='{$status}' 
+		,paid_at='{$paid_at}'
+		,status='{$status}'
 		WHERE order_id={$order_id}");
-		//@todo insert payment log
+		//insert payment log
+        DB::insert('etuan_payment_log', array(
+                'order_id' => $order_id,
+                'paid_at' => $paid_at,
+                'amount' => $amount,
+                'gateway' => $gateway,
+                ), true);
 	}
 	function paymentConf($type='alipay')
 	{
@@ -55,19 +61,19 @@ class etuan
 			'partner' => $this->readConf('alipay_partner'),
 			'account' => $this->readConf('alipay_account'),
 			'key' => $this->readConf('alipay_key'),
-			);	
+			);
 		}
 		elseif($type=='tenpay')
 		{
 			return array(
 			'account' => $this->readConf('tenpay_account'),
 			'key' => $this->readConf('tenpay_key'),
-			);				
-		}	
+			);
+		}
 		else
 		{
 			return array();
-		}		
+		}
 	}
     function readConf($var, $default=null)
     {
@@ -126,13 +132,39 @@ class etuan
         }
         return $cache[$product_id];
     }
-    function fetchAll($table, $where=array(), $limit=0, $offset=0)
+    function fetchCol($sql, $idx=0)
     {
         $list = array();
-        $where = $where?' where ' .implode(' and ', $where):'';
-        $limit = $limit?" limit {$offset},{$limit}":'';
-         $query = DB::query("SELECT * FROM ".DB::table($table)." {$where}{$limit}");
-         while($row = DB::fetch($query)){
+        $query = DB::query($sql);
+        while($row = DB::fetch($query, MYSQL_BOTH)){
+            $list[] = $row[$idx];
+        }
+        return $list;
+    }
+    function fetchOptions($sql, $idx_key=0, $idx_val=1)
+    {
+        $options = array();
+        $query = DB::query($sql);
+        while($row = DB::fetch($query, MYSQL_BOTH)){
+            $options[$row[$idx_key]] = $row[$idx_val];
+        }
+        return $options;
+    }
+    function fetchAll($table, $where=array(), $limit=0, $offset=0)
+    {
+        $table = trim($table);
+        $list = array();
+        if(preg_match('/^(show|select)\s+/i', $table))
+        {
+            $sql = $table;
+        }else
+        {
+            $where = $where?' where ' .implode(' and ', $where):'';
+            $limit = $limit?" limit {$offset},{$limit}":'';
+            $sql = "SELECT * FROM ".DB::table($table)." {$where}{$limit}";
+        }
+        $query = DB::query($sql);
+        while($row = DB::fetch($query)){
             $list[] = $row;
         }
         return $list;
@@ -150,14 +182,26 @@ class etuan
     {
         return $this->fetchRow('etuan_supplier', $id, $reload);
     }
-
+    function isSeller()
+    {
+        global $_G;
+        return true;
+        return in_array($_G['group']['groupid'], $this->readConf('seller_gid'));
+    }
 }
 class plugin_etuan extends etuan
  {
 
     function global_usernav_extra1()
     {
-        return '<a href="plugin.php?id=etuan:cart">购物车</a>';
+        $links = array();
+        $sep = ' | ';
+        $links []= '<a href="plugin.php?id=etuan:cart">购物车</a>';
+        if($this->isSeller())
+        {
+            $links []= '<a href="plugin.php?id=etuan:my&app=tuan">我的团购</a>';
+        }
+        return implode($sep, $links);
     }
 }
 
@@ -263,37 +307,53 @@ class etuan_cart
         }
         return $credit_limit;
     }
-    function getShipFee($tuan_id, $shipmethod_id)
+    function getShipFee($tuan_id, $shipmethod)
     {
-        return 0;
+        $tuan = $this->tuan->fetchRow('etuan_tuan', $tuan_id);
+        $field = "ship_fee_{$shipmethod}";
+        $fee = 0;
+        if(isset($tuan[$field]))
+        {
+            $fee = $tuan[$field];
+        }
+        return $fee;
     }
-    function submit($tuan_id, $buyer_id, $credit_used, $shipmethod_id, $payment_id, $address_id, $memo)
+    function submit($tuan_id, $buyer_id, $credit_used, $ship_method, $payment_method, $address, $memo)
     {
         $sn = dgmdate(time(), 'YmdHis').mt_rand(10,99);
-        $product_fee = $this->getProductFee($tuan_id);
+        $sub_total = $this->getProductFee($tuan_id);
         $credit_limit = $this->getCreditLimit($tuan_id);
-        $ship_fee = $this->getShipFee($tuan_id, $shipmethod_id);
-        if($credit_used>$credit_limit)
-        {
-            $credit_used = $credit_limit;
-        }
+        $ship_fee = $this->getShipFee($tuan_id, $ship_method);
+        $credit_used = ($credit_used>$credit_limit)?$credit_limit:0;
         $bought_at = dgmdate(time(), 'Y-m-d H:i:s');
-        $actual_fee = $product_fee + $ship_fee - $credit_used * $etuan->readConf('credit_ratio')/100;
-        $order_id = DB::insert('etuan_order', compact('sn','tuan_id',  'buyer_id', 'bought_at', 'credit_used', 'shipmethod_id', 'payment_id', 'address_id', 'actual_fee', 'product_fee', 'ship_fee', 'credit_used', 'memo'), true);
-        $credit_type = $etuan->readConf('credit_type');
-        updatemembercount($buyer_id, array("extcredits{$credit_type}" => -$credit_used), true,'',0, 'etuan::etuan_used_credit');
+        $credit_discount = $credit_used * $this->tuan->readConf('credit_ratio')/100;
+        $total = $sub_total + $ship_fee - $credit_discount;
+        $status = $total?'paid':'pending';
+        $order_items = $this->getItems($tuan_id);
+        $order_data = compact('sn','tuan_id', 'buyer_id', 'bought_at', 'ship_method', 'payment_method', 'address_id', 'sub_total', 'ship_fee', 'credit_used', 'credit_discount', 'total', 'memo');
+        $order_data = array_merge($order_data, $address);
+        $order_id = DB::insert('etuan_order', $order_data, true);
+
+        if($credit_used)
+        {
+            $credit_type = $this->tuan->readConf('credit_type');
+            updatemembercount($buyer_id, array("extcredits{$credit_type}" => -$credit_used), true,'',0, 'etuan::etuan_used_credit');
+        }
         foreach($order_items as $order_item)
         {
             //插入订单产品列表
-            DB::insert('etuan_order_products', array_merge($order_item, compact('order_id')));
-            //通知团长
-            $tuan = $this->tuan->fetchTuan($order_item['tuan_id']);
-            $notify_var = array_merge($order_item, compact('tuan_name', 'product_name', 'order_id'));
-            notification_add($tuan['seller_id'], 'etuan', 'etuan:seller_notify_tuan_bought', $notify_var, 1);
+            DB::insert('etuan_order_product', array_merge($order_item, compact('order_id')));
         }
-        $order = $etuan->fetchRow('etuan_order', $order_id);
-        $order['tuan'] = $etuan->fetchRow('etuan_tuan', $order['tuan_id']);
+
+        $order = $this->tuan->fetchRow('etuan_order', $order_id);
+        $order['tuan'] = $this->tuan->fetchRow('etuan_tuan', $order['tuan_id']);
         $this->clear($tuan_id);
+        //通知团长
+        notification_add($tuan['seller_id'], 'etuan', 'etuan:seller_notify_tuan_bought', array(
+            'tuan_name' => $tuan['name'],
+            'order_id' => $order['id'],
+            'order_sn' => $order['sn'],
+        ), 1);
         return $order;
     }
 

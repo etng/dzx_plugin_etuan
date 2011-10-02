@@ -1,0 +1,124 @@
+<!--{template common/header}-->
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my&app=tuan">{lang etuan:my_tuan}</a>
+		<em>&rsaquo;</em>{lang etuan:view}
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="static/image/feed/thread.gif" class="vm" /> {$tuan_thread[subject]}{$tuan_thread[intro]}</h1>
+
+			<div class="tl">
+								<table cellspacing="0" cellpadding="0">
+						<tr class="th">
+							<td class="icn">&nbsp;</td>
+							<th>{lang etuan:my_tuan_name}</th>
+							<td>{lang etuan:my_tuan_duration}</td>
+							<td>{lang etuan:my_tuan_status}</td>
+						</tr>
+						<tr>
+							<td class="icn"><a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank"> <img src="source/plugin/etuan/static/icon_post.gif" /> </a></td>
+							<th> <a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank">$tuan_thread[subject]</a> </th>
+							<td>{$tuan_thread[begin_date]} - {$tuan_thread[end_date]}</td>
+							<td class="by">{$tuan_thread[status]}</td>
+						</tr>
+					</table>
+</div>
+
+			<div class="tl"><div>
+		<!--{template etuan:tuan_view_nav}-->
+	</div>
+<h3>供应商供货表</h3>
+<!--{loop $supplies $supply}-->
+<table width="100%" border="0">
+  <caption>
+  概要
+  </caption>
+  <tr>
+    <th scope="col">供应商名称</th>
+    <td scope="col">{$supply[supplier][name]}</td>
+    <th scope="col">联系人</th>
+    <td scope="col">{$supply[supplier][contact_name]}</td>
+  </tr>
+  <tr>
+    <th>供应商地址</th>
+    <td>{$supply[supplier][address]}</td>
+    <th>联系电话</th>
+    <td>{$supply[supplier][contact_phone]}</td>
+  </tr>
+  <tr>
+    <th>配货方式</th>
+    <td>&nbsp;</td>
+    <th>联系人QQ</th>
+    <td>{$supply[supplier][contact_qq]}</td>
+  </tr>
+  <tr>
+    <th>送货日期</th>
+    <td>&nbsp;</td>
+    <th>结款方式</th>
+    <td>{$supply[supplier][name]}</td>
+  </tr>
+  <tr>
+    <th>备用联系人</th>
+    <td>{$supply[supplier][second_contact_name]}</td>
+    <th>结款日期</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>备用联系人电话</th>
+    <td>{$supply[supplier][second_contact_phone]}</td>
+    <th>备注信息</th>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table width="100%" border="0">
+  <caption>
+    详情
+  </caption>
+  <tr>
+    <th scope="col">团品号</th>
+    <th scope="col">团品名称</th>
+    <th scope="col">规格</th>
+    <th scope="col">供货单价（元）</th>
+    <th scope="col">商品单位</th>
+    <th scope="col">供货数量</th>
+    <th scope="col">订单金额</th>
+  </tr>
+  <!--{loop $supply[items] $supply_item}-->
+  <tr>
+    <td>{$supply_item[product_id]}</td>
+    <td>{$supply_item[product_name]}</td>
+    <td>{$supply_item[product_spec]}</td>
+    <td>{$supply_item[product_unit_price]}</td>
+    <td>{$supply_item[product_unit_name]}</td>
+    <td>{$supply_item[quantity]}</td>
+    <td>{$supply_item[price]}</td>
+  </tr><!--{/loop}-->
+
+  <tr>
+    <td>总计</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>{$supply[price]}</td>
+  </tr>
+</table>
+<!--{/loop}-->
+			</div>
+			<!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
+		</div>
+
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<!--{template common/footer}-->

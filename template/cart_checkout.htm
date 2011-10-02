@@ -1,32 +1,4 @@
 <!--{template common/header}-->
-<style type="text/css">
-.tl{padding-top: 10px;}
-.tl .bm_c {padding-top:0;}
-.tl table {width:100%;table-layout:fixed;border-collapse:separate;}
-.tl th, .tl td {padding:5px 0;border-bottom:1px solid #C2D5E3;}
-.emptb th, .emptb td {padding:0;border-bottom:none;}
-.tl tr:hover th, .tl tr:hover td {background-color:#F2F2F2;}
-.tl th {padding-right:1.5em;zoom:1;}
-.tl th a:visited {color:#666;}
-.fromg {visibility:hidden;}
-.ie6 .fromg, tr:hover .fromg {visibility:visible;}
-.tl .icn {padding-left:5px;width:25px;text-align:left;}
-.tl .frm {width:150px;}
-.tl .o {width:20px;}
-.tl .num {width:60px;line-height:18px;}
-.tl .by {width:105px;line-height:18px;}
-.tl .by b{color:#06F;font-size: 16px;}
-.tl cite, .tl .num em {display:block;}
-.tl th em {margin-right:4px;zoom:1;}
-.tl th em, .tl th em a {color:#007CD5;}
-.tl td em {font-size:11px;font-family:Arial, PMingliu, sans-serif;-webkit-text-size-adjust:none;}
-.tl td em, .tl td em a {color:#999;}
-.tl .ts th, .tl .ts td {padding:3px 0;border-bottom-color:#CDCDCD;background:#F2F2F2;}
-.tl .th {margin-top:1px;padding:0 10px;border-bottom:1px solid #CDCDCD;background:#F2F2F2;}
-.tl .th table {border:none;}
-.tl .th td, .tl .th th {height:20px;border:none;vertical-align:baseline;}
-.tl .tf {padding:3px 0;}
-</style>
 <div id="pt" class="bm cl">
 	<!--{subtemplate common/simplesearchform}-->
 	<div class="z">
@@ -47,11 +19,17 @@
 			<div class="tl">
 				<h3>{lang etuan:cart_choose_address}</h3>
 				<div>
+				<input type="hidden" id="address_id" name="address_id" value="0"/>
+				<input type="hidden" id="ship_community_id" name="ship_community_id" value=""/>
+				<input type="hidden" id="ship_name" name="ship_name" value=""/>
+				<input type="hidden" id="ship_address" name="ship_address" value=""/>
+				<input type="hidden" id="ship_phone" name="ship_phone" value=""/>
+				<input type="hidden" id="ship_email" name="ship_email" value=""/>
 				<ul>
 				<!--{if $addresses}-->
 				<!--{loop $addresses $address}-->
-					<li><input type="radio" id="address_id_{$address[id]}" name="address_id" value="{$address[id]}" />
-					{$address[name]}</li>
+					<li><input type="radio" id="address_id_{$address[id]}" name="address_id" value="{$address[id]}" data-address_id="{$address[id]}" data-community_id="{$address[community_id]}" data-name="{$address[contact_name]}" data-address="{$address[address]}" data-phone="{$address[phone]}" data-email="{$address[email]}" onclick="set_ship_address('{$address[id]}', '{$address[community_id]}', '{$address[contact_name]}', '{$address[address]}', '{$address[phone]}', '{$address[email]}')" />
+					{$address[community_name]} {$address[address]}  {$address[contact_name]} {$address[phone]} {$address[email]}</li>
 				<!--{/loop}-->
 				<!--{/if}-->
 				</ul>
@@ -60,18 +38,18 @@
 				<h3>{lang etuan:cart_choose_shipmethod}</h3>
 				<div><ul>
 					<!--{if $tuan_cart_items[tuan][ship_only_pick]}-->
-					<li><strong>{lang etuan:tuan_ship_only_pick}</strong><label><input type="radio" id="shipmethod_pick" name="shipmethod" value="shipmethod_pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
+					<li><strong>{lang etuan:tuan_ship_only_pick}</strong><label><input type="radio" id="shipmethod_pick" name="ship_method" value="pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
 					<!--{else}-->
-					<li><label><input type="radio" id="shipmethod_pick" name="shipmethod" value="shipmethod_pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
-					<li><label><input type="radio" id="shipmethod_deliver" name="shipmethod" value="shipmethod_deliver" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_deliver]}" />{lang etuan:tuan_ship_fee_deliver} {$tuan_cart_items[tuan][ship_fee_deliver]}</label>	</li>
+					<li><label><input type="radio" id="shipmethod_pick" name="ship_method" value="pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
+					<li><label><input type="radio" id="shipmethod_deliver" name="ship_method" value="deliver" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_deliver]}" />{lang etuan:tuan_ship_fee_deliver} {$tuan_cart_items[tuan][ship_fee_deliver]}</label>	</li>
 					<!--{/if}-->
 					</ul>
 				</div>
 				<h3>{lang etuan:cart_choose_payment_method}</h3>
 				<ul>
-					<li><label><input type="radio" id="payment_cod" name="payment_id" value="cod" />{lang etuan:payment_method_cod}</label></li>
-					<li><label><input type="radio" id="payment_alipay" name="payment_id" value="alipay" />{lang etuan:payment_method_alipay}</label></li>
-					<li><label><input type="radio" id="payment_tenpay" name="payment_id" value="tenpay" />
+					<li><label><input type="radio" id="payment_cod" name="payment_method" value="cod" checked="true" />{lang etuan:payment_method_cod}</label></li>
+					<li><label><input type="radio" id="payment_alipay" name="payment_method" value="alipay" />{lang etuan:payment_method_alipay}</label></li>
+					<li><label><input type="radio" id="payment_tenpay" name="payment_method" value="tenpay" />
 					{lang etuan:payment_method_tenpay}</label></li>
 				</ul>
 				<h3>{lang etuan:cart_choose_credit}</h3>
@@ -80,7 +58,7 @@
 					<input type="text" id="credit_used" name="credit_used" value="0" data-usable="{}" />
 				</div>
 				<h3>{lang etuan:cart_choose_memo}</h3>
-				<div><textarea name="memo" id="memo" rows="2" cols="2" class="pt" style="width:95%; height:51px;"></textarea></div>
+				<div><textarea name="memo" id="memo" rows="2" cols="2" class="pt" style="width:95%; height:51px;">{lang etuan:order_memo}</textarea></div>
 				<h3>{lang etuan:cart_items}</h3>
 					<table cellspacing="0" cellpadding="0">
 						<tr class="th">
@@ -91,7 +69,7 @@
 						</tr>
 							<!--{loop $tuan_cart_items[items] $cart_item}-->
 							<tr>
-								<th> <a href="forum.php?mod=viewthread&tid=$cart_item[tuan][tid]" target="_blank">$cart_item[product][name]</a> </th>
+								<th> <img src="$cart_item[product][photo]"><a href="forum.php?mod=viewthread&tid=$cart_item[tuan][tid]" target="_blank">$cart_item[product][name]</a> </th>
 								<td>{$cart_item['quantity']}</td>
 								<td class="num">{$cart_item['unit_price']}</td>
 								<td class="by">{$cart_item['price']}</td>
@@ -141,5 +119,17 @@
 			</ul>
 		</div>
 	</div>
-</div>
+</div><script type="text/javascript">
+<!--
+	function set_ship_address(val_address_id ,val_ship_community_id ,val_ship_name ,val_ship_address ,val_ship_phone ,val_ship_email)
+	{
+		$('address_id').value=val_address_id;
+		$('ship_community_id').value=val_ship_community_id;
+		$('ship_name').value=val_ship_name;
+		$('ship_address').value=val_ship_address;
+		$('ship_phone').value=val_ship_phone;
+		$('ship_email').value=val_ship_email;
+	}
+//-->
+</script>
 <!--{template common/footer}-->

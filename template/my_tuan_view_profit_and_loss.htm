@@ -1,0 +1,97 @@
+<!--{template common/header}-->
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my&app=tuan">{lang etuan:my_tuan}</a>
+		<em>&rsaquo;</em>{lang etuan:view}
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="static/image/feed/thread.gif" class="vm" /> {$tuan_thread[subject]}{$tuan_thread[intro]}</h1>
+
+			<div class="tl">
+								<table cellspacing="0" cellpadding="0">
+						<tr class="th">
+							<td class="icn">&nbsp;</td>
+							<th>{lang etuan:my_tuan_name}</th>
+							<td>{lang etuan:my_tuan_duration}</td>
+							<td>{lang etuan:my_tuan_status}</td>
+						</tr>
+						<tr>
+							<td class="icn"><a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank"> <img src="source/plugin/etuan/static/icon_post.gif" /> </a></td>
+							<th> <a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank">$tuan_thread[subject]</a> </th>
+							<td>{$tuan_thread[begin_date]} - {$tuan_thread[end_date]}</td>
+							<td class="by">{$tuan_thread[status]}</td>
+						</tr>
+					</table>
+</div>
+
+			<div class="tl">	<div>
+		<!--{template etuan:tuan_view_nav}-->
+	</div>
+<h3>本团盈亏表
+</h3>
+<table width="100%" border="0">
+<caption>
+    总盈亏表
+  </caption>
+  <tr>
+    <th scope="col">团品名</th>
+    <th scope="col">规格</th>
+    <th scope="col">销售单价</th>
+    <th scope="col">成本单价</th>
+    <th scope="col">单位</th>
+    <th scope="col">收货数量</th>
+    <th scope="col">单品合计收入</th>
+    <th scope="col">单品合计成本</th>
+    <th scope="col">毛利率</th>
+    <th scope="col">毛利</th>
+  </tr> <!--{loop $product_profit_and_loss_list $product_profit_and_loss}-->
+  <tr>
+    <td>{$product_profit_and_loss[name]}</td>
+    <td>{$product_profit_and_loss[spec]}</td>
+    <td>{$product_profit_and_loss[unit_price]}</td>
+    <td>{$product_profit_and_loss[unit_cost]}</td>
+    <td>{$product_profit_and_loss[unit_name]}</td>
+    <td>{$product_profit_and_loss[quantity]}</td>
+    <td>{$product_profit_and_loss[price]}</td>
+    <td>{$product_profit_and_loss[cost]}</td>
+    <td>{$product_profit_and_loss[gross_profit_ratio]}</td>
+    <td>{$product_profit_and_loss[gross_profit]}</td>
+  </tr><!--{/loop}-->
+</table>
+<table width="100%" border="0">
+  <caption>
+  按小区盈亏表
+  </caption>
+  <tr>
+    <th scope="col">小区名</th>
+    <th scope="col">小区合计收入</th>
+    <th scope="col">小区合计成本</th>
+    <th scope="col">毛利率</th>
+    <th scope="col">毛利</th>
+  </tr>
+  <!--{loop $commuinty_profit_and_loss_list $commuinty_profit_and_loss}-->
+  <tr>
+    <td>{$commuinty_profit_and_loss[name]}</td>
+     <td>{$commuinty_profit_and_loss[price]}</td>
+      <td>{$commuinty_profit_and_loss[cost]}</td>
+       <td>{$commuinty_profit_and_loss[gross_profit_ratio]}</td>
+        <td>{$commuinty_profit_and_loss[gross_profit]}</td>
+  </tr>
+  <!--{/loop}-->
+</table>
+			</div>
+		</div>
+
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<!--{template common/footer}-->

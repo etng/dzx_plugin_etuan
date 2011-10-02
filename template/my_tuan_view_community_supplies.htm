@@ -1,0 +1,91 @@
+<!--{template common/header}-->
+<div id="pt" class="bm cl">
+	<!--{subtemplate common/simplesearchform}-->
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&rsaquo;</em><a href="plugin.php?id=etuan:my&app=tuan">{lang etuan:my_tuan}</a>
+		<em>&rsaquo;</em>{lang etuan:view}
+	</div>
+</div>
+
+
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0">
+			<h1 class="mt"><img alt="thread" src="static/image/feed/thread.gif" class="vm" /> {$tuan_thread[subject]}{$tuan_thread[intro]}</h1>
+
+			<div class="tl">
+								<table cellspacing="0" cellpadding="0">
+						<tr class="th">
+							<td class="icn">&nbsp;</td>
+							<th>{lang etuan:my_tuan_name}</th>
+							<td>{lang etuan:my_tuan_duration}</td>
+							<td>{lang etuan:my_tuan_status}</td>
+						</tr>
+						<tr>
+							<td class="icn"><a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank"> <img src="source/plugin/etuan/static/icon_post.gif" /> </a></td>
+							<th> <a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank">$tuan_thread[subject]</a> </th>
+							<td>{$tuan_thread[begin_date]} - {$tuan_thread[end_date]}</td>
+							<td class="by">{$tuan_thread[status]}</td>
+						</tr>
+					</table>
+</div>
+
+			<div class="tl"><div>
+		<!--{template etuan:tuan_view_nav}-->
+	</div>
+<h3>分小区收货表</h3>
+<!--{loop $community_supplies $community_supply}-->
+<table width="100%" border="0">
+  <tr>
+    <th scope="col">小区名</th>
+    <td scope="col">{$community_supply[community][name]}</td>
+    <th scope="col">团名</th>
+    <td scope="col">{$community_supply[tuan_name]}</td>
+  </tr>
+  <tr>
+    <th>配货方式</th>
+    <td>{$community_supply[community][ship_method]}</td>
+    <th>配货联系人</th>
+    <td>{$community_supply[community][contact_name]}</td>
+  </tr>
+  <tr>
+    <th>手机</th>
+    <td>{$community_supply[community][contact_phone]}</td>
+    <th>预计发货时间</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>备注</th>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+</table>
+<table width="100%" border="0">
+  <tr>
+    <th scope="col">团品名</th>
+    <th scope="col">规格</th>
+    <th scope="col">商品单位</th>
+    <th scope="col">收货数量</th>
+    <th scope="col">跟团用户数</th>
+    <th scope="col">验收签字</th>
+  </tr>
+    <!--{loop $community_supply[items] $supply_item}-->
+  <tr>
+    <td><img src="{$supply_item[product][photo]}"> {$supply_item[product][name]}</td>
+    <td>{$supply_item[product][spec]}</td>
+    <td>{$supply_item[product][unit_name]}</td>
+    <td>{$supply_item[sum_quantity]}</td>
+    <td>{$supply_item[buyer_count]}</td>
+    <td>&nbsp;</td>
+  </tr><!--{/loop}-->
+</table><br /><br /><br /><!--{/loop}-->
+			</div>
+			<!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
+		</div>
+
+	</div>
+	<div class="appl">
+		<!--{template etuan:my_right}-->
+	</div>
+</div>
+<!--{template common/footer}-->

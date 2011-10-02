@@ -36,42 +36,30 @@
 			<td></td>
 		</tr>
 		<tr>
-			<td height="35" align="right">{lang etuan:my_address_area}: <span class="rq">*</span></td>
-			<td><p><select name="province" id="lodov_province" style="width:115px;" onclick="load_district();">
-					<option value="0">{lang etuan:pleaseselect}</option>
-				</select>
-				<select name="city" id="lodov_city" style="width:115px;">
-					<option value="0">{lang etuan:pleaseselect}</option>
-				</select>
-				<select name="town" id="lodov_town" style="width:90px;">
-					<option value="0">{lang etuan:pleaseselect}</option>
-				</select></p>
-				<!--{if $op=='add'}-->
-					<input name="province_val" id="province_val" type="hidden"/>
-					<input name="city_val" id="city_val" type="hidden"/>
-					<input name="town_val" id="town_val" type="hidden"/>
-				<!--{elseif $op=='edit'}-->
-					<p style="padding:8px 0px 5px 0px;"><input name="province_val" id="province_val"  type="text" class="px" style="color:#999;width:105px;" value="{$row[province]}" readonly="readonly"/>
-					<input name="city_val" id="city_val" class="px"  type="text" style="color:#999;width:105px;" value="{$row[city]}" readonly="readonly"/>
-					<input name="town_val" id="town_val" class="px"  type="text" style="color:#999;width:80px;" value="{$row[town]}" readonly="readonly"/></p>
-				<!--{/if}-->
-				</td>
+		<td height="35" align="right">{lang etuan:my_address_community}: <span class="rq">*</span></td>
+		<td>
+		<select name="community_id" id="community_id" width="60" class="ps" selecti="0">
+		<!--{loop $communities $community}-->
+			<option value="{$community[id]}"<!--{if $community[id]==$row['community_id']}--> selected="true"<!--{/if}-->>{$community[name]}</option>
+		<!--{/loop}-->
+		</select>
+		</td>
 		</tr>
 		<tr>
-			<td height="35" align="right">{lang etuan:my_address_street}: <span class="rq">*</span></td>
-			<td><input name="address" id="address" class="px"  type="text" size="60" value="{$row[address]}" /></td>
+			<td height="35" align="right">{lang etuan:my_address_address}: <span class="rq">*</span></td>
+			<td><input name="address" id="address" type="text" class="px" size="20" value="{$row[address]}" /></td>
 		</tr>
 		<tr>
-			<td height="35" align="right">{lang etuan:my_address_zip}: <span class="rq">*</span></td>
-			<td><input name="zip" id="zip" type="text" class="px" size="20" value="{$row[zip]}" /></td>
-		</tr>
-		<tr>
-			<td height="35" align="right">{lang etuan:my_address_name}: <span class="rq">*</span></td>
-			<td><input name="popname" id="popname" type="text" class="px" size="20" value="{$row[name]}" /></td>
+		<td height="35" align="right">{lang etuan:my_address_contact_name}: <span class="rq">*</span></td>
+			<td><input name="contact_name" id="contact_name" type="text" class="px" size="20" value="{$row[contact_name]}" /></td>
 		</tr>
 		<tr>
 			<td height="35" align="right">{lang etuan:my_address_phone}: <span class="rq">*</span></td>
 			<td><input name="phone" id="phone" type="text" class="px" size="20" value="{$row[phone]}" /></td>
+		</tr>
+		<tr>
+			<td height="35" align="right">{lang etuan:my_address_email}: <span class="rq">*</span></td>
+			<td><input name="email" id="email" type="text" class="px" size="20" value="{$row[email]}" /></td>
 		</tr>
 	</table>
 </div>

@@ -1,0 +1,47 @@
+<!--{template common/header}-->
+<!--{if empty($_G['gp_infloat'])}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="/" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+		<a href="plugin.php?id=etuan:my">{lang etuan:my_seller_settings}</a>
+	</div>
+</div>
+<div id="ct" class="wp cl">
+<!--{/if}-->
+<h3 class="flb">
+	<em>{lang etuan:my_seller_settings}</em>
+	<!--{if !empty($_G['gp_infloat'])}-->
+		<span>
+			<a href="javascript:;" class="flbc" onclick="hideWindow('add_seller_settings')" title="{lang close}">{lang close}</a>
+		</span>
+	<!--{/if}-->
+</h3>
+	<form method="post" name="seller_settings_form" id="seller_settings_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=seller_settings">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+
+<div class="c" style="width: 450px;">
+	<table width="100%" class="actl">
+		<tr>
+			<td width="18%" height="10"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td height="35" align="right">{lang etuan:tuan_ship_only_pick}: <span class="rq">*</span></td>
+			<td><input type="checkbox" name="ship_only_pick" id="ship_only_pick" class="px" value="1" onClick="$('ship_fee_deliver').disabled = this.checked;" /></td>
+		</tr>
+		<tr>
+			<td height="35" align="right">{lang etuan:tuan_ship_fee_deliver}: <span class="rq">*</span></td>
+			<td><input type="text" name="ship_fee_deliver" id="ship_fee_deliver" class="px" value="$settings[ship_fee_deliver]" /></td>
+		</tr>
+		<tr>
+			<td height="35" align="right">{lang etuan:tuan_ship_fee_pick}: <span class="rq">*</span></td>
+			<td><input type="text" name="ship_fee_pick" id="ship_fee_pick" class="px" value="$settings[ship_fee_pick]" /></td>
+		</tr>
+	</table>
+</div>
+<div class="o pns"><button type="submit" id="updatesubmit" class="pn pnc" value="true" name="updatesubmit"><span>{lang submit}</span></button></div>
+</form>
+<!--{if empty($_G['gp_infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

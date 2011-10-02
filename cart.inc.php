@@ -26,19 +26,24 @@ switch($op){
         break;
     case 'checkout'://填写结账单即选择送货地址、支付方式、发货方式及积分抵扣等
         $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan($get_detail=true);
-        $addresses = $etuan->fetchAll('etuan_address', array("buyer_id={$_G['uid']}"));
+        $addresses = $etuan->fetchAll('select c.name as community_name, a.* from '.DB::table('etuan_address').' as a left join '.DB::table('etuan_community').' as c on a.community_id=c.id where a.buyer_id='.$_G['uid']);
         include template('etuan:cart_checkout');
         break;
     case 'submit'://生成订单
-        $order = $ecart->submit($_G['gp_tuan_id'], $_G['uid'], $_G['gp_credit_used'], $_G['gp_shipmethod_id'], $_G['gp_payment_id'], $_G['gp_address_id'], $_G['gp_memo']);
+        $address = array(
+            'address_id' =>  $_G['gp_address_id'],
+            'ship_community_id' =>  $_G['gp_ship_community_id'],
+            'ship_address' =>  $_G['gp_ship_address'],
+            'ship_name' =>  $_G['gp_ship_name'],
+            'ship_phone' =>  $_G['gp_ship_phone'],
+            'ship_email' =>  $_G['gp_ship_email'],
+        );
+        $order = $ecart->submit($_G['gp_tuan_id'], $_G['uid'], $_G['gp_credit_used'], $_G['gp_ship_method'], $_G['gp_payment_method'], $address, $_G['gp_memo']);
         $order_view_url = "plugin.php?id=etuan:my&app=order&op=view&orderid={$order['id']}";
-        if($_G['gp_payment_id']!='cod')
+        if($_G['gp_payment_method']!='cod')
         {
-            require_once(DISCUZ_ROOT.'./source/plugin/etuan/payment/'.$_G['gp_payment_id'].'_api.php');
-            $cls = ucfirst($_G['gp_payment_id']) . 'Service';
-			$config = $etuan->paymentConf($_G['gp_payment_id']);
-            $gateway = new $cls($config);
-            $gateway->doSend($order['id'], $order['tuan']['name'], $order['total'], $_G['siteurl'].$order_view_url);
+            $pay_url = "plugin.php?id=etuan:my&app=order&op=pay&orderid={$order['id']}";
+            dheader("Location: ".$_G['siteurl'].$pay_url);
         }else
         {
             if(!$ecart->isEmpty())
