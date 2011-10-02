@@ -22,7 +22,7 @@ TOTO
 * Supplier Logo, Product Photo file upload
 
 中文说明
-_________
+--------
 
 * 解压本压缩包并上传到<bbsroot>/source/plugin/目录下
 * 访问  __插件__=>__插件__=>__安装新插件__ 找到插件__易团__点击旁边的__安装__链接，按照提示进行安装即可
