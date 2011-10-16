@@ -28,13 +28,14 @@
 	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
 	<input type="hidden" name="productid" value="{$productid}" />
 <!--{/if}-->
-
+<!--{if $suppliers}-->
 <div class="c" style="width: 450px;">
 	<table width="100%" class="actl">
 		<tr>
 			<td width="25%" height="10"></td>
 			<td></td>
 		</tr>
+
 <tr>
 <td height="35" align="right">{lang etuan:my_product_supplier}: <span class="rq">*</span></td>
 <td>
@@ -44,6 +45,7 @@
 	<option value="{$supplier[id]}"<!--{if $supplier[id]==$row['supplier_id']}--> selected="true"<!--{/if}-->>{$supplier[name]}</option>
 <!--{/loop}-->
 </select>
+
 </td>
 </tr>
 <tr>
@@ -87,6 +89,10 @@
 	</table>
 </div>
 <div class="o pns"><button type="submit" id="addsubmit" class="pn pnc" value="true" name="addsubmit"><span>{lang submit}</span></button></div>
+
+<!--{else}-->
+<a href="plugin.php?id=etuan:my&app=supplier">{lang etuan:add_supplier_first}</a>
+<!--{/if}-->
 </form>
 
 <script type="text/javascript">

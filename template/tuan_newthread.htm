@@ -64,13 +64,12 @@
 		<dl>
 			<dt>{lang etuan:tuan_products}:</dt>
 			<dd>
+			<!--{if $my_products}-->
 			<!--{loop $my_products $k $product}-->
 				<div class="spmf2 mbm">
-					{$product[name]}
-					<em>
-						<input type="checkbox" name="tuan_product_enable[{$product[id]}]" id="tuan_product_enable_{$product[id]}" class="px" value="1" onClick="$('product_unit_price_{$product[id]}').disabled = $('product_user_limit_{$product[id]}').disabled = $('product_total_limit_{$product[id]}').disabled = !this.checked;" />
-						<label for="tuan_product_enable_{$product[id]}">{lang etuan:tuan_product_enable}</label>
-						</em>
+					<input type="checkbox" name="tuan_product_enable[{$product[id]}]" id="tuan_product_enable_{$product[id]}" class="px" value="1" onClick="$('product_unit_price_{$product[id]}').disabled = $('product_user_limit_{$product[id]}').disabled = $('product_total_limit_{$product[id]}').disabled = !this.checked;"/>
+						<em>{$product[name]}</em>
+
 					<em>
 					<input type="text" name="product_unit_price[{$product[id]}]" id="product_unit_price_{$product[id]}" class="px" value="$product[price]" />
 					<label for="product_unit_price_{$product[id]}">{lang etuan:tuan_product_unit_price}</label>
@@ -84,6 +83,9 @@
 					<label for="product_total_limit_{$product[id]}">{lang etuan:tuan_product_total_limit}</label>
 					</em>
 				</div><!--{/loop}-->
+				<!--{else}-->
+				<a href="plugin.php?id=etuan:my&app=product">{lang etuan:add_product_first}</a>
+				<!--{/if}-->
 			</dd>
 		</dl>
 	</div>

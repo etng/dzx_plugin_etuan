@@ -1,15 +1,42 @@
 <!--{block return}-->
-<h3>{lang etuan:tuan_thread_view_products}</h3>
+<div class="trdc xs1">
+<em>{lang etuan:tuan_thread_view_products}</em>
 <a href="">{lang etuan:tuan_thread_expand_all_products}</a>
 <a href="">{lang etuan:tuan_thread_collapse_all_products}</a>
+</div>
+
 <!--{loop $products $k $product}-->
-<div>
-	<h4>{$product[name]}({$product[price]})</h4>
-	<img src="{$product[photo]}">
-	<a href="">{lang etuan:tuan_thread_expand_product}</a>
-<a href="">{lang etuan:tuan_thread_collapse_product}</a>
-	<div>{$product[description]}</div>
-	<div>{lang etuan:tuan_thread_product_buy}<input type="text" id="buy_quantity_{$product[id]}" class="px" value="1" /><a href="#" onclick="this.href=('plugin.php?id=etuan:cart&op=add&tuan_id={$tuan['id']}&product_id={$product[id]}&quantity='+$('buy_quantity_{$product[id]}').value);">{lang etuan:add_to_cart}</a></div>
+<div class="xs1 cl"><div class="trdb">
+<div id="trade{$product[id]}" class="trdl cl">
+<div class="tt" onclick="display('trade{$product[id]}');ajaxget('forum.php?mod=viewthread&amp;do=tradeinfo&amp;tid=21&amp;pid={$product[id]}','tradeinfo{$product[id]}','tradeinfo{$product[id]}')">
+<img src="{$product[photo]}" onclick="zoom(this, '{$product[photo]}')" width="90" _width="90" _height="90" alt="{$product[name]}">
+</div>
+<div class="ta spi">
+<span class="y"><a href="javascript:;" onclick="display('trade{$product[id]}');ajaxget('forum.php?mod=viewthread&amp;do=tradeinfo&amp;tid=21&amp;pid={$product[id]}','tradeinfo{$product[id]}','tradeinfo{$product[id]}')" title="展开"><img src="static/image/common/collapsed_yes.gif" alt="" class="vm"> 展开</a></span>
+<h4><a href="forum.php?mod=viewthread&amp;do=tradeinfo&amp;tid=21&amp;pid={$product[id]}" target="_blank">{$product[name]}</a></h4>
+
+<dl class="z">
+<dt></dt>
+<dd>
+
+</dd>
+<dt></dt>
+<dd>
+
+</dd>
+</dl>
+<div class="z mtn">
+<strong>{$product[price]}</strong>&nbsp;元&nbsp;&nbsp;
+<p class="xg1">
+<del>{$product[public_price]} 元</del>
+</p>
+</div>
+<div><input type="text" id="buy_quantity_{$product[id]}" class="px" value="1" size="3" /><a href="#" onclick="this.href=('plugin.php?id=etuan:cart&op=add&tuan_id={$tuan['id']}&product_id={$product[id]}&quantity='+$('buy_quantity_{$product[id]}').value);">{lang etuan:add_to_cart}</a></div>
+</div>
+</div>
+<div id="tradeinfo{$product[id]}">{$product[description]}</div>
 </div>
 <!--{/loop}-->
+
+
 <!--{/block}-->

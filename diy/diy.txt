@@ -1,0 +1,17 @@
+后台
+	门户-》模块管理-》团购=》添加：
+	名称：  [etuan]团购商品
+	内容：
+	<div class="module cl ml">
+	<ul>
+	[loop]
+	<li style="padding: 0 12px 10px; width: {picwidth}px;">
+	<a href="{url}"{target}><img src="{pic}" width="{picwidth}" height="{picheight}" alt="{title}" style="padding: 1px; border: 1px solid #CCC; background: #FFF;" /></a>
+	<p class="xs2"><a href="{url}"{target} class="xi1">{price}</a></p>
+	<p><a href="{url}" title="{title}"{target}>{title}</a></p>
+	</li>
+	[/loop]
+	</ul>
+	</div>
+前台DIY模式
+	模块=》易团=》团购

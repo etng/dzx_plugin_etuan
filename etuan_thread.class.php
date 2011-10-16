@@ -90,7 +90,9 @@ class threadplugin_etuan  extends etuan
             LEFT JOIN ".DB::table('etuan_product')." AS p on tp.product_id=p.id
             WHERE tp.tuan_id='{$tuan['id']}'");
         while($row = DB::fetch($query)){
+            $row['photo'] = 'static/image/common/nophototiny.png';
             $products[] = $row;
+
         }
 		include template('etuan:tuan_viewthread');
 		return $return;

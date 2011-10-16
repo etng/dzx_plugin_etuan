@@ -18,7 +18,8 @@ if($op == 'add') {
                 ), true);
 		$etuan->ajaxOrMsg('etuan:address_add_success', "plugin.php?id=etuan:my&app=address");
 	}else{
-        $communities = $etuan->fetchAll('etuan_community');
+        require_once libfile('function/group');
+		$groupselect = get_groupselect(0, 0, 0);
 		include template('etuan:my_address_add');
 	}
 
@@ -34,13 +35,20 @@ if($op == 'add') {
 		$etuan->ajaxOrMsg('etuan:address_edit_success', "plugin.php?id=etuan:my&app=address");
 	}else{
 		$row = DB::fetch_first("SELECT * FROM ".DB::table('etuan_address')." where buyer_id=$_G[uid] and id = '$id'");
-        $communities = $etuan->fetchAll('etuan_community');
-		include template('etuan:my_address_add');
+        require_once libfile('function/group');
+		$groupselect = get_groupselect(0, 0, 0);
+        include template('etuan:my_address_add');
 	}
 
 }else if($op == 'delete') {
 	DB::delete('etuan_address', "buyer_id=$_G[uid] and id = $id");
 	$etuan->ajaxOrMsg('etuan:address_delete_success', "plugin.php?id=etuan:my&app=address");
+}else if($op == 'ajax') {
+	include template('common/header_ajax');
+    $sub_op = trim(@$_G['gp_subop']);
+	include template('etuan:ajax_address_group2');
+	include template('common/footer_ajax');
+	dexit();
 }else{
 
 	$page = max(1, intval($_G['page']));

@@ -38,11 +38,13 @@
 		<tr>
 		<td height="35" align="right">{lang etuan:my_address_community}: <span class="rq">*</span></td>
 		<td>
-		<select name="community_id" id="community_id" width="60" class="ps" selecti="0">
-		<!--{loop $communities $community}-->
-			<option value="{$community[id]}"<!--{if $community[id]==$row['community_id']}--> selected="true"<!--{/if}-->>{$community[name]}</option>
-		<!--{/loop}-->
-		</select>
+
+<select name="" tabindex="2" class="ps" onchange="ajaxget('plugin.php?id=etuan:my&app=address&op=ajax&sub_op=group2&fupid='+ this.value, 'secondgroup');">
+	<option value="0">{lang choose_please}</option>
+	$groupselect[first]
+</select>
+<em id="secondgroup"><select name="fup" id="fup" class="ps" ><option value="">{lang option_required}</option></select></em>
+<em id="group_id"><select name="group_id" id="group_id" class="ps" ><option value="">{lang option_required}</option></select></em>
 		</td>
 		</tr>
 		<tr>
