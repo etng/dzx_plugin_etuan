@@ -30,6 +30,9 @@ switch($op){
             $etuan->ajaxOrMsg('etuan:product_add_success', "plugin.php?id=etuan:my&app=product");
         }else{
             $suppliers = $etuan->fetchAll('etuan_supplier', array("seller_id={$_G['uid']}"));
+            $row = array(
+                'credit_limit'=>0,
+            );
             include template('etuan:my_product_add');
         }
         break;

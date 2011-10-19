@@ -86,7 +86,7 @@
 						{lang etuan:my_order_not_received_yet}
 						<!--{else}-->$order['received_at']<!--{/if}--></td></tr>
 
-						<tr><td>{lang etuan:status}</td><td>$order['status']</td></tr>
+						<tr><td>{lang etuan:status}</td><td>$order_statuss[$order['status']]</td></tr>
 						<tr><td>{lang etuan:my_operation}</td><td>
 
 							<!--{if $order['status']=='shipped'}-->

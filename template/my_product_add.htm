@@ -77,8 +77,13 @@
 <td><input name="photo" id="photo" type="text" class="px" size="20" value="{$row['photo']}" /></td>
 </tr>
 <tr>
+<td height="35" align="right">{lang etuan:my_product_intro}: <span class="rq">*</span></td>
+<td><textarea name="intro" id="intro" rows="5">{$row['intro']}</textarea></td>
+</tr>
+<tr>
 <td height="35" align="right">{lang etuan:my_product_description}: <span class="rq">*</span></td>
-<td><input name="description" id="description" type="text" class="px" size="20" value="{$row['description']}" /></td>
+<td><textarea name="description" id="description" rows="5">{$row['description']}</textarea>
+</td>
 </tr>
 <tr>
 <td height="35" align="right">{lang etuan:my_product_credit_limit}: <span class="rq">*</span></td>

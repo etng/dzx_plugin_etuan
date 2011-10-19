@@ -42,9 +42,11 @@
 </dl>
 
 <p class="pns mbm">
-</p><dl class="amount"><dt>我要买：</dt><dd><a class="reduce" href="javascript:reduce_trade_amount({$product['id']})">-</a><input type="text" value="1" id="trade_amount_{$product['id']}" onkeyup="set_trade_amount({$product['id']})" name="trade_amount"><a class="increase" href="javascript:increase_trade_amount({$product['id']})">+</a></dd></dl>
-<a onclick="return addTradeCart({$tuan['id']}, {$product['id']});" href="plugin.php?id=etuan:cart&tuid={$tuan['id']}&tpid={$product['id']}&quantity=1">加入购物车</a>
-&nbsp;<a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$tuan['seller_qq']}&amp;Site=$_G['setting']['bbname']&amp;Menu=yes" target="_blank" title="QQ"><img src="static/image/common/qq.gif" alt="QQ" style="vertical-align:middle">在线砍价</a><p></p>
+</p><dl class="amount"><dt>我要买：</dt><dd><a class="reduce" href="javascript:reduce_trade_amount({$product['id']})">-</a><input type="text" value="1" size="3" id="block_trade_amount_{$product['id']}" onkeyup="set_trade_amount({$product['id']})" name="trade_amount"><a class="increase" href="javascript:increase_trade_amount({$product['id']})">+</a><a onclick="return addTradeCart({$tuan['id']}, {$product['id']});" href="plugin.php?id=etuan:cart&tuid={$tuan['id']}&tpid={$product['id']}&quantity=1">加入购物车</a></dd></dl>
+
+<!--{if $tuan['seller_qq']}-->
+&nbsp;<a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$tuan['seller_qq']}&amp;Site=$_G['setting']['bbname']&amp;Menu=yes" target="_blank" title="QQ"><img src="static/image/common/qq.gif" alt="QQ" style="vertical-align:middle">在线砍价</a>
+<!--{/if}-->
 </div>
 </div>
 <div class="cl mtw">

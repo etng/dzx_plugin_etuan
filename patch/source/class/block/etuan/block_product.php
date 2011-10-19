@@ -57,12 +57,12 @@ class block_product {
 				'title' => 'etuan_product_orderby',
 				'type'=> 'mradio',
 				'value' => array(
-					array('dateline', 'etuan_product_orderby_dateline'),
+					array('tu.begin_date', 'etuan_product_orderby_dateline'),
 					array('todayhots', 'etuan_product_orderby_todayhots'),
 					array('weekhots', 'etuan_product_orderby_weekhots'),
 					array('monthhots', 'etuan_product_orderby_monthhots'),
 				),
-				'default' => 'dateline'
+				'default' => 'tu.begin_date'
 			),
 			'highlight' => array(
 				'title' => 'etuan_product_highlight',
@@ -169,115 +169,77 @@ class block_product {
 
 		require_once libfile('function/post');
 		require_once libfile('function/search');
-
-//		$datalist = $list = $listpids = $threadpids = $aid2pid = $attachtables = array();
-//		$keyword = $keyword ? searchkey($keyword, "t.subject LIKE '%{text}%'") : '';
-//		$sql = ($fids ? ' AND t.fid IN ('.dimplode($fids).')' : '')
-//			.($tids ? ' AND t.tid IN ('.dimplode($tids).')' : '')
-//			.($digest ? ' AND t.digest IN ('.dimplode($digest).')' : '')
-//			.($stick ? ' AND t.displayorder IN ('.dimplode($stick).')' : '')
-//			." AND t.isgroup='0'";
-//		$where = '';
-//		if(in_array($orderby, array('todayhots','weekhots','monthhots'))) {
-//			$historytime = 0;
-//			switch($orderby) {
-//				case 'todayhots':
-//					$historytime = mktime(0, 0, 0, date('m', TIMESTAMP), date('d', TIMESTAMP), date('Y', TIMESTAMP));
-//				break;
-//				case 'weekhots':
-//					$week = gmdate('w', TIMESTAMP) - 1;
-//					$week = $week != -1 ? $week : 6;
-//					$historytime = mktime(0, 0, 0, date('m', TIMESTAMP), date('d', TIMESTAMP) - $week, date('Y', TIMESTAMP));
-//				break;
-//				case 'monthhots':
-//					$historytime = mktime(0, 0, 0, date('m', TIMESTAMP), 1, date('Y', TIMESTAMP));
-//				break;
-//			}
-//			$where = ' WHERE tr.dateline>='.$historytime;
-//			$orderby = 'totalitems';
-//		}
-//		$where .= ($uids ? ' AND tr.sellerid IN ('.dimplode($uids).')' : '').$keyword;
-//		$where .= ($bannedids ? ' AND tr.pid NOT IN ('.dimplode($bannedids).')' : '');
-//		$sqlfrom = " INNER JOIN `".DB::table('forum_thread')."` t ON t.tid=tr.tid $sql AND t.displayorder>='0'";
-//		$joinmethod = empty($tids) ? 'INNER' : 'LEFT';
-//		if($recommend) {
-//			$sqlfrom .= " $joinmethod JOIN `".DB::table('forum_forumrecommend')."` fc ON fc.tid=tr.tid";
-//		}
-//		$sqlfield = $highlight ? ', t.highlight' : '';
-//		$query = DB::query("SELECT tr.pid, tr.tid, tr.aid, tr.price, tr.credit, tr.subject, tr.totalitems, tr.seller, tr.sellerid$sqlfield
-//			FROM ".DB::table('forum_product')." tr $sqlfrom $where
-//			ORDER BY tr.$orderby DESC
-//			LIMIT $startrow,$items;"
-//			);
-//		require_once libfile('block_thread', 'class/block/forum');
-//		$bt = new block_thread();
-//		while($data = DB::fetch($query)) {
-//			if($style['getsummary']) {
-//				$threadpids[$data['posttableid']][] = $data['pid'];
-//			}
-//			if($data['aid']) {
-//				$aid2pid[$data['aid']] = $data['pid'];
-//				$attachtable = getattachtableid($data['tid']);
-//				$attachtables[$attachtable][] = $data['aid'];
-//			}
-//			$listpids[] = $data['pid'];
-//			$list[$data['pid']] = array(
-//				'id' => $data['pid'],
-//				'idtype' => 'pid',
-//				'title' => cutstr(str_replace('\\\'', '&#39;', addslashes($data['subject'])), $titlelength, ''),
-//				'url' => 'forum.php?mod=viewthread&do=productinfo&tid='.$data['tid'].'&pid='.$data['pid'].($viewmod ? '&from=portal' : ''),
-//				'pic' => ($data['aid'] ? '' : $_G['style']['imgdir'].'/nophoto.gif'),
-//				'picflag' => '0',
-//				'fields' => array(
-//					'fulltitle' => str_replace('\\\'', '&#39;', addslashes($data['subject'])),
-//					'totalitems' => $data['totalitems'],
-//					'author' => $data['seller'] ? $data['seller'] : $_G['setting']['anonymoustext'],
-//					'authorid' => $data['sellerid'] ? $data['sellerid'] : 0,
-//					'price' => ($data['price'] > 0 ? '&yen; '.$data['price'] : '').($data['credit'] > 0 ? ($data['price'] > 0 ? lang('block/productlist', 'etuan_product_price_add') : '').$data['credit'].' '.$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]]['unit'].$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]]['title'] : ''),
-//				)
-//			);
-//			if($highlight && $data['highlight']) {
-//				$list[$data['tid']]['fields']['showstyle'] = $bt->getthreadstyle($data['highlight']);
-//			}
-//		}
-//		if(!empty($listpids)) {
-//			foreach($threadpids as $key => $var) {
-//				$posttable = $key == 0 ? 'forum_post' : 'forum_post_'.$key;
-//				$query = DB::query("SELECT pid, message FROM ".DB::table($posttable)." WHERE pid IN  (".dimplode($var).")");
-//				while($result = DB::fetch($query)) {
-//					$list[$result['pid']]['summary'] = messagecutstr($result['message'], $messagelength);
-//				}
-//			}
-//
-//			foreach($attachtables as $tableid => $taids) {
-//				$query = DB::query('SELECT aid, attachment, remote FROM '.DB::table('forum_attachment_'.$tableid).' WHERE aid IN ('.dimplode($taids).')');
-//				while($avalue = DB::fetch($query)) {
-//					$list[$aid2pid[$avalue['aid']]]['pic'] = 'forum/'.$avalue['attachment'];
-//					$list[$aid2pid[$avalue['aid']]]['picflag'] = $avalue['remote'] ? '2' : '1';
-//				}
-//			}
-//
-//			foreach($listpids as $key => $value) {
-//				$datalist[] = $list[$value];
-//			}
-//		}
+        $where = array();
+        if($keyword)
+        {
+            $wherer[]=searchkey($keyword, "p.name LIKE '%{text}%'");
+        }
+		if(in_array($orderby, array('todayhots','weekhots','monthhots'))) {
+			$historytime = 0;
+			switch($orderby) {
+				case 'todayhots':
+					$historytime = mktime(0, 0, 0, date('m', TIMESTAMP), date('d', TIMESTAMP), date('Y', TIMESTAMP));
+				break;
+				case 'weekhots':
+					$week = gmdate('w', TIMESTAMP) - 1;
+					$week = $week != -1 ? $week : 6;
+					$historytime = mktime(0, 0, 0, date('m', TIMESTAMP), date('d', TIMESTAMP) - $week, date('Y', TIMESTAMP));
+				break;
+				case 'monthhots':
+					$historytime = mktime(0, 0, 0, date('m', TIMESTAMP), 1, date('Y', TIMESTAMP));
+				break;
+			}
+			$where[]= 'tu.begin_date>='.$historytime;
+			$orderby = 'tp.sold_cnt';
+		}
+        if($uids)
+        {
+		    $where []= 'tu.seller_id IN ('.dimplode($uids).')';
+        }
+        if($bannedids)
+        {
+		    $where []= 'p.id NOT IN ('.dimplode($bannedids).')';
+        }
+        if(!$orderby || $orderby=='dateline')
+        {
+            $orderby = 'tu.begin_date';
+        }
+        $where[]="tu.`status`='ing'";
+        $where = $where?implode(' AND ', $where):'1=1';
         $datalist = array();
-        $query = DB::query($sql="select * from " .DB::table('etuan_product') . " LIMIT $startrow,$items;");
+        $query = DB::query($sql="SELECT
+                                        p.*,
+                                        tp.sold_cnt AS totalitems,
+                                        tu.name AS tuan_name,
+                                        tu.status AS tuan_status,
+                                        tu.tid AS thread_id,
+                                        tu.begin_date AS begin_date,
+                                        tu.end_date AS end_date,
+                                        tp.unit_price AS price,
+                                        s.name AS supplier_name
+                                FROM " .DB::table('etuan_tuan_product') . " AS tp
+                                LEFT JOIN " .DB::table('etuan_tuan') . " AS tu ON tp.tuan_id=tu.id
+                                LEFT JOIN " .DB::table('etuan_product') . " AS p ON tp.product_id=p.id
+                                LEFT JOIN " .DB::table('etuan_supplier') . " AS s ON p.supplier_id=s.id
+                                WHERE {$where}
+                                ORDER BY {$orderby} DESC
+                                LIMIT $startrow,$items;");
         while($data = DB::fetch($query)) {
             $datalist[]= array(
 				'id' => $data['id'],
 				'idtype' => 'pid',
 				'title' => cutstr(str_replace('\\\'', '&#39;', addslashes($data['name'])), $titlelength, ''),
-				'url' => 'forum.php?mod=viewthread&do=productinfo&tid='.$data['id'].'&pid='.$data['id'],
+				'url' => 'forum.php?mod=viewthread&tid='.$data['thread_id'],
 				'pic' => ($data['photo'] ? '' : $_G['style']['imgdir'].'/nophoto.gif'),
 				'picflag' => '0',
                 'fields' => array(
 					'fulltitle' => str_replace('\\\'', '&#39;', addslashes($data['name'])),
-//					'totalitems' => $data['totalitems'],
-//					'author' => $data['seller'] ? $data['seller'] : $_G['setting']['anonymoustext'],
+					'totalitems' => $data['totalitems'],
+					'author' => $data['seller'] ? $data['seller'] : $_G['setting']['anonymoustext'],
 					'authorid' => $data['seller_id'] ? $data['seller_id'] : 0,
 					'price' =>$data['price'],
-                        ),
+					'summary' =>$data['description'],
+                ),
             );
         }
 		return array('html' => '', 'data' => $datalist);

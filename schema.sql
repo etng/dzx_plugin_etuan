@@ -3,7 +3,7 @@
 # Server version:               5.1.48-community-log
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3920
-# Date/time:                    2011-10-19 08:13:05
+# Date/time:                    2011-10-19 23:10:21
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -157,6 +157,7 @@ CREATE TABLE IF NOT EXISTS `pre_etuan_product` (
   `spec` varchar(55) NOT NULL COMMENT '规格',
   `unit_name` varchar(55) NOT NULL COMMENT '单位',
   `photo` varchar(255) NOT NULL COMMENT '图片',
+  `intro` text NOT NULL COMMENT '介绍',
   `description` text NOT NULL COMMENT '介绍',
   `credit_limit` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '可用积分数',
   PRIMARY KEY (`id`),

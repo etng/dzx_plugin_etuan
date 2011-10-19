@@ -32,7 +32,7 @@
 							<td class="icn"><a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank"> <img src="source/plugin/etuan/static/icon_post.gif" /> </a></td>
 							<th> <a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank">$tuan_thread[subject]</a> </th>
 							<td>{$tuan_thread[begin_date]} - {$tuan_thread[end_date]}</td>
-							<td class="by">{$tuan_thread[status]}</td>
+							<td>{$tuan_statuss[$tuan_thread[tuan_status]]}</td>
 							<td class="num">
 							<a href="plugin.php?id=etuan:my&app=tuan&op=view&tid={$tuan_thread[tid]}" class="xi2">{lang etuan:view}</a>
 							<a href="plugin.php?id=etuan:my&app=tuan&op=delete&tid={$tuan_thread[tid]}" class="xi2">{lang etuan:delete}</a>

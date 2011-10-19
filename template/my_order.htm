@@ -42,13 +42,13 @@
 						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_order_{$order['id']}">
 							<td>$order['tuan']['name']</td>
 							<td>$order['bought_at']</td>
-							<td>$order['payment_method']</td>
-							<td>$order['ship_method']</td>
+							<td>$payment_methods[$order['payment_method']]</td>
+							<td>$ship_methods[$order['ship_method']]</td>
 							<td>$order['sub_total']</td>
 							<td>$order['ship_fee']</td>
 							<td>$order['credit_used']</td>
 							<td>$order['total']</td>
-							<td>$order['status']</td>
+							<td>$order_statuss[$order['status']]</td>
 							<td>
 							<a href="plugin.php?id=etuan:my&app=order&op=view&orderid={$order['id']}">{lang etuan:view}</a>
 							<!--{if $order['status']=='shipped'}-->

@@ -39,7 +39,7 @@
 						<!--{loop $list $value}-->
 						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_product_{$value['id']}">
 							<td><img src="$value['supplier']['logo']">$value['supplier']['name']</td>
-							<td><img src="$value['photo']">$value['name']</td>
+							<td><img src="<!--{if $value['photo']==''}-->{$_G['style']['imgdir']}/nophoto.gif<!--{else}-->{$value['photo']}<!--{/if}-->" width="50px">$value['name']</td>
 							<td>$value['market_price']</td>
 							<td>$value['supply_price']</td>
 							<td>$value['price']</td>
