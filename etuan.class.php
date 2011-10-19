@@ -159,6 +159,15 @@ class etuan
             $sql = $table;
         }else
         {
+            settype($where, 'array');
+            foreach($where as $k=>$v)
+            {
+                if(!is_int($k))
+                {
+                    $where[]=sprintf('%s=\'%s\'', $k, $v);
+                    unset($where[$k]);
+                }
+            }
             $where = $where?' where ' .implode(' and ', $where):'';
             $limit = $limit?" limit {$offset},{$limit}":'';
             $sql = "SELECT * FROM ".DB::table($table)." {$where}{$limit}";
@@ -356,7 +365,14 @@ class etuan_cart
         ), 1);
         return $order;
     }
-
+    function detail($tuan_id, $product_id)
+    {
+        $tuan = $this->tuan->fetchTuan($tuan_id);
+        $product = $this->tuan->fetchProduct($product_id);
+        $tuan_products = $this->tuan->fetchAll('etuan_tuan_product', compact('tuan_id','product_id'));
+        $tuan_product = current($tuan_products);
+        return compact('tuan', 'product', 'tuan_product');
+    }
     function addItem($tuan_id, $product_id, $quantity=1)
     {
         $this->products["{$tuan_id}_{$product_id}"] = $quantity;

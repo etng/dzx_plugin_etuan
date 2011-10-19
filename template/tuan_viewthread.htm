@@ -1,4 +1,6 @@
 <!--{block return}-->
+<link rel="stylesheet" type="text/css" href="source/plugin/etuan/static/etuan.css" />
+<script type="text/javascript" src="source/plugin/etuan/static/etuan.js"></script>
 <div class="trdc xs1">
 <em>{lang etuan:tuan_thread_view_products}</em>
 <a href="">{lang etuan:tuan_thread_expand_all_products}</a>
@@ -8,12 +10,12 @@
 <!--{loop $products $k $product}-->
 <div class="xs1 cl"><div class="trdb">
 <div id="trade{$product[id]}" class="trdl cl">
-<div class="tt" onclick="display('trade{$product[id]}');ajaxget('forum.php?mod=viewthread&amp;do=tradeinfo&amp;tid=21&amp;pid={$product[id]}','tradeinfo{$product[id]}','tradeinfo{$product[id]}')">
+<div class="tt" onclick="display('trade{$product[id]}');ajaxget('plugin.php?id=etuan:cart&op=detail&tu_id={$tuan['id']}&tp_id={$product[id]}','tradeinfo{$product[id]}','tradeinfo{$product[id]}')">
 <img src="{$product[photo]}" onclick="zoom(this, '{$product[photo]}')" width="90" _width="90" _height="90" alt="{$product[name]}">
 </div>
 <div class="ta spi">
-<span class="y"><a href="javascript:;" onclick="display('trade{$product[id]}');ajaxget('forum.php?mod=viewthread&amp;do=tradeinfo&amp;tid=21&amp;pid={$product[id]}','tradeinfo{$product[id]}','tradeinfo{$product[id]}')" title="展开"><img src="static/image/common/collapsed_yes.gif" alt="" class="vm"> 展开</a></span>
-<h4><a href="forum.php?mod=viewthread&amp;do=tradeinfo&amp;tid=21&amp;pid={$product[id]}" target="_blank">{$product[name]}</a></h4>
+<span class="y"><a href="javascript:;" onclick="display('trade{$product[id]}');ajaxget('plugin.php?id=etuan:cart&op=detail&tu_id={$tuan['id']}&tp_id={$product[id]}','tradeinfo{$product[id]}','tradeinfo{$product[id]}')" title="展开"><img src="static/image/common/collapsed_yes.gif" alt="" class="vm"> 展开</a></span>
+<h4><a href="#" target="_blank">{$product[name]}</a></h4>
 
 <dl class="z">
 <dt></dt>
@@ -31,12 +33,20 @@
 <del>{$product[public_price]} 元</del>
 </p>
 </div>
-<div><input type="text" id="buy_quantity_{$product[id]}" class="px" value="1" size="3" /><a href="#" onclick="this.href=('plugin.php?id=etuan:cart&op=add&tuan_id={$tuan['id']}&product_id={$product[id]}&quantity='+$('buy_quantity_{$product[id]}').value);">{lang etuan:add_to_cart}</a></div>
+<div>
+<p class="pns mbm">
+</p><dl class="amount"><dt>我要买：</dt><dd><a class="reduce" href="javascript:reduce_trade_amount({$product['id']})">-</a><input type="text" value="1" id="trade_amount_{$product['id']}" onkeyup="set_trade_amount({$product['id']})" name="trade_amount"><a class="increase" href="javascript:increase_trade_amount({$product['id']})">+</a></dd></dl>
+<a onclick="return addTradeCart({$tuan['id']}, {$product['id']});" href="plugin.php?id=etuan:cart&tuid={$tuan['id']}&tpid={$product['id']}&quantity=1">加入购物车</a>
+&nbsp;<a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$tuan['seller_qq']}&amp;Site=$_G['setting']['bbname']&amp;Menu=yes" target="_blank" title="QQ"><img src="static/image/common/qq.gif" alt="QQ" style="vertical-align:middle">在线砍价</a><p></p>
+
+</div>
 </div>
 </div>
 <div id="tradeinfo{$product[id]}">{$product[description]}</div>
 </div>
 <!--{/loop}-->
 
+<div id="cart_dummy" style="display:none">
 
+</div>
 <!--{/block}-->

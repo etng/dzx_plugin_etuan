@@ -3,7 +3,7 @@
 # Server version:               5.1.48-community-log
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3920
-# Date/time:                    2011-10-02 14:55:38
+# Date/time:                    2011-10-19 08:13:05
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -261,6 +261,7 @@ CREATE TABLE IF NOT EXISTS `pre_etuan_tuan_product` (
   `unit_price` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '单价',
   `user_limit` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '单用户限购',
   `total_limit` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '总限购',
+  `sold_cnt` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '已卖出数量',
   PRIMARY KEY (`id`),
   KEY `tuan_id` (`tuan_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='团购中的商品';

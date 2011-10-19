@@ -1,0 +1,58 @@
+<!--{subtemplate common/header_ajax}--><div id="tradeinfo{$product['id']}" style="">
+
+<div class="bbda ptm act cl" style="border:0">
+<div class="cl">
+<div class="spvimg">
+<a href="javascript:;"><img src="<!--{if !$product['photo']}-->{$_G['style']['imgdir']}/nophoto.gif<!--{else}-->{$product['photo']}<!--{/if}-->
+" onclick="zoom(this, '<!--{if !$product['photo']}-->{$_G['style']['imgdir']}/nophoto.gif<!--{else}-->{$product['photo']}<!--{/if}-->
+')" width="300" _width="300" _height="300" alt="{$product['name']} {$product['spec']}"></a>
+<p class="ptm pbm">
+</p>
+</div>
+
+<div class="spi cl">
+<span class="y"><a href="javascript:;" onclick="$('tradeinfo{$product['id']}').style.display = 'none';display('trade{$product['id']}');" title="收起"><img src="static/image/common/collapsed_no.gif" alt="" class="vm"> 收起</a></span>
+<h4 class="wx mbm bbda"><a href="#" target="_blank">{$product['name']} {$product['spec']}</a></h4>
+<dl>
+<dt>商品类型:</dt>
+<dd>
+全新商品
+</dd>
+<dt>运费:</dt>
+<dd>
+根据送货方式不等</dd>
+<dt>剩余时间:</dt>
+<dd>
+{$tuan['end_date']}
+</dd>
+<dt>商品数量:</dt><dd>{$tuan_product['total_limit']}</dd>
+<dt>地点:</dt><dd>成都</dd><dt>累计售出:</dt><dd>{$tuan_product['sold_cnt']}</dd>
+</dl>
+<dl class="nums">
+<dt>现价:</dt>
+<dd>
+<p><em>{$tuan_product['unit_price']}</em>&nbsp;元</p>
+</dd>
+</dl>
+<dl>
+<dt>原价:</dt>
+<dd class="xg1">
+<del>{$product['market_price']} 元</del><br>
+</dd>
+</dl>
+
+<p class="pns mbm">
+</p><dl class="amount"><dt>我要买：</dt><dd><a class="reduce" href="javascript:reduce_trade_amount({$product['id']})">-</a><input type="text" value="1" id="trade_amount_{$product['id']}" onkeyup="set_trade_amount({$product['id']})" name="trade_amount"><a class="increase" href="javascript:increase_trade_amount({$product['id']})">+</a></dd></dl>
+<a onclick="return addTradeCart({$tuan['id']}, {$product['id']});" href="plugin.php?id=etuan:cart&tuid={$tuan['id']}&tpid={$product['id']}&quantity=1">加入购物车</a>
+&nbsp;<a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$tuan['seller_qq']}&amp;Site=$_G['setting']['bbname']&amp;Menu=yes" target="_blank" title="QQ"><img src="static/image/common/qq.gif" alt="QQ" style="vertical-align:middle">在线砍价</a><p></p>
+</div>
+</div>
+<div class="cl mtw">
+<div class="c pbm">
+{$product['description']}
+</div>
+</div>
+
+</div>
+
+</div><!--{subtemplate common/footer_ajax}-->

@@ -7,6 +7,11 @@ require_once DISCUZ_ROOT.'./source/plugin/etuan/etuan.func.php';
 $op = trim(@$_G['gp_op']);
 $cart_url = 'plugin.php?id=etuan:cart&op=list';
 switch($op){
+    case 'detail': //商品详情，ajax plugin.php?id=etuan:cart&op=detail&tu_id=[团购编号]&tp_id=[商品编号]
+        $detail = $ecart->detail($_G['gp_tu_id'], $_G['gp_tp_id']);
+        extract($detail);
+        include template('etuan:tuan_item_detail');
+        break;
     case 'add': //加入购物车
         $ecart->addItem($_G['gp_tuan_id'], $_G['gp_product_id'], empty($_G['gp_quantity'])?1:$_G['gp_quantity']);
         $etuan->ajaxOrMsg('etuan:cart_add_success', $cart_url);
