@@ -41,7 +41,7 @@
         <input name="community_name" id="community_name" type="hidden" value="{$row[community_name]}" />
             <!--{if $grouplist}-->
             <select name="community_id" id="community_id">
-                <option value="0">{lang choose_please_group}</option>
+                <option value="0">{lang etuan:please_choose_group}</option>
                 <!--{loop $grouplist $groupid $group}-->
                 <option value="$groupid">$group[name]</option>
                 <!--{/loop}-->

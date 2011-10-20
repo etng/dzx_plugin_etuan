@@ -5,10 +5,27 @@ if(!defined('IN_DISCUZ')) {
 
 $op = trim(@$_G['gp_op']);
 $id = intval(@$_G['gp_id']);
+require_once libfile('function/group');
+
+$joined_grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 2);
+$managed_grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 1);
+if(!$joined_grouplist)
+{
+    $joined_grouplist = array();
+}
+if(!$managed_grouplist)
+{
+    $managed_grouplist = array();
+}
+$grouplist = array();
+foreach(array_merge($joined_grouplist, $managed_grouplist) as $group)
+{
+    $grouplist[$group['fid']] = $group;
+}
 
 if($op == 'add') {
 	if(submitcheck('addsubmit')) {
-		DB::insert('etuan_address', array(
+		DB::insert('etuan_address', $a=array(
                 'buyer_id' => $_G['uid'],
                 'address' => $_G['gp_address'],
                 'community_id' => $_G['gp_community_id'],
@@ -19,8 +36,6 @@ if($op == 'add') {
                 ), true);
 		$etuan->ajaxOrMsg('etuan:address_add_success', "plugin.php?id=etuan:my&app=address");
 	}else{
-        require_once libfile('function/group');
-		$grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 2);
 		include template('etuan:my_address_add');
 	}
 
@@ -37,8 +52,7 @@ if($op == 'add') {
 		$etuan->ajaxOrMsg('etuan:address_edit_success', "plugin.php?id=etuan:my&app=address");
 	}else{
 		$row = DB::fetch_first("SELECT * FROM ".DB::table('etuan_address')." where buyer_id=$_G[uid] and id = '$id'");
-        require_once libfile('function/group');
-		$grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 2);
+
         include template('etuan:my_address_add');
 	}
 
@@ -51,7 +65,7 @@ if($op == 'add') {
 	$pagenum = 10;
 	$limit_start = $pagenum * ($page - 1);
 	$totalnum = DB::result_first("SELECT COUNT(*) FROM ".DB::table('etuan_address')." where buyer_id='$_G[uid]'");
-    $sql = "SELECT * FROM ".DB::table('etuan_address')." where buyer_id='$_G[uid]' Order By id DESC";
+    $sql = "SELECT a.*,f.name as community_name FROM ".DB::table('etuan_address')." as a left join ".DB::table('forum_forum')." as f on a.community_id=f.fid where a.buyer_id='$_G[uid]' ORDER BY a.id DESC";
 	$list = $etuan->fetchAll($sql);
 	$multi = multi($totalnum, $pagenum, $page, "plugin.php?id=etuan:my&app=address");
 	include template('etuan:my_address');

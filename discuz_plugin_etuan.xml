@@ -2,7 +2,7 @@
 <root>
 	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
 	<item id="Version"><![CDATA[X2]]></item>
-	<item id="Time"><![CDATA[2011-10-02 15:02]]></item>
+	<item id="Time"><![CDATA[2011-10-21 07:51]]></item>
 	<item id="From"><![CDATA[Discuz! Board (http://bbs.myxiaoqu.dev/)]]></item>
 	<item id="Data">
 		<item id="plugin">
@@ -14,7 +14,7 @@
 			<item id="datatables"><![CDATA[]]></item>
 			<item id="directory"><![CDATA[etuan/]]></item>
 			<item id="copyright"><![CDATA[http://www.zetng.com]]></item>
-			<item id="version"><![CDATA[0.1]]></item>
+			<item id="version"><![CDATA[0.3]]></item>
 			<item id="__modules">
 				<item id="0">
 					<item id="name"><![CDATA[etuan]]></item>
@@ -206,6 +206,7 @@
 				<item id="admin_community_add_succeed"><![CDATA[添加小区成功]]></item>
 				<item id="admin_community_edit_succeed"><![CDATA[修改小区成功]]></item>
 				<item id="admin_community_update_succeed"><![CDATA[更新小区成功]]></item>
+				<item id="address_add_success"><![CDATA[收货地址保存成功]]></item>
 				<item id="payment_add_success"><![CDATA[支付方式添加成功]]></item>
 				<item id="payment_edit_success"><![CDATA[支付方式修改成功]]></item>
 				<item id="shipmethod_add_success"><![CDATA[发货方式添加成功]]></item>
@@ -231,6 +232,9 @@
 				<item id="edit"><![CDATA[查看]]></item>
 				<item id="status"><![CDATA[状态]]></item>
 				<item id="cart_checkouting"><![CDATA[结算中]]></item>
+				<item id="my_product_intro"><![CDATA[介绍]]></item>
+				<item id="please_choose_group"><![CDATA[请选择所在小区]]></item>
+				<item id="add_address_first"><![CDATA[请先添加收货地址]]></item>
 				<item id="tuan_intro"><![CDATA[团购介绍]]></item>
 				<item id="tuan_duration"><![CDATA[团购时间]]></item>
 				<item id="tuan_start_time"><![CDATA[开始时间]]></item>
@@ -429,6 +433,9 @@
 				<item id="my_address_contact_name"><![CDATA[联系人]]></item>
 				<item id="my_order_not_paid_yet"><![CDATA[还没有付款]]></item>
 				<item id="pay_order"><![CDATA[支付]]></item>
+				<item id="buy_login_nopermission"><![CDATA[请登录]]></item>
+				<item id="add_product_first"><![CDATA[您还没有添加过商品，点击这里添加]]></item>
+				<item id="add_supplier_first"><![CDATA[您还没有添加过供应商，点击这里添加]]></item>
 			</item>
 			<item id="installlang">
 				<item id="placeholder"><![CDATA[占位符]]></item>

@@ -31,7 +31,7 @@ switch($op){
         break;
     case 'checkout'://填写结账单即选择送货地址、支付方式、发货方式及积分抵扣等
         $cart_items_group_by_tuan = $ecart->getItemsGroupByTuan($get_detail=true);
-        $addresses = $etuan->fetchAll('select c.name as community_name, a.* from '.DB::table('etuan_address').' as a left join '.DB::table('etuan_community').' as c on a.community_id=c.id where a.buyer_id='.$_G['uid']);
+        $addresses = $etuan->fetchAll('select  a.*, f.name as community_name from '.DB::table('etuan_address').' as a left join '.DB::table('forum_forum').' as f on a.community_id=f.fid where a.buyer_id='.$_G['uid']);
         include template('etuan:cart_checkout');
         break;
     case 'submit'://生成订单

@@ -3,7 +3,7 @@
 # Server version:               5.1.48-community-log
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3920
-# Date/time:                    2011-10-19 23:10:21
+# Date/time:                    2011-10-21 07:52:12
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `pre_etuan_address` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `buyer_id` int(10) unsigned NOT NULL COMMENT '买家',
   `community_id` int(10) unsigned NOT NULL COMMENT '小区',
+  `community_name` varchar(55) NOT NULL COMMENT '小区名称',
   `province` varchar(55) NOT NULL COMMENT '省',
   `city` varchar(55) NOT NULL COMMENT '市',
   `town` varchar(55) NOT NULL COMMENT '城镇',

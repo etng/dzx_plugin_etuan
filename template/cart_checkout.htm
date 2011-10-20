@@ -32,9 +32,11 @@
 					<li><input type="radio" id="address_id_{$address[id]}" name="address_id" value="{$address[id]}" data-address_id="{$address[id]}" data-community_id="{$address[community_id]}" data-name="{$address[contact_name]}" data-address="{$address[address]}" data-phone="{$address[phone]}" data-email="{$address[email]}" onclick="set_ship_address('{$address[id]}', '{$address[community_id]}', '{$address[contact_name]}', '{$address[address]}', '{$address[phone]}', '{$address[email]}')" />
 					{$address[community_name]} {$address[address]}  {$address[contact_name]} {$address[phone]} {$address[email]}</li>
 				<!--{/loop}-->
+				<!--{else}-->
+				<a href="plugin.php?id=etuan:my&app=address">{lang etuan:add_address_first}</a>
 				<!--{/if}-->
 				</ul>
-				<a href="javascript:void(0);" onclick="showWindow('add_address', 'plugin.php?id=etuan:my&app=address&op=add', 'get', 0)">{lang etuan:my_add_address}</a>
+				<!-- <a href="javascript:void(0);" onclick="showWindow('add_address', 'plugin.php?id=etuan:my&app=address&op=add', 'get', 0)">{lang etuan:my_add_address}</a> -->
 				</div>
 				<h3>{lang etuan:cart_choose_shipmethod}</h3>
 				<div><ul>

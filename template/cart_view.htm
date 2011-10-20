@@ -29,7 +29,7 @@
 						<!--{if $tuan_cart_items[items]}-->
 							<!--{loop $tuan_cart_items[items] $cart_item}-->
 							<tr>
-								<td><img src="<!--{if !$cart_item[product]['photo']}-->{$_G['style']['imgdir']}/nophoto.gif<!--{else}-->{$cart_item[product]['photo']}<!--{/if}-->">{$cart_item[product][name]}</td>
+								<td><img src="<!--{if !$cart_item[product]['photo']}-->{$_G['style']['imgdir']}/nophoto.gif<!--{else}-->{$cart_item[product]['photo']}<!--{/if}-->" width="90px">{$cart_item[product][name]}</td>
 								<td>{$cart_item['quantity']}</td>
 								<td class="num">{$cart_item['unit_price']}</td>
 								<td class="by">{$cart_item['price']}</td>
