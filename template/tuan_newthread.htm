@@ -82,6 +82,10 @@
 					<input type="text" name="product_total_limit[{$product[id]}]" id="product_total_limit_{$product[id]}" class="px" value="0" />
 					<label for="product_total_limit_{$product[id]}">{lang etuan:tuan_product_total_limit}</label>
 					</em>
+                    <em>
+					<input type="text" name="product_sold_cnt[{$product[id]}]" id="product_sold_cnt{$product[id]}" class="px" value="0" />
+					<label for="product_sold_cnt_{$product[id]}">{lang etuan:tuan_product_sold_cnt}</label>
+					</em>
 				</div><!--{/loop}-->
 				<!--{else}-->
 				<a href="plugin.php?id=etuan:my&app=product">{lang etuan:add_product_first}</a>

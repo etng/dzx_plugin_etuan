@@ -29,7 +29,7 @@
 							<td>{lang etuan:my_product_price}</td>
 							<td>{lang etuan:my_product_spec}</td>
 							<td>{lang etuan:my_product_unit_name}</td>
-							<td>{lang etuan:my_product_description}</td>
+							<td>{lang etuan:my_product_intro}</td>
 							<td>{lang etuan:my_product_credit_limit}</td>
 							<td>{lang etuan:my_operation}</td>
 						</tr>
@@ -45,7 +45,7 @@
 							<td>$value['price']</td>
 							<td>$value['spec']</td>
 							<td>$value['unit_name']</td>
-							<td>$value['description']</td>
+							<td>$value['intro']</td>
 							<td>$value['credit_limit']</td>
 							<td><a href="javascript:void(0);" onclick="showWindow('add_product', 'plugin.php?id=etuan:my&app=product&op=edit&productid={$value[id]}', 'get', 0)" class="xi2">{lang edit}</a><span class="pipe">|</span><a href="javascript:void(0);" onclick="delete_product({$value[id]});" class="xi2">{lang delete}</a></td>
 

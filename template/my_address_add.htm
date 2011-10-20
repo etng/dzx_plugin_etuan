@@ -38,13 +38,17 @@
 		<tr>
 		<td height="35" align="right">{lang etuan:my_address_community}: <span class="rq">*</span></td>
 		<td>
-
-<select name="" tabindex="2" class="ps" onchange="ajaxget('plugin.php?id=etuan:my&app=address&op=ajax&sub_op=group2&fupid='+ this.value, 'secondgroup');">
-	<option value="0">{lang choose_please}</option>
-	$groupselect[first]
-</select>
-<em id="secondgroup"><select name="fup" id="fup" class="ps" ><option value="">{lang option_required}</option></select></em>
-<em id="group_id"><select name="group_id" id="group_id" class="ps" ><option value="">{lang option_required}</option></select></em>
+        <input name="community_name" id="community_name" type="hidden" value="{$row[community_name]}" />
+            <!--{if $grouplist}-->
+            <select name="community_id" id="community_id">
+                <option value="0">{lang choose_please_group}</option>
+                <!--{loop $grouplist $groupid $group}-->
+                <option value="$groupid">$group[name]</option>
+                <!--{/loop}-->
+            </select>
+            <!--{else}-->
+                <div class="emp">你还没加入过小区，赶快去<a href="forum.php?mod=group">加入自己的小区吧</a></div>
+            <!--{/if}-->
 		</td>
 		</tr>
 		<tr>
@@ -72,34 +76,7 @@
 var pleaseselect = '{lang etuan:pleaseselect}';
 function add_validate(){
 
-	if($('province_val').value==''){
-		showDialog('{lang etuan:buy_area_error}', 'alert', '', function () { $('province').focus();});
-		return false;
-	}
-	if($('city_val').value==''){
-		showDialog('{lang etuan:buy_area_error}', 'alert', '', function () { $('city').focus();});
-		return false;
-	}
-	if($('town_val').value==''){
-		showDialog('{lang etuan:buy_area_error}', 'alert', '', function () { $('town').focus();});
-		return false;
-	}
-	if($('address').value.length<5){
-		showDialog('{lang etuan:buy_street_error}', 'alert', '', function () { $('address').focus();});
-		return false;
-	}
-	if($('zip').value.length!=6 || $('zip').value.search(/^\d+$/)){
-		showDialog('{lang etuan:buy_zip_error}', 'alert', '', function () { $('zip').focus();});
-		return false;
-	}
-	if($('popname').value == ''){
-		showDialog('{lang etuan:buy_popname_error}', 'alert', '', function () { $('popzip').focus();});
-		return false;
-	}
-	if($('phone').value == ''){
-		showDialog('{lang etuan:buy_phone_error}', 'alert', '', function () { $('phone').focus();});
-		return false;
-	}
+
 }
 </script>
 <script src="data/cache/cache_lodov_district.js" type="text/javascript"></script>

@@ -64,7 +64,7 @@
 									<!--{loop $order[payment_log] $payment_log}-->
 									<tr>
 										<td>{$payment_log[paid_at]}</td>
-										<td>{$payment_log[gateway]}</td>
+										<td>{$payment_methods[$payment_log[gateway]]}</td>
 										<td>{$payment_log[amount]}</td>
 									</tr>
 									<!--{/loop}-->
