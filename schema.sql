@@ -3,7 +3,7 @@
 # Server version:               5.1.48-community-log
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3920
-# Date/time:                    2011-10-21 07:52:12
+# Date/time:                    2011-11-02 03:10:40
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -237,6 +237,7 @@ CREATE TABLE IF NOT EXISTS `pre_etuan_tuan` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `tid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '帖子编号',
   `name` varchar(255) NOT NULL COMMENT '名称',
+  `location` varchar(255) NOT NULL COMMENT '所在地',
   `begin_date` date NOT NULL COMMENT '开始日期',
   `end_date` date NOT NULL COMMENT '结束日期',
   `seller_id` int(10) unsigned NOT NULL COMMENT '商家',

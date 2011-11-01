@@ -5,23 +5,7 @@ if(!defined('IN_DISCUZ')) {
 
 $op = trim(@$_G['gp_op']);
 $id = intval(@$_G['gp_id']);
-require_once libfile('function/group');
 
-$joined_grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 2);
-$managed_grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 1);
-if(!$joined_grouplist)
-{
-    $joined_grouplist = array();
-}
-if(!$managed_grouplist)
-{
-    $managed_grouplist = array();
-}
-$grouplist = array();
-foreach(array_merge($joined_grouplist, $managed_grouplist) as $group)
-{
-    $grouplist[$group['fid']] = $group;
-}
 
 if($op == 'add') {
 	if(submitcheck('addsubmit')) {

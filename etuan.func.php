@@ -17,7 +17,7 @@ $order_statuss = array(
     'canceled'=>'已取消',
     'invalid'=>'无效',
 );
-$payment_method = array(
+$payment_methods = array(
     'alipay'=>'支付宝',
     'cod'=>'货到付款',
     'tenpay'=>'财付通',
@@ -27,3 +27,20 @@ $tuan_statuss = array(
     'over'=>'已结束',
     'pre'=>'未开始',
 );
+require_once libfile('function/group');
+$all_grouplist = grouplist('membernum', array(), 1000);
+$joined_grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 2);
+$managed_grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 1);
+if(!$joined_grouplist)
+{
+    $joined_grouplist = array();
+}
+if(!$managed_grouplist)
+{
+    $managed_grouplist = array();
+}
+$my_grouplist = array();
+foreach(array_merge($joined_grouplist, $managed_grouplist) as $group)
+{
+    $my_grouplist[$group['fid']] = $group;
+}

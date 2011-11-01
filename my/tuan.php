@@ -38,31 +38,34 @@ switch($op){
             {
                 $stat[$row['product_id']]=$row['quantity_sum'];
             }
-            $products = $etuan->fetchAll('select
-            p.supplier_id, p.id AS product_id,p.name AS product_name,p.spec AS product_spec,
-            p.supply_price AS product_unit_price,p.unit_name as product_unit_name from '.DB::table('etuan_product').' as p where p.id in ('.implode(',', array_keys($stat)).')');
-            $supplies = array();
+            if($stat)
+            {
+                $products = $etuan->fetchAll('select
+                p.supplier_id, p.id AS product_id,p.name AS product_name,p.spec AS product_spec,
+                p.supply_price AS product_unit_price,p.unit_name as product_unit_name from '.DB::table('etuan_product').' as p where p.id in ('.implode(',', array_keys($stat)).')');
+                $supplies = array();
 
-            foreach($products as $product)
-            {
-                $product['quantity'] = $stat[$product['product_id']];
-                $product['price'] = $product['quantity']*$product['product_unit_price'];
-                $price+=$product['price'];
-                $supplies[$product['supplier_id']]['items'][]=$product;
-            }
-            foreach($supplies as $supplier_id=>$data)
-            {
-                $price = 0;
-                $supplies[$supplier_id]['supplier'] = $etuan->fetchRow('etuan_supplier', $supplier_id);
-                foreach($data['items'] as $product)
+                foreach($products as $product)
                 {
+                    $product['quantity'] = $stat[$product['product_id']];
+                    $product['price'] = $product['quantity']*$product['product_unit_price'];
                     $price+=$product['price'];
+                    $supplies[$product['supplier_id']]['items'][]=$product;
                 }
-                $supplies[$supplier_id]['price'] =$price;
+                foreach($supplies as $supplier_id=>$data)
+                {
+                    $price = 0;
+                    $supplies[$supplier_id]['supplier'] = $etuan->fetchRow('etuan_supplier', $supplier_id);
+                    foreach($data['items'] as $product)
+                    {
+                        $price+=$product['price'];
+                    }
+                    $supplies[$supplier_id]['price'] =$price;
+                }
             }
         }else if($report=='profit_and_loss')
         {
-             $product_profit_and_loss_list = array();
+            $product_profit_and_loss_list = array();
             $commuinty_profit_and_loss_list = array();
             $rows =  $etuan->fetchAll("SELECT top.product_id, SUM(quantity) AS quantity_sum
             FROM ".DB::table('etuan_order_product')." AS top
@@ -73,24 +76,27 @@ switch($op){
             {
                 $stat[$row['product_id']]=$row['quantity_sum'];
             }
-            $products = $etuan->fetchAll('select
-            p.id AS product_id,p.name AS name,p.spec AS spec,
-            p.supply_price AS unit_price,p.unit_name as unit_name,tp.unit_price as unit_cost from '.DB::table('etuan_product').' as p left join '.DB::table('etuan_tuan_product').' as tp on tp.product_id=p.id where tp.tuan_id='. $tuan_thread['tuan_id'].' and p.id in ('.implode(',', array_keys($stat)).')');
-            foreach($products as $product)
+            if($stat)
             {
-                $product['quantity'] = $stat[$product['product_id']];
-                $product['cost'] = $product['quantity']*$product['unit_price'];
-                $product['price'] = $product['quantity']*$product['unit_cost'];
-                $product['gross_profit'] = $product['price']-$product['cost'];
-                $product['gross_profit_ratio'] = intval($product['gross_profit']*10000/$product['price'])/100 . '%';
-                $product_profit_and_loss_list[]=$product;
+                $products = $etuan->fetchAll('select
+                p.id AS product_id,p.name AS name,p.spec AS spec,
+                p.supply_price AS unit_price,p.unit_name as unit_name,tp.unit_price as unit_cost from '.DB::table('etuan_product').' as p left join '.DB::table('etuan_tuan_product').' as tp on tp.product_id=p.id where tp.tuan_id='. $tuan_thread['tuan_id'].' and p.id in ('.implode(',', array_keys($stat)).')');
+                foreach($products as $product)
+                {
+                    $product['quantity'] = $stat[$product['product_id']];
+                    $product['cost'] = $product['quantity']*$product['unit_price'];
+                    $product['price'] = $product['quantity']*$product['unit_cost'];
+                    $product['gross_profit'] = $product['price']-$product['cost'];
+                    $product['gross_profit_ratio'] = intval($product['gross_profit']*10000/$product['price'])/100 . '%';
+                    $product_profit_and_loss_list[]=$product;
+                }
             }
         }else if($report=='community_shipment')
         {
             $community_shipments = array();
             $rows = $etuan->fetchAll('SELECT o.id as order_id, o.ship_community_id,c.name as ship_community_name, o.ship_address,o.ship_name, o.ship_phone, o.ship_method, m.username AS buyer_name, o.total
             FROM '.DB::table('etuan_order').' AS o
-            left join '.DB::table('etuan_community').' as c on o.ship_community_id=c.id
+            left join '.DB::table('forum_forum').' as c on o.ship_community_id=c.fid
             LEFT JOIN '.DB::table('common_member').' AS m ON o.buyer_id=m.uid
             WHERE o.tuan_id='.$tuan_thread['tuan_id']);
             foreach($rows as $row)
@@ -116,25 +122,28 @@ switch($op){
         {
             $community_supplies = array();
             $community_ids = $etuan->fetchCol('select distinct community_id from '.DB::table('etuan_order_product').' where tuan_id='.$tuan_thread['tuan_id']);
-            foreach($etuan->fetchAll('select * from '.DB::table('etuan_community').' where id in ('.implode(',', $community_ids) . ')') as $community)
+            if($community_ids)
             {
-                $community_supply['community'] = $community;
-                $community_supply['items'] = array();
-                $sql = "
-                SELECT
-                    product_id,
-                    SUM(quantity) AS sum_quantity,
-                    SUM(price) AS sum_price,
-                    COUNT(order_id) AS buyer_count
-                FROM ".DB::table('etuan_order_product')." AS op
-                WHERE community_id={$community['id']}
-                GROUP BY product_id";
-                foreach($etuan->fetchAll($sql) as $row)
+                foreach($all_grouplist as $community_id=>$community)
                 {
-                    $row['product'] = $etuan->fetchRow('etuan_product', $row['product_id']);
-                    $community_supply['items'][]=$row;
+                    $community_supply['community'] = $community;
+                    $community_supply['items'] = array();
+                    $sql = "
+                    SELECT
+                        product_id,
+                        SUM(quantity) AS sum_quantity,
+                        SUM(price) AS sum_price,
+                        COUNT(order_id) AS buyer_count
+                    FROM ".DB::table('etuan_order_product')." AS op
+                    WHERE community_id={$community_id}
+                    GROUP BY product_id";
+                    foreach($etuan->fetchAll($sql) as $row)
+                    {
+                        $row['product'] = $etuan->fetchRow('etuan_product', $row['product_id']);
+                        $community_supply['items'][]=$row;
+                    }
+                    $community_supplies[]=$community_supply;
                 }
-                $community_supplies[]=$community_supply;
             }
         }
 		include template('etuan:my_tuan_view_'.$report);

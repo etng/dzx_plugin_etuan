@@ -20,26 +20,26 @@
 
 
 			<div class="tl">
-					<table cellspacing="0" cellpadding="0">
+					<table cellspacing="0" cellpadding="0" class='dt mtm'>
 						<tr class="th">
-							<td>{lang etuan:my_supplier_name}</td>
-							<td>{lang etuan:my_supplier_phone}</td>
-							<td>{lang etuan:my_supplier_contact_name}</td>
-							<td>{lang etuan:my_supplier_contact_gender}</td>
-							<td>{lang etuan:my_supplier_contact_phone}</td>
-							<td>{lang etuan:my_supplier_contact_qq}</td>
-							<td>{lang etuan:my_supplier_cate}</td>
-							<td>{lang etuan:my_supplier_speed_rating}</td>
-							<td>{lang etuan:my_supplier_quality_rating}</td>
-							<td>{lang etuan:my_supplier_service_rating}</td>
-							<td>{lang etuan:my_operation}</td>
+							<th>{lang etuan:my_supplier_name}</th>
+							<th>{lang etuan:my_supplier_phone}</th>
+							<th>{lang etuan:my_supplier_contact_name}</th>
+							<th>{lang etuan:my_supplier_contact_gender}</th>
+							<th>{lang etuan:my_supplier_contact_phone}</th>
+							<th>{lang etuan:my_supplier_contact_qq}</th>
+							<th>{lang etuan:my_supplier_cate}</th>
+							<th>{lang etuan:my_supplier_speed_rating}</th>
+							<th>{lang etuan:my_supplier_quality_rating}</th>
+							<th>{lang etuan:my_supplier_service_rating}</th>
+							<th>{lang etuan:my_operation}</th>
 						</tr>
 
 					<!--{if $list}-->
 						<!--{eval $i=0;}-->
 						<!--{loop $list $value}-->
 						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_supplier_{$value['id']}">
-						<td>{$value['logo']}{$value['name']}</td>
+						<td><img src="{$value['logo']}">{$value['name']}</td>
 						<td>$value['phone']</td>
 						<td>$value['contact_name']</td>
 						<td>$value['contact_gender']</td>

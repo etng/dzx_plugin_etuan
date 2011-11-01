@@ -6,20 +6,20 @@
 		<a href="plugin.php?id=etuan:cart">{lang etuan:my_cart}</a>
 	</div>
 </div>
-
+<link rel="stylesheet" type="text/css" href="source/plugin/etuan/static/etuan.css" />
 
 <div id="ct" class="ct2_a wp cl">
 	<div class="mn">
 		<div class="bm bw0">
 			<h1 class="mt"><img alt="thread" src="static/image/feed/thread.gif" class="vm" /> {lang etuan:my_cart}</h1>
 			<div class="tl">
-					<table cellspacing="0" cellpadding="0">
+					<table cellspacing="0" cellpadding="0" class='dt mtm'>
 						<tr class="th">
-							<td>{lang etuan:cart_product}</td>
-							<td>{lang etuan:cart_quantity}</td>
-							<td>{lang etuan:cart_unit_price}</td>
-							<td>{lang etuan:cart_price}</td>
-							<td class="num">{lang etuan:my_operation}</td>
+							<th>{lang etuan:cart_product}</th>
+							<th>{lang etuan:cart_quantity}</th>
+							<th>{lang etuan:cart_unit_price}</th>
+							<th>{lang etuan:cart_price}</th>
+							<th class="num">{lang etuan:my_operation}</th>
 						</tr>
 					<!--{if $cart_items_group_by_tuan}-->
 					<!--{loop $cart_items_group_by_tuan $tuan_cart_items}-->
@@ -47,8 +47,8 @@
 				</form>
 			</div>
 			<!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
-			<div class="tbn">
-			<a href="plugin.php?id=etuan:cart&op=checkout">{lang etuan:cart_checkout}</a>
+			<div class="tbn" >
+			<a href="plugin.php?id=etuan:cart&op=checkout">{lang etuan:cart_checkout}</a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="plugin.php?id=etuan:cart&op=clear">{lang etuan:cart_clear}</a>
 			</div>
 		</div>

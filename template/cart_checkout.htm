@@ -41,10 +41,10 @@
 				<h3>{lang etuan:cart_choose_shipmethod}</h3>
 				<div><ul>
 					<!--{if $tuan_cart_items[tuan][ship_only_pick]}-->
-					<li><strong>{lang etuan:tuan_ship_only_pick}</strong><label><input type="radio" id="shipmethod_pick" name="ship_method" value="pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
+					<li><strong>{lang etuan:tuan_ship_only_pick}</strong><label><input type="radio" id="shipmethod_pick" name="ship_method" value="pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" onclick="setShipFee({$tuan_cart_items[tuan][ship_fee_pick]});" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
 					<!--{else}-->
 					<li><label><input type="radio" id="shipmethod_pick" name="ship_method" value="pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
-					<li><label><input type="radio" id="shipmethod_deliver" name="ship_method" value="deliver" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_deliver]}" />{lang etuan:tuan_ship_fee_deliver} {$tuan_cart_items[tuan][ship_fee_deliver]}</label>	</li>
+					<li><label><input type="radio" id="shipmethod_deliver" name="ship_method" value="deliver" checked="true"onclick="setShipFee({$tuan_cart_items[tuan][ship_fee_deliver]});" data-shipfee="{$tuan_cart_items[tuan][ship_fee_deliver]}" />{lang etuan:tuan_ship_fee_deliver} {$tuan_cart_items[tuan][ship_fee_deliver]}</label>	</li>
 					<!--{/if}-->
 					</ul>
 				</div>
@@ -58,7 +58,7 @@
 				<h3>{lang etuan:cart_choose_credit}</h3>
 				<div>
 					{lang etuan:checkout_use_credit_tips}
-					<input type="text" id="credit_used" name="credit_used" value="0" data-usable="{}" />
+					<input type="text" id="credit_used" name="credit_used" value="0" data-usable="{}" onblur="setCreditDiscount(this.value)" />
 				</div>
 				<h3>{lang etuan:cart_choose_memo}</h3>
 				<div><textarea name="memo" id="memo" rows="2" cols="2" class="pt" style="width:95%; height:51px;">{lang etuan:order_memo}</textarea></div>
@@ -96,7 +96,9 @@
 							<tr>
 								<td colspan="2">&nbsp;</td>
 								<td class="num">{lang etuan:total}</td>
-								<td class="by"><span id="total">{$tuan_cart_items[total]}</span></td>
+								<td class="by">
+								<input type="hidden" id="base_total" value="{$tuan_cart_items[base_total]}" />
+								<span id="total">{$tuan_cart_items[total]}</span></td>
 							</tr>
 					</table>
 			</div>
@@ -133,6 +135,24 @@
 		$('ship_phone').value=val_ship_phone;
 		$('ship_email').value=val_ship_email;
 	}
+	function setShipFee(v)
+	{
+		$('ship_fee').innerHTML=v;
+		recalTotal();
+	}
+	function setCreditDiscount(v)
+	{
+		$('credit_discount').innerHTML=parseInt(v);
+		recalTotal();
+	}
+	function recalTotal()
+	{
+		$('total').innerHTML=parseFloat($('base_total').value)
+		+parseFloat($('ship_fee').innerHTML)
+		+parseFloat($('credit_discount').innerHTML)
+		;
+	}
+	setShipFee({$tuan_cart_items[tuan][ship_fee_deliver]});
 //-->
 </script>
 <!--{template common/footer}-->

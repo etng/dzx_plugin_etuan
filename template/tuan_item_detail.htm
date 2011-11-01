@@ -18,15 +18,15 @@
 <dd>
 全新商品
 </dd>
-<dt>运费:</dt>
-<dd>
-根据送货方式不等</dd>
 <dt>剩余时间:</dt>
 <dd>
 {$tuan['end_date']}
 </dd>
 <dt>商品数量:</dt><dd>{$tuan_product['total_limit']}</dd>
-<dt>地点:</dt><dd>成都</dd><dt>累计售出:</dt><dd>{$tuan_product['sold_cnt']}</dd>
+<dt>规格:</dt><dd>{$tuan_product['spec']}</dd>
+<dt>单位:</dt><dd>{$tuan_product['unit_name']}</dd>
+<dt>地点:</dt><dd>{$tuan['location']}</dd>
+<dt>累计售出:</dt><dd>{$tuan_product['sold_cnt']}</dd>
 </dl>
 <dl class="nums">
 <dt>现价:</dt>
@@ -42,7 +42,7 @@
 </dl>
 
 <p class="pns mbm">
-</p><dl class="amount"><dt>我要买：</dt><dd><a class="reduce" href="javascript:reduce_trade_amount({$product['id']})">-</a><input type="text" value="1" size="3" id="block_trade_amount_{$product['id']}" onkeyup="set_trade_amount({$product['id']})" name="trade_amount"><a class="increase" href="javascript:increase_trade_amount({$product['id']})">+</a><a onclick="return addTradeCart({$tuan['id']}, {$product['id']});" href="plugin.php?id=etuan:cart&tuid={$tuan['id']}&tpid={$product['id']}&quantity=1">加入购物车</a></dd></dl>
+</p><dl class="amount"><dt>我要买：</dt><dd><a class="reduce" href="javascript:reduce_trade_amount({$product['id']})">-</a><input type="text" value="1" size="3" id="block_trade_amount_{$product['id']}" onkeyup="set_trade_amount({$product['id']})" name="trade_amount">{$tuan_product['unit_name']}<a class="increase" href="javascript:increase_trade_amount({$product['id']})">+</a><a onclick="return addTradeCart({$tuan['id']}, {$product['id']});" href="plugin.php?id=etuan:cart&tuid={$tuan['id']}&tpid={$product['id']}&quantity=1">加入购物车</a></dd></dl>
 
 <!--{if $tuan['seller_qq']}-->
 &nbsp;<a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$tuan['seller_qq']}&amp;Site=$_G['setting']['bbname']&amp;Menu=yes" target="_blank" title="QQ"><img src="static/image/common/qq.gif" alt="QQ" style="vertical-align:middle">在线砍价</a>

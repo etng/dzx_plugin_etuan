@@ -41,21 +41,42 @@
 			</dt>
 			<dd>
 				<div class="spmf mbm">
+				<em>
+					<input type="text" name="location" id="location" class="px"  value="$tuan[location]"/>
+					<label for="location">所在地</label>
+					</em>
+				<!--{if $tuan[ship_only_pick]}-->
 						<em>
-						<input type="checkbox" name="ship_only_pick" id="ship_only_pick" class="px" value="1" onClick="$('ship_fee_deliver').disabled = this.checked;" />
+						<input type="checkbox" name="ship_only_pick" id="ship_only_pick" value="1" onClick="$('ship_fee_deliver').disabled = this.checked;" checked="true" />
 						<label for="ship_only_pick">{lang etuan:tuan_ship_only_pick}</label>
 						</em>
+				<!--{else}-->
+						<em>
+						<input type="checkbox" name="ship_only_pick" id="ship_only_pick" value="1" onClick="$('ship_fee_deliver').disabled = this.checked;" />
+						<label for="ship_only_pick">{lang etuan:tuan_ship_only_pick}</label>
+						</em>
+				<!--{/if}-->
+
+
 						<br />
 				</div>
 				<div class="spmf mbm">
 					<em>
-					<input type="text" name="ship_fee_pick" id="ship_fee_pick" class="px" value="$tuan[ship_fee_pick]" />
+					<input type="text" name="ship_fee_pick" id="ship_fee_pick" size="5" value="$tuan[ship_fee_pick]" />
 					<label for="ship_fee_pick">{lang etuan:tuan_ship_fee_pick}</label>
 					</em>
+				<!--{if $tuan[ship_only_pick]}-->
 					<em>
-					<input type="text" name="ship_fee_deliver" id="ship_fee_deliver" class="px" value="$tuan[ship_fee_deliver]" />
+					<input type="text" name="ship_fee_deliver" id="ship_fee_deliver" size="5"  value="$tuan[ship_fee_deliver]" disabled="true" />
 					<label for="ship_fee_deliver">{lang etuan:tuan_ship_fee_deliver}</label>
 					</em>
+				<!--{else}-->
+					<em>
+					<input type="text" name="ship_fee_deliver" id="ship_fee_deliver" size="5"  value="$tuan[ship_fee_deliver]" />
+					<label for="ship_fee_deliver">{lang etuan:tuan_ship_fee_deliver}</label>
+					</em>
+				<!--{/if}-->
+
 				</div>
 			</dd>
 		</dl>
@@ -67,25 +88,54 @@
 			<!--{if $my_products}-->
 			<!--{loop $my_products $k $product}-->
 				<div class="spmf2 mbm">
-					<input type="checkbox" name="tuan_product_enable[{$product[id]}]" id="tuan_product_enable_{$product[id]}" class="px" value="1" onClick="$('product_unit_price_{$product[id]}').disabled = $('product_user_limit_{$product[id]}').disabled = $('product_total_limit_{$product[id]}').disabled = !this.checked;"/>
-						<em>{$product[name]}</em>
+					<em>{$product[name]}</em>
+					<!--{if $products[$product[id]]}-->
 
-					<em>
-					<input type="text" name="product_unit_price[{$product[id]}]" id="product_unit_price_{$product[id]}" class="px" value="$product[price]" />
-					<label for="product_unit_price_{$product[id]}">{lang etuan:tuan_product_unit_price}</label>
+					<span for="product_unit_price_{$product[id]}">勾选加入本团</span>
+					<input type="checkbox" name="tuan_product_enable[{$product[id]}]" id="tuan_product_enable_{$product[id]}" class="checkbox" value="1" onClick="$('product_unit_price_{$product[id]}').disabled = $('product_user_limit_{$product[id]}').disabled = $('product_total_limit_{$product[id]}').disabled = !this.checked;" checked="true"/>
+				<br />
+
+					<em><span for="product_unit_price_{$product[id]}">{lang etuan:tuan_product_unit_price}</span>
+					<input type="text" name="product_unit_price[{$product[id]}]" id="product_unit_price_{$product[id]}" size="6" value="{$products[$product[id]]['unit_price']}" />
+
 					</em>
-					<em>
+					<!-- <em>
 					<input type="text" name="product_user_limit[{$product[id]}]" id="product_user_limit_{$product[id]}" class="px" value="0" />
 					<label for="product_user_limit_{$product[id]}">{lang etuan:tuan_product_user_limit}</label>
 					</em>
 					<em>
 					<input type="text" name="product_total_limit[{$product[id]}]" id="product_total_limit_{$product[id]}" class="px" value="0" />
 					<label for="product_total_limit_{$product[id]}">{lang etuan:tuan_product_total_limit}</label>
+					</em> -->
+                    <em><span for="product_sold_cnt_{$product[id]}">{lang etuan:tuan_product_sold_cnt}</span>
+					<input type="text" name="product_sold_cnt[{$product[id]}]" id="product_sold_cnt{$product[id]}" size="3" value="{$products[$product[id]]['sold_cnt']}" />
+
 					</em>
-                    <em>
-					<input type="text" name="product_sold_cnt[{$product[id]}]" id="product_sold_cnt{$product[id]}" class="px" value="0" />
-					<label for="product_sold_cnt_{$product[id]}">{lang etuan:tuan_product_sold_cnt}</label>
+					<!--{else}-->
+
+
+					<span for="product_unit_price_{$product[id]}">勾选加入本团</span>
+					<input type="checkbox" name="tuan_product_enable[{$product[id]}]" id="tuan_product_enable_{$product[id]}" class="checkbox" value="1" onClick="$('product_unit_price_{$product[id]}').disabled = $('product_user_limit_{$product[id]}').disabled = $('product_total_limit_{$product[id]}').disabled = !this.checked;"/>
+				<br />
+
+					<em><span for="product_unit_price_{$product[id]}">{lang etuan:tuan_product_unit_price}</span>
+					<input type="text" name="product_unit_price[{$product[id]}]" id="product_unit_price_{$product[id]}" size="6" value="$product[price]" />
+
 					</em>
+					<!-- <em>
+					<input type="text" name="product_user_limit[{$product[id]}]" id="product_user_limit_{$product[id]}" class="px" value="0" />
+					<label for="product_user_limit_{$product[id]}">{lang etuan:tuan_product_user_limit}</label>
+					</em>
+					<em>
+					<input type="text" name="product_total_limit[{$product[id]}]" id="product_total_limit_{$product[id]}" class="px" value="0" />
+					<label for="product_total_limit_{$product[id]}">{lang etuan:tuan_product_total_limit}</label>
+					</em> -->
+                    <em><span for="product_sold_cnt_{$product[id]}">{lang etuan:tuan_product_sold_cnt}</span>
+					<input type="text" name="product_sold_cnt[{$product[id]}]" id="product_sold_cnt{$product[id]}" size="3" value="0" />
+
+					</em>
+
+					<!--{/if}-->
 				</div><!--{/loop}-->
 				<!--{else}-->
 				<a href="plugin.php?id=etuan:my&app=product">{lang etuan:add_product_first}</a>

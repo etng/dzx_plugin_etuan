@@ -1,6 +1,18 @@
 <!--{block return}-->
 <h3>开团时间</h3>
 <p>{$tuan[begin_date]} - {$tuan[end_date]}</p>
+<h3>所在地</h3>
+<p>{$tuan[location]}</p>
+<h3>运费</h3>
+<p>{lang etuan:tuan_ship_fee_pick}: {$tuan[ship_fee_pick]}</p>
+<p>{lang etuan:tuan_ship_fee_deliver}:
+<!--{if $tuan['ship_only_pick']}-->
+本团只能上门自提
+<!--{else}-->
+{$tuan[ship_fee_deliver]}
+<!--{/if}-->
+
+</p>
 <h3>参与方式</h3>
 <p>
 {$tuan[intro]}
@@ -27,9 +39,9 @@
 <h4><a href="#" target="_blank">{$product[name]}</a></h4>
 
 <dl class="z">
-<dt></dt>
+<dt>规格</dt>
 <dd>
-
+{$product[spec]}
 </dd>
 <dt></dt>
 <dd>
@@ -37,14 +49,14 @@
 </dd>
 </dl>
 <div class="z mtn">
-<strong>{$product[price]}</strong>&nbsp;元&nbsp;&nbsp;
+<strong>{$product[unit_price]}</strong>&nbsp;元&nbsp;&nbsp;
 <p class="xg1">
 <del>{$product[public_price]} 元</del>
 </p>
 </div>
 <div>
 <p class="pns mbm">
-</p><dl class="amount"><dt>我要买：</dt><dd><a class="reduce" href="javascript:reduce_trade_amount({$product['id']})">-</a><input type="text" value="1"size=3 id="trade_amount_{$product['id']}" onkeyup="set_trade_amount({$product['id']})" name="trade_amount"><a class="increase" href="javascript:increase_trade_amount({$product['id']})">+</a><a onclick="return addTradeCart({$tuan['id']}, {$product['id']});" href="plugin.php?id=etuan:cart&tuid={$tuan['id']}&tpid={$product['id']}&quantity=1">加入购物车</a></dd></dl>
+</p><dl class="amount"><dt>我要买：</dt><dd><a class="reduce" href="javascript:reduce_trade_amount({$product['id']})">-</a><input type="text" value="1"size=3 id="trade_amount_{$product['id']}" onkeyup="set_trade_amount({$product['id']})" name="trade_amount">{$product[unit_name]}<a class="increase" href="javascript:increase_trade_amount({$product['id']})">+</a><a onclick="return addTradeCart({$tuan['id']}, {$product['id']});" href="plugin.php?id=etuan:cart&tuid={$tuan['id']}&tpid={$product['id']}&quantity=1">加入购物车</a></dd></dl>
 <!--{if $tuan['seller_qq']}-->
 &nbsp;<a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$tuan['seller_qq']}&amp;Site=$_G['setting']['bbname']&amp;Menu=yes" target="_blank" title="QQ"><img src="static/image/common/qq.gif" alt="QQ" style="vertical-align:middle">在线砍价</a>
 <!--{/if}-->

@@ -22,25 +22,25 @@
 
 
 			<div class="tl">
-					<table cellspacing="0" cellpadding="0">
+					<table cellspacing="0" cellpadding="0" class='dt mtm'>
 						<tr class="th">
-							<td>{lang etuan:my_order_tuan}</td>
-							<td>{lang etuan:my_order_bought_at}</td>
-							<td>{lang etuan:my_order_payment}</td>
-							<td>{lang etuan:my_order_shipmethod}</td>
-							<td>{lang etuan:my_order_product_fee}</td>
-							<td>{lang etuan:my_order_ship_fee}</td>
-							<td>{lang etuan:my_order_credit_used}</td>
-							<td>{lang etuan:my_order_actual_fee}</td>
-							<td>{lang etuan:status}</td>
-							<td>{lang etuan:my_operation}</td>
+							<th>{lang etuan:my_order_tuan}</th>
+							<th>{lang etuan:my_order_bought_at}</th>
+							<th>{lang etuan:my_order_payment}</th>
+							<th>{lang etuan:my_order_shipmethod}</th>
+							<th>{lang etuan:my_order_product_fee}</th>
+							<th>{lang etuan:my_order_ship_fee}</th>
+							<th>{lang etuan:my_order_credit_used}</th>
+							<th>{lang etuan:my_order_actual_fee}</th>
+							<th>{lang etuan:status}</th>
+							<th>{lang etuan:my_operation}</th>
 						</tr>
 
 					<!--{if $list}-->
 						<!--{eval $i=0;}-->
 						<!--{loop $list $order}-->
 						<tr <!--{if $i%2==0}-->class="a"<!--{/if}--> id="_order_{$order['id']}">
-							<td>$order['tuan']['name']</td>
+							<td><a href="forum.php?mod=viewthread&tid=$order['tuan'][tid]" target="_blank">$order['tuan']['name']</a></td>
 							<td>$order['bought_at']</td>
 							<td>$payment_methods[$order['payment_method']]</td>
 							<td>$ship_methods[$order['ship_method']]</td>

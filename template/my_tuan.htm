@@ -18,19 +18,19 @@
 				<li<!--{if $filter=="over"}--> class="a"<!--{/if}-->><a href="plugin.php?id=etuan:my&app=tuan&filter=over">{lang etuan:my_tuan_over}</a></li>
 			</ul>
 			<div class="tl">
-					<table cellspacing="0" cellpadding="0">
+					<table cellspacing="0" cellpadding="0" class='dt mtm'>
 						<tr class="th">
-							<td class="icn">&nbsp;</td>
-							<th>{lang etuan:my_tuan_name}</th>
-							<td>{lang etuan:my_tuan_duration}</td>
-							<td>{lang etuan:my_tuan_status}</td>
-							<td class="num">{lang etuan:my_operation}</td>
+							<th class="icn" width='20'>&nbsp;</th>
+							<th>{lang etuan:my_tuan_name}团购名称</th>
+							<th width='150'>{lang etuan:my_tuan_duration}</th>
+							<th width='100'>{lang etuan:my_tuan_status}</th>
+							<th class="num" width='120'>{lang etuan:my_operation}</th>
 						</tr>
 					<!--{if $tuan_threads}-->
 						<!--{loop $tuan_threads $tuan_thread}-->
 						<tr>
 							<td class="icn"><a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank"> <img src="source/plugin/etuan/static/icon_post.gif" /> </a></td>
-							<th> <a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank">$tuan_thread[subject]</a> </th>
+							<td> <a href="forum.php?mod=viewthread&tid=$tuan_thread[tid]" target="_blank">$tuan_thread[subject]</a> </td>
 							<td>{$tuan_thread[begin_date]} - {$tuan_thread[end_date]}</td>
 							<td>{$tuan_statuss[$tuan_thread[tuan_status]]}</td>
 							<td class="num">

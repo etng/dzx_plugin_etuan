@@ -46,7 +46,7 @@
 						<tr><td>{lang etuan:my_order_credit_used}</td><td>$order['credit_used']</td></tr>
 						<tr><td>{lang etuan:my_order_credit_discount}</td><td>$order['credit_discount']</td></tr>
 						<tr><td>{lang etuan:my_order_actual_fee}</td><td>$order['total']</td></tr>
-						<tr><td>{lang etuan:my_order_payment}</td><td>$order['payment_method']</td></tr>
+						<tr><td>{lang etuan:my_order_payment}</td><td>{$payment_methods[$order['payment_method']]}</td></tr>
 						<!--{if $order['paid_at']=='0000-00-00 00:00:00'}-->
 						<tr><td>{lang etuan:my_order_paid_at}</td><td>{lang etuan:my_order_not_paid_yet}</td></tr>
 						<!--{else}-->
@@ -72,7 +72,7 @@
 							</table>
 						</td></tr>
 						<!--{/if}-->
-						<tr><td>{lang etuan:my_order_shipmethod}</td><td>$order['ship_method']</td></tr>
+						<tr><td>{lang etuan:my_order_shipmethod}</td><td>$ship_methods[$order['ship_method']]</td></tr>
 						<tr><td>{lang etuan:my_order_ship_address}</td><td>$order['ship_address']</td></tr>
 						<tr><td>{lang etuan:my_order_ship_community}</td><td>$order['ship_community']['name']</td></tr>
 						<tr><td>{lang etuan:my_order_ship_name}</td><td>$order['ship_name']</td></tr>

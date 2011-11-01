@@ -219,7 +219,7 @@ class plugin_etuan_forum extends plugin_etuan
 {
     function viewthread_postbottom()
     {
-        return array('易团 团购系统已启用，欢迎到团购板块参加团购！');
+        return array(/*'易团 团购系统已启用，欢迎到团购板块参加团购！'*/);
     }
 }
 
@@ -256,7 +256,8 @@ class etuan_cart
                 'ship_fee'  => $ship_fee=0,
                 'credit_discount'  => $credit_discount=0,
                 'usable_credit'  => $this->getCreditLimit($tuan_id),
-                'total'  => $sub_total+$ship_fee-$credit_discount,
+                'base_total'  => $base_total=$sub_total-$credit_discount,
+                'total'  => $base_total+$ship_fee,
                 );
         }
         return $cart_items_by_tuan;

@@ -39,10 +39,10 @@
 		<td height="35" align="right">{lang etuan:my_address_community}: <span class="rq">*</span></td>
 		<td>
         <input name="community_name" id="community_name" type="hidden" value="{$row[community_name]}" />
-            <!--{if $grouplist}-->
+            <!--{if $my_grouplist}-->
             <select name="community_id" id="community_id">
                 <option value="0">{lang etuan:please_choose_group}</option>
-                <!--{loop $grouplist $groupid $group}-->
+                <!--{loop $my_grouplist $groupid $group}-->
                 <option value="$groupid">$group[name]</option>
                 <!--{/loop}-->
             </select>
