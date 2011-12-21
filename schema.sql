@@ -3,7 +3,7 @@
 # Server version:               5.1.48-community-log
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3920
-# Date/time:                    2011-11-02 03:10:40
+# Date/time:                    2011-12-22 00:56:27
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -25,8 +25,14 @@ CREATE TABLE IF NOT EXISTS `pre_etuan_address` (
   `address` varchar(255) NOT NULL COMMENT '地址',
   `zip` varchar(10) NOT NULL COMMENT '邮编',
   `contact_name` varchar(10) NOT NULL COMMENT '姓名',
+  `name` varchar(50) NOT NULL,
+  `building` varchar(50) NOT NULL,
+  `unit` varchar(50) NOT NULL,
+  `room` varchar(50) NOT NULL,
+  `mobile` varchar(50) NOT NULL,
   `phone` varchar(25) NOT NULL COMMENT '电话',
   `email` varchar(255) NOT NULL COMMENT 'Email',
+  `memo` varchar(500) NOT NULL COMMENT 'Email',
   PRIMARY KEY (`id`),
   KEY `buyer_id` (`buyer_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='收货地址';
