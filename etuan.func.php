@@ -27,6 +27,12 @@ $tuan_statuss = array(
     'over'=>'已结束',
     'pre'=>'未开始',
 );
+$genders = array(
+    'x'=>'未知',
+    'm'=>'男',
+    'f'=>'女',
+);
+
 require_once libfile('function/group');
 $all_grouplist = grouplist('membernum', array(), 1000);
 $joined_grouplist = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 100, 0, 2);

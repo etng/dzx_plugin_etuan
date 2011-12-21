@@ -145,6 +145,8 @@ class threadplugin_etuan  extends etuan
                 $row['photo'] = 'static/image/common/nophototiny.png';
             }
             $products[$row['id']] = $row;
+//            var_dump($row);
+//            die();
 
         }
         return compact('tuan', 'products');

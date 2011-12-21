@@ -20,12 +20,12 @@
 					<tr><td>{lang etuan:my_supplier_phone}</td><td>$supplier['phone']</td></tr>
 					<tr><td>{lang etuan:my_supplier_address}</td><td>$supplier['address']</td></tr>
 					<tr><td>{lang etuan:my_supplier_contact_name}</td><td>$supplier['contact_name']</td></tr>
-					<tr><td>{lang etuan:my_supplier_contact_gender}</td><td>$supplier['contact_gender']</td></tr>
+					<tr><td>{lang etuan:my_supplier_contact_gender}</td><td>$genders[$supplier['contact_gender']]</td></tr>
 					<tr><td>{lang etuan:my_supplier_contact_phone}</td><td>$supplier['contact_phone']</td></tr>
 					<tr><td>{lang etuan:my_supplier_contact_qq}</td><td>$supplier['contact_qq']</td></tr>
 
-					<tr><td>{lang etuan:my_supplier_second_contact_name}</td><td>$supplier['second_contact_name']</td></tr>
-					<tr><td>{lang etuan:my_supplierr_second_contact_phone}</td><td>$supplier['second_contact_phone']</td></tr>
+					<tr><td>备联系人姓名</td><td>$supplier['second_contact_name']</td></tr>
+					<tr><td>备联系人电话</td><td>$supplier['second_contact_phone']</td></tr>
 
 
 					<tr><td>{lang etuan:my_supplier_cate}</td><td>$supplier['cate']</td></tr>
@@ -36,6 +36,7 @@
 					<tr><td>{lang etuan:my_supplier_service_rating}</td><td>$supplier['service_rating']</td></tr>
 					<tr><td>{lang etuan:my_supplier_memo}</td><td>$supplier['memo']</td></tr>
 					<tr><td>{lang etuan:my_operation}</td><td>
+					<a href="plugin.php?id=etuan:my&app=supplier&op=edit&supplierid={$supplier[id]}" class="xi2">{lang edit}</a>
 						<span class="pipe">|</span>
 						<a href="plugin.php?id=etuan:my&app=supplier&op=delete&supplierid={$supplier[id]}" class="xi2">{lang delete}</a></td>
 					</tr>

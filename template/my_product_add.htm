@@ -1,4 +1,7 @@
 <!--{template common/header}-->
+<script type="text/javascript" src="source/plugin/etuan/static/ueditor/editor_config.js"></script>
+<script type="text/javascript" src="source/plugin/etuan/static/ueditor/editor_all.js"></script>
+<link rel="stylesheet" href="source/plugin/etuan/static/ueditor/themes/default/ueditor.css"/>
 <!--{if empty($_G['gp_infloat'])}-->
 <div id="pt" class="bm cl">
 	<div class="z">
@@ -21,23 +24,30 @@
 	<!--{/if}-->
 </h3>
 <!--{if $op=='add'}-->
-	<form method="post" name="product_form" id="product_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=product&op=add" onsubmit="return add_validate();">
+	<form enctype="multipart/form-data" method="post" name="product_form" id="product_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=product&op=add" onsubmit="return add_validate();">
 	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
 <!--{elseif $op=='edit'}-->
-	<form method="post" name="product_form" id="product_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=product&op=edit" onsubmit="return add_validate();">
+	<form enctype="multipart/form-data" method="post" name="product_form" id="product_form"  autocomplete="off" action="plugin.php?id=etuan:my&app=product&op=edit" onsubmit="return add_validate();">
 	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
 	<input type="hidden" name="productid" value="{$productid}" />
 <!--{/if}-->
 <!--{if $suppliers}-->
-<div class="c" style="width: 450px;">
+<div class="c" style="width: 760px;">
 	<table width="100%" class="actl">
 		<tr>
-			<td width="25%" height="10"></td>
+			<td width="15%" height="10"></td>
+			<td></td>
+			<td width="15%"></td>
+			<td></td>
+			<td width="15%"></td>
+			<td></td>
+			<td width="15%"></td>
 			<td></td>
 		</tr>
 
-<tr>
-<td height="35" align="right">{lang etuan:my_product_supplier}: <span class="rq">*</span></td>
+
+ <tr>
+ <td height="35" align="right">{lang etuan:my_product_supplier}: <span class="rq">*</span></td>
 <td>
 
 <select name="supplier_id" id="supplier_id" width="60" class="ps" selecti="0">
@@ -45,53 +55,51 @@
 	<option value="{$supplier[id]}"<!--{if $supplier[id]==$row['supplier_id']}--> selected="true"<!--{/if}-->>{$supplier[name]}</option>
 <!--{/loop}-->
 </select>
-
-</td>
-</tr>
-<tr>
 <td height="35" align="right">{lang etuan:my_product_name}: <span class="rq">*</span></td>
 <td><input name="name" id="name" type="text" class="px" size="20" value="{$row['name']}" /></td>
+<td height="35" align="right">{lang etuan:my_product_spec}: <span class="rq">*</span></td>
+<td><input name="spec" id="spec" type="text" class="px" size="10" value="{$row['spec']}" /></td>
+<td height="35" align="right">{lang etuan:my_product_unit_name}: <span class="rq">*</span></td>
+<td><input name="unit_name" id="unit_name" type="text" class="px" size="10" value="{$row['unit_name']}" /></td>
 </tr>
+
+
 <tr>
 <td height="35" align="right">{lang etuan:my_product_market_price}: <span class="rq">*</span></td>
-<td><input name="market_price" id="market_price" type="text" class="px" size="20" value="{$row['market_price']}" /></td>
-</tr>
-<tr>
-<td height="35" align="right">{lang etuan:my_product_supply_price}: <span class="rq">*</span></td>
-<td><input name="supply_price" id="supply_price" type="text" class="px" size="20" value="{$row['supply_price']}" /></td>
-</tr>
-<tr>
+<td><input name="market_price" id="market_price" type="text" class="px" size="5" value="{$row['market_price']}" /></td>
 <td height="35" align="right">{lang etuan:my_product_price}: <span class="rq">*</span></td>
-<td><input name="price" id="price" type="text" class="px" size="20" value="{$row['price']}" /></td>
+<td><input name="price" id="price" type="text" class="px" size="5" value="{$row['price']}" /></td>
+<td height="35" align="right">{lang etuan:my_product_supply_price}: <span class="rq">*</span></td>
+<td><input name="supply_price" id="supply_price" type="text" class="px" size="5" value="{$row['supply_price']}" /></td>
+<td height="35" align="right">金豆抵扣: <span class="rq">*</span></td>
+<td><input name="credit_limit" id="credit_limit" type="text" class="px" size="5" value="{$row['credit_limit']}" /></td>
 </tr>
-<tr>
-<td height="35" align="right">{lang etuan:my_product_spec}: <span class="rq">*</span></td>
-<td><input name="spec" id="spec" type="text" class="px" size="20" value="{$row['spec']}" /></td>
-</tr>
-<tr>
-<td height="35" align="right">{lang etuan:my_product_unit_name}: <span class="rq">*</span></td>
-<td><input name="unit_name" id="unit_name" type="text" class="px" size="20" value="{$row['unit_name']}" /></td>
-</tr>
+
 <tr>
 <td height="35" align="right">{lang etuan:my_product_photo}: <span class="rq">*</span></td>
-<td><input name="photo" id="photo" type="text" class="px" size="20" value="{$row['photo']}" /></td>
-</tr>
-<tr>
-<td height="35" align="right">{lang etuan:my_product_intro}: <span class="rq">*</span></td>
-<td><textarea name="intro" id="intro" rows="5">{$row['intro']}</textarea>简介，在商品详细信息收起的情况显示</td>
-</tr>
-<tr>
-<td height="35" align="right">{lang etuan:my_product_description}: <span class="rq">*</span></td>
-<td><textarea name="description" id="description" rows="5">{$row['description']}</textarea>详细介绍，在商品信息展开的情况下显示
+<td colspan="7">
+
+<input name="photo_file" id="photo_file" type="file"/>
+<input name="photo" id="photo" type="hidden" value="{$row['photo']}" />
+<!--{if $row['photo']}-->
+	<img src="{$row['photo']}" width="50px" height="50px">
+<!--{/if}-->
 </td>
 </tr>
 <tr>
-<td height="35" align="right">{lang etuan:my_product_credit_limit}: <span class="rq">*</span></td>
-<td><input name="credit_limit" id="credit_limit" type="text" class="px" size="20" value="{$row['credit_limit']}" /></td>
+<td height="35" align="right">简介: <span class="rq">*</span></td>
+<td colspan="7">
+	<textarea  name="intro" id="intro" rows="5" cols="75" style="display:none"></textarea>
+	<div id="intro_editor"></div>
+</td>
 </tr>
-
-
-	</table>
+<tr>
+<td height="35" align="right">详情: <span class="rq">*</span></td>
+<td colspan="7">
+	<textarea  name="description" id="description" rows="5" cols="75" style="display:none">{$row['description']}</textarea>
+	<div id="description_editor"></div>
+</td>
+</tr></table>
 </div>
 <div class="o pns"><button type="submit" id="addsubmit" class="pn pnc" value="true" name="addsubmit"><span>{lang submit}</span></button></div>
 
@@ -101,48 +109,66 @@
 </form>
 
 <script type="text/javascript">
-var pleaseselect = '{lang etuan:pleaseselect}';
+var description_editor = new baidu.editor.ui.Editor({
+	initialContent: '{$row['description']}',
+	minFrameHeight: 50,
+    toolbars: [
+        ['FontFamily','FontSize','Bold','Italic','Underline','ForeColor','BackColor','JustifyLeft','JustifyCenter','JustifyRight', 'InsertOrderedList','InsertUnorderedList', 'Emoticon','InsertImage','Link','Unlink','RemoveFormat','|','Undo','Redo']
+		]
+});
+description_editor.render('description_editor');
+var intro_editor = new baidu.editor.ui.Editor({
+	initialContent: '{$row['intro']}',
+    toolbars: [
+        ['FontFamily','FontSize','Bold','Italic','Underline','ForeColor','BackColor','JustifyLeft','JustifyCenter','JustifyRight', 'InsertOrderedList','InsertUnorderedList', 'Emoticon','InsertImage','Link','Unlink','RemoveFormat','|','Undo','Redo']
+		]
+});
+intro_editor.render('intro_editor');
 function add_validate(){
-	if($('supplier_id_val').value==''){
-		showDialog('{lang etuan:my_product_supplier_id_error}', 'alert', '', function () { $('supplier_id').focus();});
-		return false;
-	}
-	if($('name_val').value==''){
-		showDialog('{lang etuan:my_product_name_error}', 'alert', '', function () { $('name').focus();});
-		return false;
-	}
-	if($('market_price_val').value==''){
-		showDialog('{lang etuan:my_product_market_price_error}', 'alert', '', function () { $('market_price').focus();});
-		return false;
-	}
-	if($('supply_price_val').value==''){
-		showDialog('{lang etuan:my_product_supply_price_error}', 'alert', '', function () { $('supply_price').focus();});
-		return false;
-	}
-	if($('price_val').value==''){
-		showDialog('{lang etuan:my_product_price_error}', 'alert', '', function () { $('price').focus();});
-		return false;
-	}
-	if($('spec_val').value==''){
-		showDialog('{lang etuan:my_product_spec_error}', 'alert', '', function () { $('spec').focus();});
-		return false;
-	}
-	if($('unit_name_val').value==''){
-		showDialog('{lang etuan:my_product_unit_name_error}', 'alert', '', function () { $('unit_name').focus();});
-		return false;
-	}
-	if($('photo_val').value==''){
-		showDialog('{lang etuan:my_product_photo_error}', 'alert', '', function () { $('photo').focus();});
-		return false;
-	}
-	if($('description_val').value==''){
-		showDialog('{lang etuan:my_product_description_error}', 'alert', '', function () { $('description').focus();});
-		return false;
-	}
-	if($('credit_limit_val').value==''){
-		showDialog('{lang etuan:my_product_credit_limit_error}', 'alert', '', function () { $('credit_limit').focus();});
-		return false;
-	}
+
+	$('description').value = description_editor.getContent();
+	$('intro').value = intro_editor.getContent();
+	console.log($('description').value);
+//	if($('supplier_id_val').value==''){
+//		showDialog('{lang etuan:my_product_supplier_id_error}', 'alert', '', function () { $('supplier_id').focus();});
+//		return false;
+//	}
+//	if($('name_val').value==''){
+//		showDialog('{lang etuan:my_product_name_error}', 'alert', '', function () { $('name').focus();});
+//		return false;
+//	}
+//	if($('market_price_val').value==''){
+//		showDialog('{lang etuan:my_product_market_price_error}', 'alert', '', function () { $('market_price').focus();});
+//		return false;
+//	}
+//	if($('supply_price_val').value==''){
+//		showDialog('{lang etuan:my_product_supply_price_error}', 'alert', '', function () { $('supply_price').focus();});
+//		return false;
+//	}
+//	if($('price_val').value==''){
+//		showDialog('{lang etuan:my_product_price_error}', 'alert', '', function () { $('price').focus();});
+//		return false;
+//	}
+//	if($('spec_val').value==''){
+//		showDialog('{lang etuan:my_product_spec_error}', 'alert', '', function () { $('spec').focus();});
+//		return false;
+//	}
+//	if($('unit_name_val').value==''){
+//		showDialog('{lang etuan:my_product_unit_name_error}', 'alert', '', function () { $('unit_name').focus();});
+//		return false;
+//	}
+//	if($('photo_val').value==''){
+//		showDialog('{lang etuan:my_product_photo_error}', 'alert', '', function () { $('photo').focus();});
+//		return false;
+//	}
+//	if($('description_val').value==''){
+//		showDialog('{lang etuan:my_product_description_error}', 'alert', '', function () { $('description').focus();});
+//		return false;
+//	}
+//	if($('credit_limit_val').value==''){
+//		showDialog('{lang etuan:my_product_credit_limit_error}', 'alert', '', function () { $('credit_limit').focus();});
+//		return false;
+//	}
 }
 </script>
 <!--{if empty($_G['gp_infloat'])}-->

@@ -29,7 +29,7 @@
 				<ul>
 				<!--{if $addresses}-->
 				<!--{loop $addresses $address}-->
-					<li><input type="radio" id="address_id_{$address[id]}" name="address_id" value="{$address[id]}" data-address_id="{$address[id]}" data-community_id="{$address[community_id]}" data-name="{$address[contact_name]}" data-address="{$address[address]}" data-phone="{$address[phone]}" data-email="{$address[email]}" onclick="set_ship_address('{$address[id]}', '{$address[community_id]}', '{$address[contact_name]}', '{$address[address]}', '{$address[phone]}', '{$address[email]}')" />
+					<li><input type="radio" id="address_id_{$address[id]}" name="address_id" value="{$address[id]}" data-address_id="{$address[id]}" data-community_id="{$address[community_id]}" data-name="{$address[contact_name]}" data-address="{$address[address]}" data-phone="{$address[phone]}" data-email="{$address[email]}" onclick="set_ship_address('{$address[id]}', '{$address[community_id]}', '{$address[contact_name]}', '{$address[address]}', '{$address[phone]}', '{$address[email]}')" checked="true" />
 					{$address[community_name]} {$address[address]}  {$address[contact_name]} {$address[phone]} {$address[email]}</li>
 				<!--{/loop}-->
 				<!--{else}-->
@@ -43,8 +43,8 @@
 					<!--{if $tuan_cart_items[tuan][ship_only_pick]}-->
 					<li><strong>{lang etuan:tuan_ship_only_pick}</strong><label><input type="radio" id="shipmethod_pick" name="ship_method" value="pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" onclick="setShipFee({$tuan_cart_items[tuan][ship_fee_pick]});" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
 					<!--{else}-->
-					<li><label><input type="radio" id="shipmethod_pick" name="ship_method" value="pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
-					<li><label><input type="radio" id="shipmethod_deliver" name="ship_method" value="deliver" checked="true"onclick="setShipFee({$tuan_cart_items[tuan][ship_fee_deliver]});" data-shipfee="{$tuan_cart_items[tuan][ship_fee_deliver]}" />{lang etuan:tuan_ship_fee_deliver} {$tuan_cart_items[tuan][ship_fee_deliver]}</label>	</li>
+					<li><label><input type="radio" id="shipmethod_pick" name="ship_method" value="pick" checked="true" data-shipfee="{$tuan_cart_items[tuan][ship_fee_pick]}" onclick="setShipFee({$tuan_cart_items[tuan][ship_fee_pick]});" />{lang etuan:tuan_ship_fee_pick} {$tuan_cart_items[tuan][ship_fee_pick]}</label></li>
+					<li><label><input type="radio" id="shipmethod_deliver" name="ship_method" value="deliver" checked="true" onclick="setShipFee({$tuan_cart_items[tuan][ship_fee_deliver]});" data-shipfee="{$tuan_cart_items[tuan][ship_fee_deliver]}" />{lang etuan:tuan_ship_fee_deliver} {$tuan_cart_items[tuan][ship_fee_deliver]}</label>	</li>
 					<!--{/if}-->
 					</ul>
 				</div>
@@ -63,7 +63,7 @@
 				<h3>{lang etuan:cart_choose_memo}</h3>
 				<div><textarea name="memo" id="memo" rows="2" cols="2" class="pt" style="width:95%; height:51px;">{lang etuan:order_memo}</textarea></div>
 				<h3>{lang etuan:cart_items}</h3>
-					<table cellspacing="0" cellpadding="0">
+					<table cellspacing="0" cellpadding="0" width="98%">
 						<tr class="th">
 							<th>{lang etuan:cart_product}</th>
 							<td>{lang etuan:cart_quantity}</td>
@@ -72,7 +72,7 @@
 						</tr>
 							<!--{loop $tuan_cart_items[items] $cart_item}-->
 							<tr>
-								<th> <img src="$cart_item[product][photo]"><a href="forum.php?mod=viewthread&tid=$cart_item[tuan][tid]" target="_blank">$cart_item[product][name]</a> </th>
+								<th> <a href="forum.php?mod=viewthread&tid=$cart_item[tuan][tid]" target="_blank"><img src="$cart_item[product][photo]" width="50px" height="50px">$cart_item[product][name]</a> </th>
 								<td>{$cart_item['quantity']}</td>
 								<td class="num">{$cart_item['unit_price']}</td>
 								<td class="by">{$cart_item['price']}</td>
@@ -149,10 +149,10 @@
 	{
 		$('total').innerHTML=parseFloat($('base_total').value)
 		+parseFloat($('ship_fee').innerHTML)
-		+parseFloat($('credit_discount').innerHTML)
+		-parseFloat($('credit_discount').innerHTML)
 		;
 	}
-	setShipFee({$tuan_cart_items[tuan][ship_fee_deliver]});
+$('shipmethod_pick').onclick();
 //-->
 </script>
 <!--{template common/footer}-->

@@ -1,6 +1,8 @@
 <!--{block return}-->
 <h3>开团时间</h3>
 <p>{$tuan[begin_date]} - {$tuan[end_date]}</p>
+<h3>剩余时间</h3>
+<p><span id="countdown"></span></p>
 <h3>所在地</h3>
 <p>{$tuan[location]}</p>
 <h3>运费</h3>
@@ -89,6 +91,47 @@
 	}
 	<!--{/loop}-->
 	}
+
+
+
+var count_down_interval = setInterval(function ()
+{
+	var end_ts=new Date('{$tuan[end_date]} 23:59:59').getTime();
+	var seconds = Math.floor((end_ts - new Date().getTime()) / 1000);
+	if(seconds>=0)
+	{
+		var countdown_parts={
+		second: seconds % 60,
+		minute: Math.floor(seconds / 60) % 60,
+		hour: Math.floor(seconds / 3600) % 24,
+		day: Math.floor(seconds / (60 * 60 * 24))
+		}
+		var html=[];
+		if(countdown_parts.day)
+		{
+			html.push(countdown_parts.day + "<b>天<b>");
+		}
+		if(countdown_parts.hour)
+		{
+			html.push(countdown_parts.hour + "<b>小时<b>");
+		}
+		if(countdown_parts.minute)
+		{
+			html.push(countdown_parts.minute + "<b>分<b>");
+		}
+		if(countdown_parts.second)
+		{
+			html.push(countdown_parts.second + "<b>秒<b>");
+		}
+		$('countdown').innerHTML=html.join(" ");
+	}
+	else
+	{
+		$('countdown').innerHTML="已结束";
+		clearInterval(count_down_interval);
+	}
+}, 1000);
+
 //-->
 </script>
 <!--{/block}-->

@@ -1,6 +1,8 @@
 <!--{block return}-->
+<script type="text/javascript" src="source/plugin/etuan/static/ueditor/editor_config.js"></script>
+<script type="text/javascript" src="source/plugin/etuan/static/ueditor/editor_all.js"></script>
+<link rel="stylesheet" href="source/plugin/etuan/static/ueditor/themes/default/ueditor.css"/>
 <style type="text/css">
-.spmf2{width: 500px;}
 
 
 	.sadd{width:375px;}
@@ -12,6 +14,9 @@
 	.spimg {max-width:80px;max-height:50px;_width:expression(this.width > 80 && this.width>=this.height ? 80:true);_height:expression(this.height > 50 && this.width<=this.height ? 50:true);}
 	.spimg_del {display: block;width: 50px;margin-top: 7px;text-align: center;text-decoration: underline;}
 	.spimg_del:hover {text-decoration: none;}
+	div.product_list{
+		border-bottom: 1px gray solid;
+	}
 </style>
 <div class="exfm cl">
 	<div class="sinf sppoll z">
@@ -33,7 +38,8 @@
 				<label for="intro">{lang etuan:tuan_intro}:</label>
 			</dt>
 			<dd>
-				<textarea name="intro" id="intro" rows="2" cols="2" class="pt" style="width:95%; height:51px;">$tuan[intro]</textarea>
+	<div id="intro_editor"></div>
+	<textarea name="intro" id="intro" rows="2" cols="2" style="display:none">$tuan[intro]</textarea>
 			</dd>
 
 			<dt>
@@ -87,8 +93,12 @@
 			<dd>
 			<!--{if $my_products}-->
 			<!--{loop $my_products $k $product}-->
-				<div class="spmf2 mbm">
+				<div class="spmf2 mbm product_list">
 					<em>{$product[name]}</em>
+					<span>规格:{$product[spec]}</span>
+					<span>单位:{$product[unit]}</span>
+					<span>供应价:{$product[supply_price]}</span>
+					<span>市场价:{$product[market_price]}</span><br />
 					<!--{if $products[$product[id]]}-->
 
 					<span for="product_unit_price_{$product[id]}">勾选加入本团</span>
@@ -102,12 +112,12 @@
 					<!-- <em>
 					<input type="text" name="product_user_limit[{$product[id]}]" id="product_user_limit_{$product[id]}" class="px" value="0" />
 					<label for="product_user_limit_{$product[id]}">{lang etuan:tuan_product_user_limit}</label>
+					</em>-->
+					<em><label for="product_total_limit_{$product[id]}">总数</label>
+					<input type="text" name="product_total_limit[{$product[id]}]" id="product_total_limit_{$product[id]}" size="3" value="0" />
+
 					</em>
-					<em>
-					<input type="text" name="product_total_limit[{$product[id]}]" id="product_total_limit_{$product[id]}" class="px" value="0" />
-					<label for="product_total_limit_{$product[id]}">{lang etuan:tuan_product_total_limit}</label>
-					</em> -->
-                    <em><span for="product_sold_cnt_{$product[id]}">{lang etuan:tuan_product_sold_cnt}</span>
+                    <em><span for="product_sold_cnt_{$product[id]}">虚拟售出数量</span>
 					<input type="text" name="product_sold_cnt[{$product[id]}]" id="product_sold_cnt{$product[id]}" size="3" value="{$products[$product[id]]['sold_cnt']}" />
 
 					</em>
@@ -125,23 +135,38 @@
 					<!-- <em>
 					<input type="text" name="product_user_limit[{$product[id]}]" id="product_user_limit_{$product[id]}" class="px" value="0" />
 					<label for="product_user_limit_{$product[id]}">{lang etuan:tuan_product_user_limit}</label>
+					</em>-->
+					<em><label for="product_total_limit_{$product[id]}">总数</label>
+					<input type="text" name="product_total_limit[{$product[id]}]" id="product_total_limit_{$product[id]}" size="3" value="0" />
+
 					</em>
-					<em>
-					<input type="text" name="product_total_limit[{$product[id]}]" id="product_total_limit_{$product[id]}" class="px" value="0" />
-					<label for="product_total_limit_{$product[id]}">{lang etuan:tuan_product_total_limit}</label>
-					</em> -->
-                    <em><span for="product_sold_cnt_{$product[id]}">{lang etuan:tuan_product_sold_cnt}</span>
+                    <em><span for="product_sold_cnt_{$product[id]}">虚拟售出数量</span>
 					<input type="text" name="product_sold_cnt[{$product[id]}]" id="product_sold_cnt{$product[id]}" size="3" value="0" />
 
 					</em>
 
 					<!--{/if}-->
-				</div><!--{/loop}-->
+				</div>
+
+				<!--{/loop}-->
 				<!--{else}-->
 				<a href="plugin.php?id=etuan:my&app=product">{lang etuan:add_product_first}</a>
 				<!--{/if}-->
 			</dd>
 		</dl>
 	</div>
-</div>
+</div><script type="text/javascript">
+var intro_editor = new baidu.editor.ui.Editor({
+	initialContent: '{$tuan['intro']}',
+	minFrameHeight: 50,
+    toolbars: [
+        ['FontFamily','FontSize','Bold','Italic','Underline','ForeColor','BackColor','JustifyLeft','JustifyCenter','JustifyRight', 'InsertOrderedList','InsertUnorderedList', 'Emoticon','InsertImage','Link','Unlink','RemoveFormat','|','Undo','Redo']
+		]
+});
+intro_editor.render('intro_editor');
+function before_submit(){
+	$('intro').value = intro_editor.getContent();
+}
+_attachEvent($('intro').form, 'submit', before_submit);
+</script>
 <!--{/block}-->

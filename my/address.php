@@ -4,45 +4,39 @@ if(!defined('IN_DISCUZ')) {
 }
 
 $op = trim(@$_G['gp_op']);
-$id = intval(@$_G['gp_id']);
+$id = intval(@$_G['gp_addressid']);
 
-
+function getAddressData($uid)
+{
+    global $_G;
+    $data= array('buyer_id' => $uid,);
+    $fields = array('address', 'zip', 'building', 'unit', 'room', 'name', 'mobile', 'phone', 'email', 'memo', 'community_id', 'community_name');
+    foreach($fields as $field)
+    {
+         $data[$field]= $_G['gp_'.$field];
+    }
+    return $data;
+}
 if($op == 'add') {
 	if(submitcheck('addsubmit')) {
-		DB::insert('etuan_address', $a=array(
-                'buyer_id' => $_G['uid'],
-                'address' => $_G['gp_address'],
-                'community_id' => $_G['gp_community_id'],
-                'community_name' => $_G['gp_community_name'],
-                'phone' => $_G['gp_phone'],
-                'email' => $_G['gp_email'],
-               'contact_name' => $_G['gp_contact_name'],
-                ), true);
-		$etuan->ajaxOrMsg('etuan:address_add_success', "plugin.php?id=etuan:my&app=address");
+		DB::insert('etuan_address', getAddressData($_G['uid']), true);
+		$etuan->ajaxOrMsg('地址添加成功', "plugin.php?id=etuan:my&app=address");
 	}else{
 		include template('etuan:my_address_add');
 	}
 
 }else if($op == 'edit') {
 	if(submitcheck('addsubmit')) {
-		DB::update('etuan_address', array(
-                'address' => $_G['gp_address'],
-                'community_id' => $_G['gp_community_id'],
-                'community_name' => $_G['gp_community_name'],
-                'phone' => $_G['gp_phone'],
-                'email' => $_G['gp_email'],
-                'contact_name' => $_G['gp_contact_name'],
-                ), "buyer_id=$_G[uid] and id = $id");
-		$etuan->ajaxOrMsg('etuan:address_edit_success', "plugin.php?id=etuan:my&app=address");
+		DB::update('etuan_address', getAddressData($_G['uid']), "buyer_id=$_G[uid] and id = $id");
+		$etuan->ajaxOrMsg('地址修改成功', "plugin.php?id=etuan:my&app=address");
 	}else{
 		$row = DB::fetch_first("SELECT * FROM ".DB::table('etuan_address')." where buyer_id=$_G[uid] and id = '$id'");
-
         include template('etuan:my_address_add');
 	}
 
 }else if($op == 'delete') {
 	DB::delete('etuan_address', "buyer_id=$_G[uid] and id = $id");
-	$etuan->ajaxOrMsg('etuan:address_delete_success', "plugin.php?id=etuan:my&app=address");
+	$etuan->ajaxOrMsg('地址删除成功', "plugin.php?id=etuan:my&app=address");
 }else{
 
 	$page = max(1, intval($_G['page']));

@@ -15,6 +15,18 @@ class etuan
             @ini_set('display_errors', true);
         }
 	}
+    function upload($field, $type="common")
+    {
+        global $_G;
+        require_once libfile('class/upload');
+        $upload = new discuz_upload();
+        $upload->init($_FILES["{$field}_file"], $type);
+        $attach = $upload->attach;
+        if(!$upload->error()) {
+            $upload->save();
+            $_G["gp_{$field}"] = str_replace('\\', '/', substr(realpath($attach['target']), strlen(DISCUZ_ROOT)-1));
+        }
+    }
     function lang($text)
     {
         return lang('plugin/etuan', $text);

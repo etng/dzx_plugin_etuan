@@ -1,4 +1,7 @@
 <!--{template common/header}-->
+<script type="text/javascript" src="source/plugin/etuan/static/ueditor/editor_config.js"></script>
+<script type="text/javascript" src="source/plugin/etuan/static/ueditor/editor_all.js"></script>
+<link rel="stylesheet" href="source/plugin/etuan/static/ueditor/themes/default/ueditor.css"/>
 <div id="pt" class="bm cl">
 	<!--{subtemplate common/simplesearchform}-->
 	<div class="z">
@@ -15,7 +18,7 @@
 
 			<ul class="tb cl">
 				<li class="a"><a href="plugin.php?id=etuan:my&app=product">{lang all}</a></li>
-				<li class="o"><a href="javascript:void(0);" onclick="showWindow('add_product', 'plugin.php?id=etuan:my&app=product&op=add', 'get', 0)">{lang etuan:my_add_product}</a></li>
+				<li class="o"><a href="plugin.php?id=etuan:my&app=product&op=add" onclick="showWindow('add_product', this.href, 'get', 0);return false;">{lang etuan:my_add_product}</a></li>
 			</ul>
 
 
@@ -29,7 +32,7 @@
 							<th>{lang etuan:my_product_price}</th>
 							<th>{lang etuan:my_product_spec}</th>
 							<th>{lang etuan:my_product_unit_name}</th>
-							<th>{lang etuan:my_product_intro}</th>
+							<th>简介</th>
 							<th>{lang etuan:my_product_credit_limit}</th>
 							<th>{lang etuan:my_operation}</th>
 						</tr>

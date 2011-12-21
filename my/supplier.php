@@ -13,6 +13,7 @@ switch($op){
 
     case 'add':
         if(submitcheck('addsubmit')){
+            $etuan->upload('logo');
             DB::insert('etuan_supplier', array(
                                 'seller_id' => $_G['uid'],
                                 'name' => $_G['gp_name'],
@@ -38,6 +39,7 @@ switch($op){
         break;
     case 'edit':
         if(submitcheck('addsubmit')) {
+            $etuan->upload('logo');
             DB::update('etuan_supplier', array(
                                     'seller_id' => $_G['uid'],
                                     'name' => $_G['gp_name'],
@@ -45,8 +47,10 @@ switch($op){
                                     'address' => $_G['gp_address'],
                                     'logo' => $_G['gp_logo'],
                                     'contact_name' => $_G['gp_contact_name'],
+                                    'second_contact_name' => $_G['gp_second_contact_name'],
                                     'contact_gender' => $_G['gp_contact_gender'],
                                     'contact_phone' => $_G['gp_contact_phone'],
+                                    'second_contact_phone' => $_G['gp_second_contact_phone'],
                                     'contact_qq' => $_G['gp_contact_qq'],
                                     'cate' => $_G['gp_cate'],
                                     'website' => $_G['gp_website'],
@@ -76,7 +80,7 @@ switch($op){
         $totalnum = DB::result_first("SELECT COUNT(*) FROM ".DB::table('etuan_supplier')." where seller_id={$_G['uid']} $extra_sql");
 
         $list = array();
-        $query = DB::query("SELECT * FROM ".DB::table('etuan_supplier')." where seller_id={$_G['uid']} $extra_sql LIMIT {$offset},{$limit}");
+        $query = DB::query("SELECT * FROM ".DB::table('etuan_supplier')." where seller_id={$_G['uid']} $extra_sql order by id desc LIMIT {$offset},{$limit}");
 
         while($row = DB::fetch($query)){
             $list[] = $row;

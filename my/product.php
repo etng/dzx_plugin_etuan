@@ -12,8 +12,11 @@ switch($op){
         break;
 
     case 'add':
+
         if(submitcheck('addsubmit')){
-            DB::insert('etuan_product', array(
+
+            $etuan->upload('photo');
+            DB::insert('etuan_product',$a = array(
                                         'seller_id' => $_G['uid'],
                                         'supplier_id' => $_G['gp_supplier_id'],
                                         'name' => $_G['gp_name'],
@@ -23,10 +26,10 @@ switch($op){
                                         'spec' => $_G['gp_spec'],
                                         'unit_name' => $_G['gp_unit_name'],
                                         'photo' => $_G['gp_photo'],
+                                        'intro' => $_G['gp_intro'],
                                         'description' => $_G['gp_description'],
                                         'credit_limit' => $_G['gp_credit_limit'],
                         ), true);
-
             $etuan->ajaxOrMsg('etuan:product_add_success', "plugin.php?id=etuan:my&app=product");
         }else{
             $suppliers = $etuan->fetchAll('etuan_supplier', array("seller_id={$_G['uid']}"));
@@ -38,6 +41,7 @@ switch($op){
         break;
     case 'edit':
         if(submitcheck('addsubmit')) {
+            $etuan->upload('photo');
             DB::update('etuan_product', array(
                                     'seller_id' => $_G['uid'],
                                     'supplier_id' => $_G['gp_supplier_id'],
@@ -49,6 +53,7 @@ switch($op){
                                     'unit_name' => $_G['gp_unit_name'],
                                     'photo' => $_G['gp_photo'],
                                     'description' => $_G['gp_description'],
+                                    'intro' => $_G['gp_intro'],
                                     'credit_limit' => $_G['gp_credit_limit'],
                                     ),
                                     "seller_id={$_G['uid']} and id={$productid}");
@@ -69,7 +74,7 @@ switch($op){
         $totalnum = DB::result_first("SELECT COUNT(*) FROM ".DB::table('etuan_product')." where seller_id={$_G['uid']} $extra_sql");
 
         $list = array();
-        $query = DB::query("SELECT * FROM ".DB::table('etuan_product')." where seller_id={$_G['uid']} $extra_sql LIMIT {$offset},{$limit}");
+        $query = DB::query("SELECT * FROM ".DB::table('etuan_product')." where seller_id={$_G['uid']} $extra_sql ORDER BY ID DESC LIMIT {$offset},{$limit}");
 
         while($row = DB::fetch($query)){
             $row['supplier'] = $etuan->fetchSupplier($row['supplier_id']);
